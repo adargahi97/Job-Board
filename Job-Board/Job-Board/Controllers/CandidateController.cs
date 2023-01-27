@@ -23,6 +23,7 @@ namespace Job_Board.Controllers
             _candidateDao = candidateDao;
         }
 
+<<<<<<< HEAD
         private ICandidateDao candidateDao;
 
         public CandidateController(ICandidateDao candidateDao)
@@ -34,6 +35,21 @@ namespace Job_Board.Controllers
         {
             candidateDao.GetCandidate();
             
+=======
+        [HttpGet]
+        [Route("Candidate")]
+        public async Task<IActionResult> GetCandidates()
+        {
+            try
+            {
+                var candidates = await _candidateDao.GetCandidates();
+                return Ok(candidates);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+>>>>>>> f11215251b2bb001b93e6c0dde100344e0bc7ae8
         }
     }
 }

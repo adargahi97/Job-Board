@@ -1,3 +1,4 @@
+using Job_Board.Daos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,7 +10,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 
 namespace Job_Board
 {
@@ -25,10 +28,24 @@ namespace Job_Board
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<DapperContext>();
+            services.AddScoped<CandidateDao>();
+            services.AddScoped<InterviewDao>();
+            services.AddScoped<JobPostingDao>();
+            services.AddScoped<LocationsDao>();
             services.AddControllers();
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Job Board",
+                Description = "A CRUD Api for a companies job postings",
+                Version = "v1"
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,7 +53,8 @@ namespace Job_Board
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Job Board V1"));
 
             app.UseRouting();
 

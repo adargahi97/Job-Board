@@ -17,5 +17,20 @@ namespace Job_Board.Controllers
         {
             _locationsDao = locationsDao;
         }
+
+        [HttpGet]
+        [Route("Locations")]
+        public async Task<IActionResult> GetLocations()
+        {
+            try
+            {
+                var locations = await _locationsDao.GetLocations();
+                return Ok(locations);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
