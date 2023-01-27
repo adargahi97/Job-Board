@@ -1,4 +1,6 @@
-﻿using Job_Board.Daos;
+﻿using Job_Board.Controllers;
+using Job_Board.Daos;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,13 @@ namespace JobBoard.UnitTest
         [TestMethod]
         public void CallDao()
         {
-            //CandidateDao mockCandidateDao = new Mock<>
+            Mock<ICandidateDao> mockCandidateDao = new Mock<ICandidateDao>();
+
+            CandidateController sut = new CandidateController(mockCandidateDao.Object);
+
+            sut.CallDao();
+
+            mockCandidateDao.Verify(CandidateDao => CandidateDao.GetCandidate(), Times.Once);
         }
     }
 }

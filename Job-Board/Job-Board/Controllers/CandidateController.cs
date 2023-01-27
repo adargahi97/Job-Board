@@ -13,11 +13,29 @@ namespace Job_Board.Controllers
     {
 
         private readonly CandidateDao _candidateDao;
+
+        public CandidateController()
+        {
+        }
+
         public CandidateController(CandidateDao candidateDao)
         {
             _candidateDao = candidateDao;
         }
 
+<<<<<<< HEAD
+        private ICandidateDao candidateDao;
+
+        public CandidateController(ICandidateDao candidateDao)
+        {
+            this.candidateDao = candidateDao;
+        }
+
+        public void CallDao()
+        {
+            candidateDao.GetCandidate();
+            
+=======
         [HttpGet]
         [Route("Candidate")]
         public async Task<IActionResult> GetCandidates()
@@ -31,6 +49,7 @@ namespace Job_Board.Controllers
             {
                 return StatusCode(500, e.Message);
             }
+>>>>>>> f11215251b2bb001b93e6c0dde100344e0bc7ae8
         }
     }
 }
