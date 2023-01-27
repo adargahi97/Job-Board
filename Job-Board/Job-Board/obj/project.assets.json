@@ -8953,24 +8953,30 @@
       "Microsoft.Data.SqlClient >= 5.1.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.32",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.32",
+      "Microsoft.OpenApi >= 1.2.3",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\": {}
+    "C:\\Users\\Abbas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\OneDrive - Veterans United Home Loans\\Documents\\GitHub\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "projectUniqueName": "C:\\Users\\Abbas\\source\\repos\\adargahi97\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
       "projectName": "Job-Board",
-      "projectPath": "C:\\Users\\Mason.Bartlett\\OneDrive - Veterans United Home Loans\\Documents\\GitHub\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
-      "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mason.Bartlett\\OneDrive - Veterans United Home Loans\\Documents\\GitHub\\final-project-job-board\\Job-Board\\Job-Board\\obj\\",
+      "projectPath": "C:\\Users\\Abbas\\source\\repos\\adargahi97\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "packagesPath": "C:\\Users\\Abbas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Abbas\\source\\repos\\adargahi97\\final-project-job-board\\Job-Board\\Job-Board\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Abbas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9014,6 +9020,10 @@
             "target": "Package",
             "version": "[3.1.32, )"
           },
+          "Microsoft.OpenApi": {
+            "target": "Package",
+            "version": "[1.2.3, )"
+          },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.5, )"
@@ -9042,7 +9052,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
