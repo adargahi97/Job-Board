@@ -13,9 +13,27 @@ namespace Job_Board.Controllers
     {
 
         private readonly CandidateDao _candidateDao;
+
+        public CandidateController()
+        {
+        }
+
         public CandidateController(CandidateDao candidateDao)
         {
             _candidateDao = candidateDao;
+        }
+
+        private ICandidateDao candidateDao;
+
+        public CandidateController(ICandidateDao candidateDao)
+        {
+            this.candidateDao = candidateDao;
+        }
+
+        public void CallDao()
+        {
+            candidateDao.GetCandidate();
+            
         }
     }
 }
