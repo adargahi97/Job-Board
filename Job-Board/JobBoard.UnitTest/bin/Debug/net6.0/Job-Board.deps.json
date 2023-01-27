@@ -35,6 +35,7 @@
           "Microsoft.Data.SqlClient": "5.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.32",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.32",
+          "Microsoft.OpenApi": "1.2.3",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",

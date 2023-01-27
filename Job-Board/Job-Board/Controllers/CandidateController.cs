@@ -17,5 +17,20 @@ namespace Job_Board.Controllers
         {
             _candidateDao = candidateDao;
         }
+
+        [HttpGet]
+        [Route("Candidate")]
+        public async Task<IActionResult> GetCandidates()
+        {
+            try
+            {
+                var candidates = await _candidateDao.GetCandidates();
+                return Ok(candidates);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

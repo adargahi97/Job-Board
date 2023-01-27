@@ -17,5 +17,20 @@ namespace Job_Board.Controllers
         {
             _interviewDao = interviewDao;
         }
+
+        [HttpGet]
+        [Route("Interview")]
+        public async Task<IActionResult> GetInterviews()
+        {
+            try
+            {
+                var interviews = await _interviewDao.GetInterviews();
+                return Ok(interviews);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
