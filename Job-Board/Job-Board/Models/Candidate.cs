@@ -15,7 +15,6 @@ namespace Job_Board.Models
         public void AddCandidate(Candidate expectedCandidate)
         {
             NewCandidate = expectedCandidate;
-            //throw new NotImplementedException();
         }
     }
 }

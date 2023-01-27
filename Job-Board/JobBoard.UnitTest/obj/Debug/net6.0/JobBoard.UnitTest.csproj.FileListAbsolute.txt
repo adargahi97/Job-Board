@@ -220,6 +220,10 @@ C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\f
 C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\JobBoard.UnitTest.pdb
 C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\JobBoard.UnitTest.genruntimeconfig.cache
 C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\ref\JobBoard.UnitTest.dll
+<<<<<<< HEAD
+C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\final-project-job-board\Job-Board\JobBoard.UnitTest\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\Mason.Bartlett\OneDrive - Veterans United Home Loans\Documents\GitHub\final-project-job-board\Job-Board\JobBoard.UnitTest\bin\Debug\net6.0\Moq.dll
+=======
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\bin\Debug\net6.0\CoverletSourceRootsMapping
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\bin\Debug\net6.0\appsettings.json
@@ -444,3 +448,4 @@ C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoar
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\JobBoard.UnitTest.pdb
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\JobBoard.UnitTest.genruntimeconfig.cache
 C:\Users\Abbas\source\repos\adargahi97\final-project-job-board\Job-Board\JobBoard.UnitTest\obj\Debug\net6.0\ref\JobBoard.UnitTest.dll
+>>>>>>> f11215251b2bb001b93e6c0dde100344e0bc7ae8
