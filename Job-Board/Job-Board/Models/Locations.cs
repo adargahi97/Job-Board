@@ -1,4 +1,6 @@
-﻿namespace Job_Board.Models
+﻿using Microsoft.CodeAnalysis;
+
+namespace Job_Board.Models
 {
     public class Locations
     {
@@ -8,5 +10,11 @@
         public string State { get; set; }
         public int Zip { get; set; }
         public string Building { get; set; }
+        public Locations NewLocations { get; private set; }
+
+        public void AddLocations(Locations expectedLocations)
+        {
+            NewLocations = expectedLocations;
+        }
     }
 }

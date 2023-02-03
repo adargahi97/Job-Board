@@ -1,4 +1,6 @@
-﻿namespace Job_Board.Models
+﻿using System;
+
+namespace Job_Board.Models
 {
     public class Interview
     {
@@ -7,6 +9,12 @@
         public string Time { get; set; }
         public int LocationsId { get; set; }
         public int CandidateId { get; set; }
+        public Interview expectedInterview { get; set; }
+        public Interview NewInterview { get; private set; }
 
+        public void AddInterview(Interview expectedInterview)
+        {
+            NewInterview = expectedInterview;
+        }
     }
 }

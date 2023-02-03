@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 ﻿using Job_Board.Wrappers;
 using System;
-=======
 ﻿using Dapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data;
 using System.Linq;
 using Job_Board.Models;
->>>>>>> f11215251b2bb001b93e6c0dde100344e0bc7ae8
 
 namespace Job_Board.Daos
 {
@@ -27,7 +24,6 @@ namespace Job_Board.Daos
         {
             _context = context;
         }
-<<<<<<< HEAD
 
         public void GetCandidate()
         {
@@ -35,7 +31,6 @@ namespace Job_Board.Daos
 
 
 
-=======
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             var query = "SELECT * FROM Candidate";
@@ -46,6 +41,5 @@ namespace Job_Board.Daos
                 return candidates.ToList();
             }
         }
->>>>>>> f11215251b2bb001b93e6c0dde100344e0bc7ae8
     }
 }
