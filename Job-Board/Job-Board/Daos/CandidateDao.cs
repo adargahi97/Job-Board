@@ -31,6 +31,7 @@ namespace Job_Board.Daos
 
 
 
+
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             var query = "SELECT * FROM Candidate";
