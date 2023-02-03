@@ -13,7 +13,7 @@ namespace Job_Board.Controllers
     {
 
         private readonly CandidateDao _candidateDao;
-
+        
         public CandidateController()
         {
         }
@@ -33,7 +33,8 @@ namespace Job_Board.Controllers
         public void CallDao()
         {
             candidateDao.GetCandidate();
-            
+
+        }
         [HttpGet]
         [Route("Candidate")]
         public async Task<IActionResult> GetCandidates()

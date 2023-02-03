@@ -11,7 +11,7 @@ namespace JobBoard.UnitTest
             Candidate sut = new Candidate();
             Candidate expectedCandidate = new Candidate();
 
-            new Candidate();
+            
 
             sut.AddCandidate(expectedCandidate);
 
