@@ -10,17 +10,24 @@ using System.Threading.Tasks;
 namespace JobBoard.UnitTest
 {
     [TestClass]
-
-    public class CandidateControllerTest
+    public class CandidateControllerTests
     {
-        [TestMethod]
-        public void CallDao()
+        private CandidateController _candidateController;
+        private Mock<ICandidateDao> mockCandidateDao;
+
+        [Setup]
+        public void Setup()
         {
-            Mock<ICandidateDao> mockCandidateDao = new Mock<ICandidateDao>();
+            mockCandidateDao = new Mock<ICandidateDao>();
 
-            CandidateController sut = new CandidateController(mockCandidateDao.Object);
+        }
 
-            sut.CallDao();
+        [TestMethod]
+        public void GetCandidates_ReturnsAllCandidates()
+        {
+            CandidateController sut = new CandidateController(mockCandidateDao);
+
+            sut.GetCandidates();
 
             mockCandidateDao.Verify(CandidateDao => CandidateDao.GetCandidate(), Times.Once);
         }

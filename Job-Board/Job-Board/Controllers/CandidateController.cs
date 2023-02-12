@@ -13,28 +13,29 @@ namespace Job_Board.Controllers
     {
 
         private readonly CandidateDao _candidateDao;
-        
-        public CandidateController()
+        public CandidateController(CandidateDao candidatedao)
         {
+            _candidateDao = candidatedao;
         }
 
-        public CandidateController(CandidateDao candidateDao)
-        {
-            _candidateDao = candidateDao;
-        }
+        //public CandidateController()
+        //{
+        //}
 
-        private ICandidateDao candidateDao;
+        ////private ICandidateDao candidateDao;
 
-        public CandidateController(ICandidateDao candidateDao)
-        {
-            this.candidateDao = candidateDao;
-        }
+        ////public CandidateController(ICandidateDao candidateDao)
+        ////{
+        ////    this.candidateDao = candidateDao;
+        ////}
 
-        public void CallDao()
-        {
-            candidateDao.GetCandidate();
+        //////public void CallDao()
+        //////{
+        //////    candidateDao.GetCandidate();
 
-        }
+        //////}
+
+
         [HttpGet]
         [Route("Candidate")]
         public async Task<IActionResult> GetCandidates()
@@ -49,5 +50,82 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Candidate/{id:int}")]
+        public async Task<IActionResult> GetCandidateByID([FromRoute] int id)
+        {
+            try
+            {
+                var candidate = await _candidateDao.GetCandidateByID(id);
+                if (candidate == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(candidate);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("Candidate")]
+        public async Task<IActionResult> CreateCandidate([FromBody] CandidateRequest createRequest)
+        {
+            try
+            {
+                await _candidateDao.CreateCandidate(createRequest);
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("Candidate/{id:int}")]
+        public async Task<IActionResult> DeleteCandidateById([FromRoute] int id)
+        {
+            try
+            {
+                var candidate = await _candidateDao.GetCandidateByID(id);
+                if (candidate == null)
+                {
+                    return StatusCode(404);
+                }
+
+                await _candidateDao.DeleteCandidateById(id);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Route("Candidate")]
+        public async Task<IActionResult> UpdateCandidateByID([FromBody] Candidate candidateReq)
+        {
+            try
+            {
+                var candidate = await _candidateDao.GetCandidateByID(candidateReq.Id);
+                if (candidate == null)
+                {
+                    return StatusCode(404);
+                }
+                var updatedCandidate = await _candidateDao.UpdateCandidateById(candidateReq);
+
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }
