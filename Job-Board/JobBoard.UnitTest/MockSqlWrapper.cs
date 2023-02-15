@@ -14,6 +14,9 @@ namespace JobBoard.UnitTest
             return new List<T>();
         }
 
-
+        Task<List<T>> ISqlWrapper.Query<T>(string sql)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

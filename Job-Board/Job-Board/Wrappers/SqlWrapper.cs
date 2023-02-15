@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Job_Board.Wrappers
 {
@@ -11,7 +12,7 @@ namespace Job_Board.Wrappers
             ConnectionString = "JobBoardConnectionString";
         }
 
-        public List<T> Query<T>(string sql)
+        Task<List<T>> ISqlWrapper.Query<T>(string sql)
         {
             throw new System.NotImplementedException();
         }

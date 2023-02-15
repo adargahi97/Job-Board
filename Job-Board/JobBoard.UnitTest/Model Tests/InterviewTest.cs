@@ -21,7 +21,7 @@ namespace JobBoard.UnitTest
 
             sut.AddInterview(expectedInterview);
 
-            Assert.AreEqual(new Interview(), sut.NewInterview);
+            Assert.AreEqual(expectedInterview, sut.NewInterview);
         }
     }
 }

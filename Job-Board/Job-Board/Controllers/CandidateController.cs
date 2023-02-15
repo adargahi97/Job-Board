@@ -18,22 +18,22 @@ namespace Job_Board.Controllers
             _candidateDao = candidatedao;
         }
 
-        //public CandidateController()
+        public CandidateController()
+        {
+        }
+
+        private ICandidateDao candidateDao;
+
+        public CandidateController(ICandidateDao candidateDao)
+        {
+            this.candidateDao = candidateDao;
+        }
+
+        //public void CallDao()
         //{
+        //    candidateDao.GetCandidate();
+
         //}
-
-        ////private ICandidateDao candidateDao;
-
-        ////public CandidateController(ICandidateDao candidateDao)
-        ////{
-        ////    this.candidateDao = candidateDao;
-        ////}
-
-        //////public void CallDao()
-        //////{
-        //////    candidateDao.GetCandidate();
-
-        //////}
 
 
         [HttpGet]

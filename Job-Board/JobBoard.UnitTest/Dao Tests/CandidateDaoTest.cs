@@ -14,16 +14,16 @@ namespace JobBoard.UnitTest
     public class CandidateDaoTest
     {
         [TestMethod]
-        void CallSqlWithString()
+        public void CallSqlWithString()
         {
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            mockSqlWrapper.Setup(o => o.Query<Candidate>(It.IsAny<string>())).Returns(new List<Candidate>());
-            ISqlWrapper customMockSqlWrapper = new MockSqlWrapper();
-            CandidateDao sut = new CandidateDao(customMockSqlWrapper);
+            //mockSqlWrapper.Setup(o => o.Query<Candidate>(It.IsAny<string>())).Returns(new List<Candidate>());
+            //ISqlWrapper customMockSqlWrapper = new MockSqlWrapper();
+            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
 
             sut.GetCandidate();
 
-            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<List<Candidate>>(It.Is<string>(sql=>sql=="SELECT * FROM [DBO].[JOBBOARD]")),Times.Once);
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql=>sql=="SELECT * FROM [DBO].[JOBBOARD]")),Times.Once);
 
         }
     }

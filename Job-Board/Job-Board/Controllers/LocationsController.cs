@@ -18,6 +18,28 @@ namespace Job_Board.Controllers
             _locationsDao = locationsDao;
         }
 
+        //
+
+        public LocationsController()
+        {
+        }
+
+        private ILocationsDao locationsDao;
+
+        public LocationsController(ILocationsDao locationsDao)
+        {
+            this.locationsDao = locationsDao;
+        }
+
+        //public void CallDao()
+        //{
+        //    locationsDao.GetLocations();
+
+        //}
+
+
+
+
         [HttpGet]
         [Route("Locations")]
         public async Task<IActionResult> GetLocations()

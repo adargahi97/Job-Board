@@ -2,7 +2,7 @@
 {
     public interface IInterviewDao
     {
-        void GetInterview();
+        public void GetInterview();
 
     }
 }

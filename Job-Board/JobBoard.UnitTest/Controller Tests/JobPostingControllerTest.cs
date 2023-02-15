@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 namespace JobBoard.UnitTest.Controller_Tests
 {
     [TestClass]
-    public class InterviewControllerTest
+    public class JobPostingControllerTest
     {
 
-        
-
         [TestMethod]
+
         public void CallDao()
         {
-            Mock<IInterviewDao> mockInterviewDao = new Mock<IInterviewDao>();
+            Mock<IJobPostingDao> mockJobPostingDao = new Mock<IJobPostingDao>();
 
-            InterviewController sut = new InterviewController(mockInterviewDao.Object);
+            JobPostingController sut = new JobPostingController(mockJobPostingDao.Object);
 
             //sut.CallDao();
 
-            mockInterviewDao.Verify(InterviewDao => InterviewDao.GetInterview(), Times.Once);
+            mockJobPostingDao.Verify(jobPostingDao => jobPostingDao.GetJobPosting(), Times.Once);
         }
     }
 }

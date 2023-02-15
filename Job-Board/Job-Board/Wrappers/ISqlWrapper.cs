@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Job_Board.Wrappers
 {
     public interface ISqlWrapper
     {
-        List<T> Query<T>(string sql);
+        Task<List<T>> Query<T>(string sql);
     }
 }

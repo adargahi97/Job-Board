@@ -13,10 +13,29 @@ namespace Job_Board.Controllers
     {
 
         private readonly JobPostingDao _jobPostingDao;
+
         public JobPostingController(JobPostingDao jobPostingDao)
         {
             _jobPostingDao = jobPostingDao;
         }
+
+        public JobPostingController()
+        {
+        }
+
+        private IJobPostingDao jobPostingDao;
+
+        public JobPostingController(IJobPostingDao jobPostingDao)
+        {
+            this.jobPostingDao = jobPostingDao;
+        }
+
+        //public void CallDao()
+        //{
+        //    jobPostingDao.GetJobPosting();
+
+        //}
+
 
         [HttpGet]
         [Route("Job_Posting")]

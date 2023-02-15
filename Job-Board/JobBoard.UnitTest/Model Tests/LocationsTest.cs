@@ -21,7 +21,7 @@ namespace JobBoard.UnitTest
 
             sut.AddLocations(expectedLocations);
 
-            Assert.AreEqual(new Locations(), sut.NewLocations);
+            Assert.AreEqual(expectedLocations, sut.NewLocations);
         }
     }
 }

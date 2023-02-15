@@ -12,24 +12,21 @@ namespace JobBoard.UnitTest
     [TestClass]
     public class CandidateControllerTests
     {
-        private CandidateController _candidateController;
-        private Mock<ICandidateDao> mockCandidateDao;
-
-        [Setup]
-        public void Setup()
-        {
-            mockCandidateDao = new Mock<ICandidateDao>();
-
-        }
 
         [TestMethod]
-        public void GetCandidates_ReturnsAllCandidates()
+
+        public void CallDao()
         {
-            CandidateController sut = new CandidateController(mockCandidateDao);
+            Mock<ICandidateDao> mockCandidateDao = new Mock<ICandidateDao>();
 
-            sut.GetCandidates();
+            CandidateController sut = new CandidateController(mockCandidateDao.Object);
 
-            mockCandidateDao.Verify(CandidateDao => CandidateDao.GetCandidate(), Times.Once);
+            //sut.CallDao();
+
+            mockCandidateDao.Verify(candidateDao => candidateDao.GetCandidate(), Times.Once);
         }
+
+
+        
     }
 }

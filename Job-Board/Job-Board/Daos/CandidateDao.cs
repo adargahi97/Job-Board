@@ -14,7 +14,6 @@ namespace Job_Board.Daos
         private readonly DapperContext _context;
         private readonly ISqlWrapper sqlWrapper;
 
-
         public CandidateDao(ISqlWrapper sqlWrapper)
         {
             this.sqlWrapper = sqlWrapper;
@@ -25,9 +24,13 @@ namespace Job_Board.Daos
             _context = context;
         }
 
+        public CandidateDao()
+        {
+        }
+
         public void GetCandidate()
         {
-
+            sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
         }
 
         public async Task CreateCandidate(CandidateRequest candidate)

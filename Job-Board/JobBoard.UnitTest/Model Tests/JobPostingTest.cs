@@ -19,7 +19,7 @@ namespace JobBoard.UnitTest
 
             sut.AddJobPosting(expectedJobPosting);
 
-            Assert.AreEqual(new JobPosting(), sut.NewJobPosting);
+            Assert.AreEqual(expectedJobPosting, sut.NewJobPosting);
         }
     }
 }

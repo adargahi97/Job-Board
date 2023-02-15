@@ -18,6 +18,24 @@ namespace Job_Board.Controllers
             _interviewDao = interviewDao;
         }
 
+        public InterviewController()
+        {
+        }
+
+        private IInterviewDao interviewDao;
+
+        public InterviewController(IInterviewDao interviewDao)
+        {
+            this.interviewDao = interviewDao;
+        }
+
+        //public void CallDao()
+        //{
+        //    interviewDao.GetInterview();
+
+        //}
+
+
         [HttpGet]
         [Route("Interview")]
         public async Task<IActionResult> GetInterviews()
