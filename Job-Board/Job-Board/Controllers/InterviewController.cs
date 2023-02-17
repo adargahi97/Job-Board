@@ -71,7 +71,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                await _interviewDao.CreateCandidate(createRequest);
+                await _interviewDao.CreateInterview(createRequest);
                 return StatusCode(201);
             }
             catch (Exception e)

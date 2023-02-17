@@ -131,5 +131,16 @@ namespace Job_Board.Daos
             }
 
         }
+
+        public async Task<CandidateRequest> GetCandidateByFirstName(string firstName)
+        {
+            var query = $"SELECT * FROM Candidate WHERE Id = {firstName}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var candidate = await connection.QueryFirstOrDefaultAsync<CandidateRequest>(query);
+                return candidate;
+            }
+        }
     }
 }

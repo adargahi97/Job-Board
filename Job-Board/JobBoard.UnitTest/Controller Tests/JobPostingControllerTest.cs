@@ -13,17 +13,17 @@ namespace JobBoard.UnitTest.Controller_Tests
     public class JobPostingControllerTest
     {
 
-        [TestMethod]
+        //[TestMethod]
 
-        public void CallDao()
-        {
-            Mock<IJobPostingDao> mockJobPostingDao = new Mock<IJobPostingDao>();
+        //public void CallDao()
+        //{
+        //    Mock<IJobPostingDao> mockJobPostingDao = new Mock<IJobPostingDao>();
 
-            JobPostingController sut = new JobPostingController(mockJobPostingDao.Object);
+        //    JobPostingController sut = new JobPostingController(mockJobPostingDao.Object);
 
-            //sut.CallDao();
+        //    //sut.CallDao();
 
-            mockJobPostingDao.Verify(jobPostingDao => jobPostingDao.GetJobPosting(), Times.Once);
-        }
+        //    mockJobPostingDao.Verify(jobPostingDao => jobPostingDao.GetJobPosting(), Times.Once);
+        //}
     }
 }

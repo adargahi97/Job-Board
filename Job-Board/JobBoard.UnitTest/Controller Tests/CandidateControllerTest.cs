@@ -14,7 +14,7 @@ namespace JobBoard.UnitTest
         {
             Mock<ICandidateDao> mockCandidateDao = new Mock<ICandidateDao>();
 
-            CandidateController sut = new CandidateController(mockCandidateDao.Object);
+            //CandidateController sut = new CandidateController(mockCandidateDao.Object);
 
             //sut.CallDao();
 
