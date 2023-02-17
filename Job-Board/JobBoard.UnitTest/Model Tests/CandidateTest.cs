@@ -8,13 +8,14 @@ namespace JobBoard.UnitTest
         [TestMethod]
         public void AddCandidate()
         {
+            //arrange
             Candidate sut = new Candidate();
             Candidate expectedCandidate = new Candidate();
-
-            
-
+           
+            //act
             sut.AddCandidate(expectedCandidate);
 
+            //assert
             Assert.AreEqual(expectedCandidate, sut.NewCandidate);
         }
     }

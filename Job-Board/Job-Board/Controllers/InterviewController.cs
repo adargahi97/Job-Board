@@ -18,23 +18,18 @@ namespace Job_Board.Controllers
             _interviewDao = interviewDao;
         }
 
-        public InterviewController()
-        {
-        }
-
         private IInterviewDao interviewDao;
 
-        public InterviewController(IInterviewDao interviewDao)
-        {
-            this.interviewDao = interviewDao;
-        }
+        //public InterviewController(IInterviewDao interviewDao)
+        //{
+        //    this.interviewDao = interviewDao;
+        //}
 
         //public void CallDao()
         //{
         //    interviewDao.GetInterview();
 
         //}
-
 
         [HttpGet]
         [Route("Interview")]
@@ -50,5 +45,82 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Interview/{id:int}")]
+        public async Task<IActionResult> GetInterviewByID([FromRoute] int id)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewByID(id);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("Interview")]
+        public async Task<IActionResult> CreateInterview([FromBody] InterviewRequest createRequest)
+        {
+            try
+            {
+                await _interviewDao.CreateCandidate(createRequest);
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("Interview/{id:int}")]
+        public async Task<IActionResult> DeleteInterviewById([FromRoute] int id)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewByID(id);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+
+                await _interviewDao.DeleteInterviewById(id);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Route("Interview")]
+        public async Task<IActionResult> UpdateInterviewByID([FromBody] Interview interviewReq)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewByID(interviewReq.Id);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+                var updatedInterview = await _interviewDao.UpdateInterviewById(interviewReq);
+
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }

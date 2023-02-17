@@ -17,4 +17,11 @@ namespace Job_Board.Models
             NewInterview = expectedInterview;
         }
     }
+    public class InterviewRequest
+    {
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public int LocationsId { get; set; }
+        public int CandidateId { get; set; }
+    }
 }
