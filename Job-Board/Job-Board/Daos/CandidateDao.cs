@@ -2,6 +2,7 @@
 using Job_Board.Models;
 using Job_Board.Wrappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Job_Board.Daos
         //Test setup
         private readonly DapperContext _context;
         private readonly ISqlWrapper sqlWrapper;
+        private SqlConnection connection;
 
         public CandidateDao(ISqlWrapper sqlWrapper)
         {
@@ -28,6 +30,11 @@ namespace Job_Board.Daos
 
         public CandidateDao()
         {
+        }
+
+        public CandidateDao(SqlConnection connection)
+        {
+            this.connection = connection;
         }
 
         public void GetCandidate()
@@ -62,6 +69,7 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             //SQL Query
+            
             var query = "SELECT * FROM Candidate";
 
             //Connect to DB

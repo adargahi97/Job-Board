@@ -1,5 +1,7 @@
 ﻿using Job_Board.Controllers;
 using Job_Board.Daos;
+using Job_Board.Models;
+using Job_Board.Wrappers;
 using Moq;
 
 namespace JobBoard.UnitTest
@@ -21,7 +23,7 @@ namespace JobBoard.UnitTest
             mockCandidateDao.Verify(candidateDao => candidateDao.GetCandidate(), Times.Once);
         }
 
-
         
+        }
+
     }
-}
