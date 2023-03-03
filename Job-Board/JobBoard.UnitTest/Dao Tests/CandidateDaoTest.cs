@@ -15,19 +15,19 @@ namespace JobBoard.UnitTest
     public class CandidateDaoTest
 
     {
-        [TestMethod]
-        public void CallSqlWithString()
-        {
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            //mockSqlWrapper.Setup(o => o.Query<Candidate>(It.IsAny<string>())).Returns(new List<Candidate>());
-            ISqlWrapper customMockSqlWrapper = new MockSqlWrapper();
-            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
+        //[TestMethod]
+        //public void CallSqlWithString()
+        //{
+        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+        //    //mockSqlWrapper.Setup(o => o.Query<Candidate>(It.IsAny<string>())).Returns(new List<Candidate>());
+        //    ISqlWrapper customMockSqlWrapper = new MockSqlWrapper();
+        //    CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
 
-            sut.GetCandidate();
+        //    sut.GetCandidate();
 
-            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
+        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
 
-        }
+        //}
 
 
 
@@ -80,15 +80,17 @@ namespace JobBoard.UnitTest
             //ARRANGE
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
             CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
+            string name = "Ron";
 
             //ACT
-            var candidate = sut.GetCandidateByFirstName("Ron").Result;
-
+            _ = sut.GetCandidateByFirstName(name);
             //Assert
-            Assert.AreEqual(candidate.FirstName, "Ron");
+            //Assert.AreEqual(candidate.FirstName, "Ron");
+            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<Candidate>(It.Is<string>(sql => sql == $"GET FROM Candidate WHERE FirstName = {name}")), Times.Once);
+
         }
 
-       
+
 
         [TestMethod]
 
@@ -96,7 +98,9 @@ namespace JobBoard.UnitTest
         {
 
             //ARRANGE
-            CandidateDao sut = new CandidateDao();
+            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+
+            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
 
             //ACT
 
@@ -110,38 +114,36 @@ namespace JobBoard.UnitTest
 
 
         [TestMethod]
-        public async Task DeleteCandidateByID_Works()
+        public void DeleteCandidateByID_Works()
         {
 
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
-            CandidateDao sut = new CandidateDao();
-            int id = 8;
-
-            Candidate candidate = new Candidate()
-            {
-                FirstName = "Don",
-                LastName = "Jon",
-                PhoneNumber = "555-555-5555",
-                Job_Id = 8,
-                LocationsId = 8,
-                Id = 8,
-            };
+            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
+            int id = 1;
 
             // Act
-            await sut.DeleteCandidateById(8);
+            _ = sut.DeleteCandidateById(id);
 
             // Assert
 
-            //Assert.IsNull(candidate.Id);
-            //Assert.IsNotNull(candidate.Id);
-            //Assert.IsTrue(candidate.Id > 0);
-
-
-
-            //mockSqlWrapper.Verify(c => c.ExecuteAsync($"DELETE FROM Candidate WHERE Id = {id}"), Times.Once);
+            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Candidate WHERE Id = {id}")), Times.Once); ;
         }
 
+        [TestMethod]
+        public void DeleteCandidateById_Works()
+        {
+            // Arrange
+            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
+
+            // Act
+            _ = sut.DeleteCandidateById(1);
+
+            // Assert
+            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == "DELETE FROM Candidate WHERE Id = 1")), Times.Once); ;
+
+        }
 
     }
 }

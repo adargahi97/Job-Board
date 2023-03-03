@@ -8,7 +8,7 @@ using Job_Board.Wrappers;
 
 namespace Job_Board.Daos
 {
-    public class LocationsDao
+    public class LocationsDao : ILocationsDao
     {
         private readonly DapperContext _context;
 
@@ -19,11 +19,11 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        public void GetLocationsDao()
-        {
-            sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
+        //public void GetLocationsDao()
+        //{
+        //    sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
 
-        }
+        //}
 
         public LocationsDao(DapperContext context)
         {

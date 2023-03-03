@@ -2,6 +2,6 @@
 {
     public interface IJobPostingDao
     {
-        public void GetJobPosting();
+        //public void GetJobPosting();
     }
 }

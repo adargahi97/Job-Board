@@ -11,24 +11,14 @@ namespace Job_Board.Controllers
     [ApiController]
     public class CandidateController : ControllerBase
     {
+        private ICandidateDao _candidateDao;
 
-        private readonly CandidateDao _candidateDao;
-        public CandidateController(CandidateDao candidatedao)
+        public CandidateController(ICandidateDao candidatedao)
         {
             _candidateDao = candidatedao;
         }
 
-        private ICandidateDao candidateDao;
-
-        //public CandidateController(ICandidateDao candidateDao)
-        //{
-        //    this.candidateDao = candidateDao;
-        //}
-
-        //public void CallDao()
-        //{
-        //    candidateDao.GetCandidate();
-        //}
+        
 
 
         [HttpGet]

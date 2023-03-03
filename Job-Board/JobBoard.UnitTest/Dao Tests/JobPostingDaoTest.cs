@@ -13,18 +13,18 @@ namespace JobBoard.UnitTest.Dao_Tests
     [TestClass]
     public class JobPostingDaoTest
     {
-        [TestMethod]
-        void CallSqlWithString()
-        {
+        //[TestMethod]
+        //void CallSqlWithString()
+        //{
 
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
-            JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
+        //    JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
 
-            sut.GetJobPosting();
+        //    sut.GetJobPosting();
 
-            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<JobPosting>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
+        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<JobPosting>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
 
-        }
+        //}
     }
 }

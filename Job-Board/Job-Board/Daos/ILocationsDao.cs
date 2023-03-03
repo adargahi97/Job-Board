@@ -2,6 +2,6 @@
 {
     public interface ILocationsDao
     {
-        void GetLocations();
+        //void GetLocations();
     }
 }

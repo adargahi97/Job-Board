@@ -23,11 +23,11 @@ namespace Job_Board.Daos
             _context = context;
         }
 
-        public void GetInterview()
-        {
-            sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
+        //public void GetInterview()
+        //{
+        //    sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
 
-        }
+        //}
 
         //POST Request (Create)
         public async Task CreateInterview(InterviewRequest interview)
@@ -85,10 +85,10 @@ namespace Job_Board.Daos
             var query = $"DELETE FROM Interview WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+             using (sqlWrapper.CreateConnection())
             {
                 //Execute query
-                await connection.ExecuteAsync(query);
+                await sqlWrapper.ExecuteAsync(query);
             }
         }
 

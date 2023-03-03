@@ -23,11 +23,11 @@ namespace Job_Board.Daos
         }
 
 
-        public void GetJobPosting()
-        {
-            sqlWrapper.Query<JobPosting>("SELECT * FROM [DBO].[JOBBOARD]");
+        //public void GetJobPosting()
+        //{
+        //    sqlWrapper.Query<JobPosting>("SELECT * FROM [DBO].[JOBBOARD]");
 
-        }
+        //}
 
         //POST Request (Create)
         public async Task CreateJobPosting(JobPostingRequest jobPosting)

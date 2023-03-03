@@ -12,36 +12,14 @@ namespace Job_Board.Daos
 {
     public class CandidateDao : ICandidateDao
     {
-        //Constructor for Dapper
-        public CandidateDao(DapperContext context)
-        {
-            _context = context;
-        }
-
-        //Test setup
-        private readonly DapperContext _context;
+        //DB Connection Setup
         private readonly ISqlWrapper sqlWrapper;
-        private SqlConnection connection;
 
         public CandidateDao(ISqlWrapper sqlWrapper)
         {
             this.sqlWrapper = sqlWrapper;
         }
 
-        public CandidateDao()
-        {
-        }
-
-        public CandidateDao(SqlConnection connection)
-        {
-            this.connection = connection;
-        }
-
-        public void GetCandidate()
-        {
-            sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
-        }
-        
         //POST Request (Create)
         public async Task CreateCandidate(CandidateRequest candidate)
         {
@@ -58,7 +36,7 @@ namespace Job_Board.Daos
             parameters.Add("LocationsId", candidate.LocationsId, DbType.Int32);
 
             //Connecting to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //executing query
                 await connection.ExecuteAsync(query, parameters);
@@ -69,11 +47,11 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             //SQL Query
-            
+
             var query = "SELECT * FROM Candidate";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
                 var candidates = await connection.QueryAsync<Candidate>(query);
@@ -84,16 +62,16 @@ namespace Job_Board.Daos
         }
 
         //GET Request (Read)
-        public async Task<CandidateRequest> GetCandidateByID(int id)
+        public async Task<Candidate> GetCandidateByID(int id)
         {
             //SQL query with passed in integer 
             var query = $"SELECT * FROM Candidate WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
-                var candidate = await connection.QueryFirstOrDefaultAsync<CandidateRequest>(query);
+                var candidate = await sqlWrapper.QueryFirstOrDefaultAsync<Candidate>(query);
 
                 //Return variable 
                 return candidate;
@@ -107,10 +85,10 @@ namespace Job_Board.Daos
             var query = $"DELETE FROM Candidate WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //Execute query
-                await connection.ExecuteAsync(query);
+                await sqlWrapper.ExecuteAsync(query);
             }
         }
 
@@ -130,7 +108,7 @@ namespace Job_Board.Daos
             parameters.Add("LocationsId", candidate.LocationsId, DbType.Int32);
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
                 var updatedCandidate = await connection.QueryFirstOrDefaultAsync<Candidate>(query, parameters);
@@ -140,13 +118,13 @@ namespace Job_Board.Daos
 
         }
 
-        public async Task<CandidateRequest> GetCandidateByFirstName(string firstName)
+        public async Task<Candidate> GetCandidateByFirstName(string firstName)
         {
-            var query = $"SELECT * FROM Candidate WHERE Id = {firstName}";
+            var query = $"GET FROM Candidate WHERE FirstName = {firstName}";
 
-            using (var connection = _context.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var candidate = await connection.QueryFirstOrDefaultAsync<CandidateRequest>(query);
+                var candidate = await sqlWrapper.QueryFirstOrDefaultAsync<Candidate>(query);
                 return candidate;
             }
         }

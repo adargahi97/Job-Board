@@ -13,16 +13,36 @@ namespace JobBoard.UnitTest.Dao_Tests
     [TestClass]
     public class InterviewDaoTest
     {
+        //[TestMethod]
+        //void CallSqlWithString()
+        //{
+        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+
+        //    InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
+
+        //    sut.GetInterview();
+
+        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Interview>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
+        //}
+
+
+
         [TestMethod]
-        void CallSqlWithString()
+        public void DeleteInterviewByID_Works()
         {
+
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
             InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
+            int id = 1;
 
-            sut.GetInterview();
+            // Act
+            _ = sut.DeleteInterviewById(id);
 
-            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Interview>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
+            // Assert
+
+            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Interview WHERE Id = {id}")), Times.Once); ;
         }
+
     }
 }
