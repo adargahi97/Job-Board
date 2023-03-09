@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using Job_Board.Models;
 using Job_Board.Wrappers;
+using Microsoft.CodeAnalysis;
 
 namespace Job_Board.Daos
 {
@@ -119,5 +120,33 @@ namespace Job_Board.Daos
             }
 
         }
+
+
+
+        public async Task<JobPosting> GetJobPostingByPosition(string position)
+        {
+            var query = $"GET FROM Job_Posting WHERE Position = {position}";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPosting>(query);
+                return jobPosting;
+            }
+        }
+
+        public async Task<JobPostingRequest> GetJobPostingByLocationsId(int locationsId)
+        {
+            var query = $"GET FROM JobPosting WHERE LocationsId = {locationsId}";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingRequest>(query);
+                return jobPosting;
+            }
+        }
+
+
+
+
     }
 }

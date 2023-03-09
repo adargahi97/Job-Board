@@ -116,5 +116,29 @@ namespace Job_Board.Daos
             }
 
         }
+
+
+
+        public async Task<InterviewRequest> GetInterviewByCandidateId(int candidateId)
+        {
+            var query = $"GET FROM Interview WHERE Position = {candidateId}";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
+                return interview;
+            }
+        }
+
+        public async Task<InterviewRequest> GetInterviewByJob_Id(int job_Id)
+        {
+            var query = $"GET FROM Interview WHERE Job_Id = {job_Id}";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
+                return interview;
+            }
+        }
     }
 }
