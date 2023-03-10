@@ -11,24 +11,13 @@ namespace Job_Board.Daos
 {
     public class JobPostingDao : IJobPostingDao
     {
-        private readonly DapperContext _context;
         private readonly ISqlWrapper sqlWrapper;
 
         public JobPostingDao(ISqlWrapper sqlWrapper)
         {
             this.sqlWrapper = sqlWrapper;
         }
-        public JobPostingDao(DapperContext context)
-        {
-            _context = context;
-        }
 
-
-        //public void GetJobPosting()
-        //{
-        //    sqlWrapper.Query<JobPosting>("SELECT * FROM [DBO].[JOBBOARD]");
-
-        //}
 
         //POST Request (Create)
         public async Task CreateJobPosting(JobPostingRequest jobPosting)
@@ -46,7 +35,7 @@ namespace Job_Board.Daos
 
 
             //Connecting to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //executing query
                 await connection.ExecuteAsync(query, parameters);
@@ -57,7 +46,7 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<JobPosting>> GetJobPostings()
         {
             var query = "SELECT * FROM Job_Posting";
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 var jobPostings = await connection.QueryAsync<JobPosting>(query);
 
@@ -72,7 +61,7 @@ namespace Job_Board.Daos
             var query = $"SELECT * FROM Job_Posting WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
                 var jobPosting = await connection.QueryFirstOrDefaultAsync<JobPostingRequest>(query);
@@ -89,7 +78,7 @@ namespace Job_Board.Daos
             var query = $"DELETE FROM Job_Posting WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Execute query
                 await connection.ExecuteAsync(query);
@@ -111,7 +100,7 @@ namespace Job_Board.Daos
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
                 var updatedJobPosting = await connection.QueryFirstOrDefaultAsync<JobPosting>(query, parameters);
@@ -121,11 +110,9 @@ namespace Job_Board.Daos
 
         }
 
-
-
         public async Task<JobPosting> GetJobPostingByPosition(string position)
         {
-            var query = $"GET FROM Job_Posting WHERE Position = {position}";
+            var query = $"SELECT * FROM Job_Posting WHERE Position = {position}";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -136,7 +123,7 @@ namespace Job_Board.Daos
 
         public async Task<JobPostingRequest> GetJobPostingByLocationsId(int locationsId)
         {
-            var query = $"GET FROM JobPosting WHERE LocationsId = {locationsId}";
+            var query = $"SELECT * FROM Job_Posting WHERE LocationsId = {locationsId}";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -144,9 +131,6 @@ namespace Job_Board.Daos
                 return jobPosting;
             }
         }
-
-
-
 
     }
 }

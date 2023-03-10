@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Job_Board;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Job_Board.Controllers
 {
@@ -12,24 +10,12 @@ namespace Job_Board.Controllers
     public class LocationsController : ControllerBase
     {
 
-        private readonly LocationsDao _locationsDao;
-        public LocationsController(LocationsDao locationsDao)
+        private ILocationsDao _locationsDao;
+        public LocationsController(ILocationsDao locationsDao)
         {
             _locationsDao = locationsDao;
         }
 
-        private ILocationsDao locationsDao;
-
-        //public LocationsController(ILocationsDao locationsDao)
-        //{
-        //    this.locationsDao = locationsDao;
-        //}
-
-        //public void CallDao()
-        //{
-        //    locationsDao.GetLocations();
-
-        //}
 
 
         [HttpGet]

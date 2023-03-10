@@ -5,12 +5,13 @@ using System.Data;
 using System.Linq;
 using Job_Board.Models;
 using Job_Board.Wrappers;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Job_Board.Daos
 {
     public class InterviewDao : IInterviewDao
     {
-        private readonly DapperContext _context;
+
         private readonly ISqlWrapper sqlWrapper;
 
         public InterviewDao(ISqlWrapper sqlWrapper)
@@ -18,16 +19,6 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        public InterviewDao(DapperContext context)
-        {
-            _context = context;
-        }
-
-        //public void GetInterview()
-        //{
-        //    sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
-
-        //}
 
         //POST Request (Create)
         public async Task CreateInterview(InterviewRequest interview)
@@ -43,7 +34,7 @@ namespace Job_Board.Daos
             parameters.Add("CandidateId", interview.CandidateId, DbType.Int32);
 
             //Connecting to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //executing query
                 await connection.ExecuteAsync(query, parameters);
@@ -54,7 +45,7 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<Interview>> GetInterviews()
         {
             var query = "SELECT * FROM Interview";
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 var interviews = await connection.QueryAsync<Interview>(query);
 
@@ -68,7 +59,7 @@ namespace Job_Board.Daos
             var query = $"SELECT * FROM Interview WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
                 var candidate = await connection.QueryFirstOrDefaultAsync<InterviewRequest>(query);
@@ -107,7 +98,7 @@ namespace Job_Board.Daos
             parameters.Add("CandidateId", interview.CandidateId, DbType.Int32);
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
                 var updatedInterview = await connection.QueryFirstOrDefaultAsync<Interview>(query, parameters);
@@ -118,10 +109,9 @@ namespace Job_Board.Daos
         }
 
 
-
         public async Task<InterviewRequest> GetInterviewByCandidateId(int candidateId)
         {
-            var query = $"GET FROM Interview WHERE Position = {candidateId}";
+            var query = $"SELECT * FROM Interview WHERE CandidateId = {candidateId}";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -130,14 +120,15 @@ namespace Job_Board.Daos
             }
         }
 
-        public async Task<InterviewRequest> GetInterviewByJob_Id(int job_Id)
+        public async Task<IEnumerable<Interview>> GetInterviewByJob_Id(int job_Id)
         {
-            var query = $"GET FROM Interview WHERE Job_Id = {job_Id}";
+            var query = $"SELECT * FROM Interview WHERE Job_Id = {job_Id}";
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
-                return interview;
+                var interviews = await connection.QueryAsync<Interview>(query);
+
+                return interviews.ToList();
             }
         }
     }

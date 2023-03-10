@@ -9,6 +9,8 @@ namespace Job_Board.Models
         public string Time { get; set; }
         public int LocationsId { get; set; }
         public int CandidateId { get; set; }
+        public int Job_Id { get; set; }
+
         public Interview expectedInterview { get; set; }
         public Interview NewInterview { get; private set; }
 
@@ -23,5 +25,6 @@ namespace Job_Board.Models
         public string Time { get; set; }
         public int LocationsId { get; set; }
         public int CandidateId { get; set; }
+        public int Job_Id { get; set; }
     }
 }

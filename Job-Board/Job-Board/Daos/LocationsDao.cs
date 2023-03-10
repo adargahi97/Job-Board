@@ -10,7 +10,6 @@ namespace Job_Board.Daos
 {
     public class LocationsDao : ILocationsDao
     {
-        private readonly DapperContext _context;
 
         private readonly ISqlWrapper sqlWrapper;
 
@@ -19,21 +18,11 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        //public void GetLocationsDao()
-        //{
-        //    sqlWrapper.Query<Candidate>("SELECT * FROM [DBO].[JOBBOARD]");
-
-        //}
-
-        public LocationsDao(DapperContext context)
-        {
-            _context = context;
-        }
         //GET Request
         public async Task<IEnumerable<Locations>> GetLocations()
         {
             var query = "SELECT * FROM Locations";
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 var employees = await connection.QueryAsync<Locations>(query);
 
@@ -57,7 +46,7 @@ namespace Job_Board.Daos
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connecting to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //executing query
                 await connection.ExecuteAsync(query, parameters);
@@ -71,7 +60,7 @@ namespace Job_Board.Daos
             var query = $"SELECT * FROM Locations WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
                 var locations = await connection.QueryFirstOrDefaultAsync<LocationsRequest>(query);
@@ -88,7 +77,7 @@ namespace Job_Board.Daos
             var query = $"DELETE FROM Locations WHERE Id = {id}";
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //Execute query
                 await connection.ExecuteAsync(query);
@@ -112,7 +101,7 @@ namespace Job_Board.Daos
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connect to DB
-            using (var connection = _context.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
                 var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Locations>(query, parameters);

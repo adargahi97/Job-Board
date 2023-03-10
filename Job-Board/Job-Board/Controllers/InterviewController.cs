@@ -12,24 +12,13 @@ namespace Job_Board.Controllers
     public class InterviewController : ControllerBase
     {
 
-        private readonly InterviewDao _interviewDao;
-        public InterviewController(InterviewDao interviewDao)
+        private IInterviewDao _interviewDao;
+
+        public InterviewController(IInterviewDao interviewDao)
         {
             _interviewDao = interviewDao;
         }
 
-        private IInterviewDao interviewDao;
-
-        //public InterviewController(IInterviewDao interviewDao)
-        //{
-        //    this.interviewDao = interviewDao;
-        //}
-
-        //public void CallDao()
-        //{
-        //    interviewDao.GetInterview();
-
-        //}
 
         [HttpGet]
         [Route("Interview")]
@@ -122,5 +111,23 @@ namespace Job_Board.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Interview/Job_Id/{id:int}")]
+        public async Task<IActionResult> GetInterviewByJob_Id([FromRoute] int id)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewByJob_Id(id);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

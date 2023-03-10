@@ -12,25 +12,12 @@ namespace Job_Board.Controllers
     public class JobPostingController : ControllerBase
     {
 
-        private readonly JobPostingDao _jobPostingDao;
+        private IJobPostingDao _jobPostingDao;
 
-        public JobPostingController(JobPostingDao jobPostingDao)
+        public JobPostingController(IJobPostingDao jobPostingDao)
         {
             _jobPostingDao = jobPostingDao;
         }
-
-        private IJobPostingDao jobPostingDao;
-
-        //public JobPostingController(IJobPostingDao jobPostingDao)
-        //{
-        //    this.jobPostingDao = jobPostingDao;
-        //}
-
-        //public void CallDao()
-        //{
-        //    jobPostingDao.GetJobPosting();
-
-        //}
 
 
         [HttpGet]

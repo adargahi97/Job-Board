@@ -8,18 +8,13 @@ namespace Job_Board.Daos
     {
         //public void GetInterview();
 
-        
+        Task CreateInterview(InterviewRequest interview);
+        Task<IEnumerable<Interview>> GetInterviews();
         Task DeleteInterviewById(int id);
-
         Task<InterviewRequest> GetInterviewByID(int id);
-
-
         Task<InterviewRequest> GetInterviewByCandidateId(int candidateId);
-
-
-        Task<InterviewRequest> GetInterviewByJob_Id(int job_Id);
-
         Task<Interview> UpdateInterviewById(Interview interview);
+        Task<IEnumerable<Interview>> GetInterviewByJob_Id(int job_Id);
 
 
 
