@@ -58,7 +58,7 @@ namespace Job_Board.Daos
         public async Task<LocationRequest> GetLocationByID(Guid id)
         {
             //SQL query with passed in integer 
-            var query = $"SELECT * FROM Location WHERE Id = {id}";
+            var query = $"SELECT * FROM Location WHERE Id = '{id}'";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -75,7 +75,7 @@ namespace Job_Board.Daos
         public async Task DeleteLocationById(Guid id)
         {
             //SQL Query to delete off of passed in integer
-            var query = $"DELETE FROM Location WHERE Id = {id}";
+            var query = $"DELETE FROM Location WHERE Id = '{id}'";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())

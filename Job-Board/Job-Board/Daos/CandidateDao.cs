@@ -20,15 +20,14 @@ namespace Job_Board.Daos
 
         public async Task CreateCandidate(CandidateRequest candidate)
         {
-            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId, InterviewId) " +
-                "VALUES (@FirstName, @LastName, @PhoneNumber, @Job_Id, @LocationsId)";
+            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId" +
+                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId";
 
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", candidate.FirstName, DbType.String);
             parameters.Add("LastName", candidate.LastName, DbType.String);
             parameters.Add("PhoneNumber", candidate.PhoneNumber, DbType.String);
             parameters.Add("JobId", candidate.JobId, DbType.Guid);
-            parameters.Add("InterviewId", candidate.InterviewId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -51,7 +50,7 @@ namespace Job_Board.Daos
 
         public async Task<Candidate> GetCandidateByID(Guid id)
         {
-            var query = $"SELECT * FROM Candidate WHERE Id = {id}";
+            var query = $"SELECT * FROM Candidate WHERE Id = '{id}'";
             using (sqlWrapper.CreateConnection())
             {
                 var candidate = await sqlWrapper.QueryFirstOrDefaultAsync<Candidate>(query);
@@ -61,7 +60,7 @@ namespace Job_Board.Daos
 
         public async Task DeleteCandidateById(Guid id)
         {
-            var query = $"DELETE FROM Candidate WHERE Id = {id}";
+            var query = $"DELETE FROM Candidate WHERE Id = '{id}'";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -72,15 +71,14 @@ namespace Job_Board.Daos
         public async Task<Candidate> UpdateCandidateById(Candidate candidate)
         {
             var query = $"UPDATE Candidate SET FirstName = @FirstName, LastName = @LastName, " +
-                $"PhoneNumber = @PhoneNumber, Job_Id = @Job_Id, InterviewId = @InterviewId " +
+                $"PhoneNumber = @PhoneNumber, JobId = @JobId" +
                 $"WHERE Id = {candidate.Id}";
 
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", candidate.FirstName, DbType.String);
             parameters.Add("LastName", candidate.LastName, DbType.String);
             parameters.Add("PhoneNumber", candidate.PhoneNumber, DbType.String);
-            parameters.Add("Job_Id", candidate.JobId, DbType.Guid);
-            parameters.Add("InterviewId", candidate.InterviewId, DbType.Guid);
+            parameters.Add("JobId", candidate.JobId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -100,5 +98,9 @@ namespace Job_Board.Daos
                 return candidate;
             }
         }
+
+
+        
+
     }
 }

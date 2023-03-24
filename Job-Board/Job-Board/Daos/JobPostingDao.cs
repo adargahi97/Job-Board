@@ -59,7 +59,7 @@ namespace Job_Board.Daos
         public async Task<JobPostingRequest> GetJobPostingByID(Guid id)
         {
             //SQL query with passed in integer 
-            var query = $"SELECT * FROM JobPosting WHERE Id = {id}";
+            var query = $"SELECT * FROM JobPosting WHERE Id = '{id}'";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -76,7 +76,7 @@ namespace Job_Board.Daos
         public async Task DeleteJobPostingById(Guid id)
         {
             //SQL Query to delete off of passed in integer
-            var query = $"DELETE FROM JobPosting WHERE Id = {id}";
+            var query = $"DELETE FROM JobPosting WHERE Id = '{id}'";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -124,7 +124,7 @@ namespace Job_Board.Daos
 
         public async Task<JobPostingRequest> GetJobPostingByLocationId(Guid locationId)
         {
-            var query = $"SELECT * FROM JobPosting WHERE LocationId = {locationId}";
+            var query = $"SELECT * FROM JobPosting WHERE LocationId = '{locationId}'";
 
             using (sqlWrapper.CreateConnection())
             {

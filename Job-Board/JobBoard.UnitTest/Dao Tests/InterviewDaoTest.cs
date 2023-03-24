@@ -81,19 +81,19 @@ namespace JobBoard.UnitTest.Dao_Tests
         }
 
         [TestMethod]
-        public void GetInterviewByJob_Id_PullsInfo()
+        public void GetInterviewByJobId_PullsInfo()
         {
 
             //ARRANGE
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
             InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
-            int job_Id = 1;
+            int jobId = 1;
 
             //ACT
-            _ = sut.GetInterviewByJob_Id(job_Id);
+            _ = sut.GetInterviewByJobId(jobId);
 
             //Assert
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<InterviewRequest>(It.Is<string>(sql => sql == $"GET FROM Interview WHERE Job_Id = {job_Id}")), Times.Once);
+            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<InterviewRequest>(It.Is<string>(sql => sql == $"GET FROM Interview WHERE JobId = {jobId}")), Times.Once);
 
         }
 

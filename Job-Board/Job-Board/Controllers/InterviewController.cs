@@ -110,7 +110,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpGet]
-        [Route("Interview/Job_Id/{id:int}")]
+        [Route("Interview/JobId/{id:guid}")]
         public async Task<IActionResult> GetInterviewByJobId([FromRoute] Guid id)
         {
             try
@@ -127,5 +127,27 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Interview/Candidate/{lastName}")]
+        public async Task<IActionResult> GetInterviewByLastName([FromRoute] string lastName)
+        {
+            try
+            {
+                //CandidateId candidateId = await _candidateDao.GetCandidateIDByLastName(lastName);
+                var interview = await _interviewDao.GetInterviewByLastName(lastName);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
     }
 }

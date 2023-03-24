@@ -20,4 +20,16 @@ namespace Job_Board.Models
         public Guid CandidateId { get; set; }
         public Guid JobId { get; set; }
     }
+
+    public class InterviewJoinCandidate
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public Guid LocationId { get; set; }
+        public Guid JobId { get; set; }
+
+    }
+
 }

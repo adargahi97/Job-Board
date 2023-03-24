@@ -49,7 +49,7 @@ namespace Job_Board.Daos
 
         public async Task<InterviewRequest> GetInterviewByID(Guid id)
         {
-            var query = $"SELECT * FROM Interview WHERE Id = {id}";
+            var query = $"SELECT * FROM Interview WHERE Id = '{id}'";
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -60,7 +60,7 @@ namespace Job_Board.Daos
 
         public async Task DeleteInterviewById(Guid id)
         {
-            var query = $"DELETE FROM Interview WHERE Id = {id}";
+            var query = $"DELETE FROM Interview WHERE Id = '{id}'";
             using (sqlWrapper.CreateConnection())
             {
                 await sqlWrapper.ExecuteAsync(query);
@@ -89,7 +89,7 @@ namespace Job_Board.Daos
 
         public async Task<InterviewRequest> GetInterviewByCandidateId(Guid candidateId)
         {
-            var query = $"SELECT * FROM Interview WHERE CandidateId = {candidateId}";
+            var query = $"SELECT * FROM Interview WHERE CandidateId = '{candidateId}'";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -100,7 +100,7 @@ namespace Job_Board.Daos
 
         public async Task<IEnumerable<Interview>> GetInterviewByJobId(Guid jobId)
         {
-            var query = $"SELECT * FROM Interview WHERE JobId = {jobId}";
+            var query = $"SELECT * FROM Interview WHERE JobId = '{jobId}'";
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -109,5 +109,21 @@ namespace Job_Board.Daos
                 return interviews.ToList();
             }
         }
+
+
+        public async Task<InterviewJoinCandidate> GetInterviewByLastName(string lastName)
+        {
+            //CandidateId candidateId = CandidateDao.GetCandidateIDByLastName(lastName);
+            
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.Date, Interview.Time, Interview.JobId, Interview.LocationId FROM Interview INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE LastName = '{lastName}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewJoinCandidate>(query);
+                return interview;
+
+            }
+        }
+
     }
 }
