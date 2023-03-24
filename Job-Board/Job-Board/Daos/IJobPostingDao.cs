@@ -12,7 +12,7 @@ namespace Job_Board.Daos
         Task DeleteJobPostingById(Guid id);
         Task<JobPostingRequest> GetJobPostingByID(Guid id);
         Task<JobPosting> GetJobPostingByPosition(string position);
-        Task<JobPostingRequest> GetJobPostingByLocationsId(Guid locationsId);
+        Task<JobPostingRequest> GetJobPostingByLocationId(Guid locationId);
         Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting);
     }
 }

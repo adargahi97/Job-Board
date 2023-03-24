@@ -24,13 +24,13 @@ namespace Job_Board.Daos
         public async Task CreateJobPosting(JobPostingRequest jobPosting)
         {
             //SQL Query w/ dynamic params to be passed in
-            var query = "INSERT INTO Job_Posting (Position, LocationsId, Department, Description) " +
-                "VALUES (@Position, @LocationsId, @Department, @Description)";
+            var query = "INSERT INTO JobPosting (Position, LocationId, Department, Description) " +
+                "VALUES (@Position, @LocationId, @Department, @Description)";
 
             //Parameters to be injected in the Query
             var parameters = new DynamicParameters();
             parameters.Add("Position", jobPosting.Position, DbType.String);
-            parameters.Add("LocationsId", jobPosting.LocationsId, DbType.Int32);
+            parameters.Add("LocationId", jobPosting.LocationId, DbType.Int32);
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
@@ -46,7 +46,7 @@ namespace Job_Board.Daos
         //GET Request
         public async Task<IEnumerable<JobPosting>> GetJobPostings()
         {
-            var query = "SELECT * FROM Job_Posting";
+            var query = "SELECT * FROM JobPosting";
             using (var connection = sqlWrapper.CreateConnection())
             {
                 var jobPostings = await connection.QueryAsync<JobPosting>(query);
@@ -59,7 +59,7 @@ namespace Job_Board.Daos
         public async Task<JobPostingRequest> GetJobPostingByID(Guid id)
         {
             //SQL query with passed in integer 
-            var query = $"SELECT * FROM Job_Posting WHERE Id = {id}";
+            var query = $"SELECT * FROM JobPosting WHERE Id = {id}";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -76,7 +76,7 @@ namespace Job_Board.Daos
         public async Task DeleteJobPostingById(Guid id)
         {
             //SQL Query to delete off of passed in integer
-            var query = $"DELETE FROM Job_Posting WHERE Id = {id}";
+            var query = $"DELETE FROM JobPosting WHERE Id = {id}";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -90,13 +90,13 @@ namespace Job_Board.Daos
         public async Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting)
         {
             //SQL Query, injection with dynamic params & passed in candidate object to access id
-            var query = $"UPDATE Job_Posting SET Position = @Position, LocationsId = @LocationsId, " +
+            var query = $"UPDATE JobPosting SET Position = @Position, LocationId = @LocationId, " +
                 $"Department = @Department, Description = @Description, " +
                 $"WHERE Id = {jobPosting.Id}";
 
             var parameters = new DynamicParameters();
             parameters.Add("Position", jobPosting.Position, DbType.String);
-            parameters.Add("LocationsId", jobPosting.LocationId, DbType.Int32);
+            parameters.Add("LocationId", jobPosting.LocationId, DbType.Int32);
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
@@ -113,7 +113,7 @@ namespace Job_Board.Daos
 
         public async Task<JobPosting> GetJobPostingByPosition(string position)
         {
-            var query = $"SELECT * FROM Job_Posting WHERE Position = {position}";
+            var query = $"SELECT * FROM JobPosting WHERE Position = {position}";
 
             using (sqlWrapper.CreateConnection())
             {
@@ -122,9 +122,9 @@ namespace Job_Board.Daos
             }
         }
 
-        public async Task<JobPostingRequest> GetJobPostingByLocationsId(Guid locationsId)
+        public async Task<JobPostingRequest> GetJobPostingByLocationId(Guid locationId)
         {
-            var query = $"SELECT * FROM Job_Posting WHERE LocationsId = {locationsId}";
+            var query = $"SELECT * FROM JobPosting WHERE LocationId = {locationId}";
 
             using (sqlWrapper.CreateConnection())
             {

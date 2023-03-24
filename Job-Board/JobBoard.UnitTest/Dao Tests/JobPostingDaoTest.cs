@@ -36,7 +36,7 @@ namespace JobBoard.UnitTest.Dao_Tests
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
             JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            int id = 1;
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             // Act
             _ = sut.DeleteJobPostingById(id);
@@ -54,10 +54,11 @@ namespace JobBoard.UnitTest.Dao_Tests
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
             JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             //ACT
 
-            var jobPosting = sut.GetJobPostingByID(1);
+            var jobPosting = sut.GetJobPostingByID(id);
 
             //ASSERT
             Assert.IsTrue(jobPosting.Id > 0);
@@ -79,24 +80,24 @@ namespace JobBoard.UnitTest.Dao_Tests
             _ = sut.GetJobPostingByPosition(position);
             //Assert
             //Assert.AreEqual(candidate.FirstName, "Ron");
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPosting>(It.Is<string>(sql => sql == $"GET FROM Job_Posting WHERE Postion = {position}")), Times.Once);
+            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPosting>(It.Is<string>(sql => sql == $"GET FROM JobPosting WHERE Postion = {position}")), Times.Once);
 
         }
 
         [TestMethod]
-        public void GetJobPostingByLocationsId_PullsInfo()
+        public void GetJobPostingByLocationId_PullsInfo()
         {
 
             //ARRANGE
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
             JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            int locationsId = 1;
+            Guid locationId = Guid.Parse("2ABF7110-5329-469B-93BC-0DB491CADB18");
 
             //ACT
-            _ = sut.GetJobPostingByLocationsId(locationsId);
+            _ = sut.GetJobPostingByLocationId(locationId);
             //Assert
             //Assert.AreEqual(candidate.FirstName, "Ron");
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPostingRequest>(It.Is<string>(sql => sql == $"GET FROM Job_Posting WHERE LocationsId = {locationsId}")), Times.Once);
+            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPostingRequest>(It.Is<string>(sql => sql == $"GET FROM JobPosting WHERE LocationId = {locationId}")), Times.Once);
 
         }
 

@@ -21,13 +21,13 @@ namespace Job_Board.Daos
 
         public async Task CreateInterview(InterviewRequest interview)
         {
-            var query = "INSERT INTO Interview (Date, Time, LocationsId, CandidateId) " +
-                "VALUES (@Date, @Time, @LocationsId, @CandidateId)";
+            var query = "INSERT INTO Interview (Date, Time, LocationId, CandidateId) " +
+                "VALUES (@Date, @Time, @LocationId, @CandidateId)";
 
             var parameters = new DynamicParameters();
             parameters.Add("Date", interview.Date, DbType.String);
             parameters.Add("Time", interview.Time, DbType.String);
-            parameters.Add("LocationsId", interview.LocationId, DbType.Guid);
+            parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
@@ -70,13 +70,13 @@ namespace Job_Board.Daos
         public async Task<Interview> UpdateInterviewById(Interview interview)
         {
             var query = $"UPDATE Interview SET Date = @Date, Time = @Time, " +
-                $"LocationsId = @LocationsId, CandidateId = @CandidateId " +
+                $"LocationId = @LocationId, CandidateId = @CandidateId " +
                 $"WHERE Id = {interview.Id}";
 
             var parameters = new DynamicParameters();
             parameters.Add("Date", interview.Date, DbType.String);
             parameters.Add("Time", interview.Time, DbType.String);
-            parameters.Add("LocationsId", interview.LocationId, DbType.Guid);
+            parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())

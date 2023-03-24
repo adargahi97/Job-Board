@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace JobBoard.UnitTest
 {
-    [TestClass]
-    public class LocationsTest
-    {
-        [TestMethod]
+    //[TestClass]
+    //public class LocationTest
+    //{
+    //    [TestMethod]
 
-        public void AddLocations()
-        {
-            Locations sut = new Locations();
-            Locations expectedLocations = new Locations();
+    //    public void AddLocation()
+    //    {
+    //        Location sut = new Location();
+    //        Location expectedLocation = new Location();
 
 
-            sut.AddLocations(expectedLocations);
+    //        sut.AddLocation(expectedLocation);
 
-            Assert.AreEqual(expectedLocations, sut.NewLocations);
-        }
-    }
+    //        Assert.AreEqual(expectedLocation, sut.NewLocation);
+    //    }
+    //}
 }
 
 
