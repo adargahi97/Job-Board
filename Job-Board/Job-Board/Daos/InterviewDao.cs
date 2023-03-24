@@ -115,7 +115,10 @@ namespace Job_Board.Daos
         {
             //CandidateId candidateId = CandidateDao.GetCandidateIDByLastName(lastName);
             
-            var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.Date, Interview.Time, Interview.JobId, Interview.LocationId FROM Interview INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE LastName = '{lastName}'";
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.Date, Interview.Time, Interview.JobId, Interview.LocationId" +
+                        $" FROM Interview " +
+                        $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
+                        $"WHERE LastName = '{lastName}'";
 
             using (sqlWrapper.CreateConnection())
             {
