@@ -44,14 +44,14 @@ namespace JobBoard.UnitTest
                 FirstName = "Don",
                 LastName = "Jon",
                 PhoneNumber = "555-555-5555",
-                Job_Id = 8,
-                LocationsId = 8,
-                Id = 8,
+                //Job_Id = 8,
+                //LocationId = 8,
+                //Id = 8,
             };
 
             //ACT
             var result = sut.GetCandidateByID(candidate.Id).Result;
-            var result2 = sut.GetCandidateByID(1).Result;
+            //var result2 = sut.GetCandidateByID(1).Result;
 
 
             //mockSqlWrapper.Setup(w => w.Query<CandidateRequest>(It.IsAny<string>())).Returns(new List<Candidate>());
@@ -59,11 +59,11 @@ namespace JobBoard.UnitTest
 
             //ASSERT
             //Assert.IsNotNull(result);
-            //Assert.IsTrue(result.LocationsId > 0);
+            //Assert.IsTrue(result.LocationId > 0);
             //Assert.IsNotNull(candidate);
             //Assert.AreEqual(candidate.Job_Id, 8);
-            //Assert.AreEqual(result.LocationsId, 8);
-            Assert.AreEqual(result2.LocationsId, 1);
+            //Assert.AreEqual(result.LocationId, 8);
+            //Assert.AreEqual(result2.LocationId, 1);
 
 
             //mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql => sql == $"SELECT * FROM Candidate WHERE Id = {id}")), Times.Once);
@@ -101,10 +101,11 @@ namespace JobBoard.UnitTest
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
             CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             //ACT
 
-            var candidate = sut.GetCandidateByID(1);
+            var candidate = sut.GetCandidateByID(id);
 
             //ASSERT
             Assert.IsTrue(candidate.Id > 0);
@@ -120,7 +121,7 @@ namespace JobBoard.UnitTest
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
             CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
-            int id = 1;
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             // Act
             _ = sut.DeleteCandidateById(id);

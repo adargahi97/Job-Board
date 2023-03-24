@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace JobBoard.UnitTest.Dao_Tests
 {
     [TestClass]
-    public class LocationsDaoTest
+    public class LocationDaoTest
     {
         //[TestMethod]
 
@@ -29,39 +29,40 @@ namespace JobBoard.UnitTest.Dao_Tests
 
 
         [TestMethod]
-        public void DeleteLocationsByID_Works()
+        public void DeleteLocationByID_Works()
         {
 
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
-            LocationsDao sut = new LocationsDao(mockSqlWrapper.Object);
-            int id = 1;
+            LocationDao sut = new LocationDao(mockSqlWrapper.Object);
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             // Act
-            _ = sut.DeleteLocationsById(id);
+            _ = sut.DeleteLocationById(id);
 
             // Assert
 
-            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Locations WHERE Id = {id}")), Times.Once); ;
+            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Location WHERE Id = {id}")), Times.Once); ;
         }
 
 
         [TestMethod]
-        public void GetLocationsByID_NotNull()
+        public void GetLocationByID_NotNull()
         {
 
             //ARRANGE
             Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
-            LocationsDao sut = new LocationsDao(mockSqlWrapper.Object);
+            LocationDao sut = new LocationDao(mockSqlWrapper.Object);
+            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
 
             //ACT
 
-            var locations = sut.GetLocationsByID(1);
+            var location = sut.GetLocationByID(id);
 
             //ASSERT
-            Assert.IsTrue(locations.Id > 0);
-            Assert.IsNotNull(locations.Id);
+            Assert.IsTrue(location.Id > 0);
+            Assert.IsNotNull(location.Id);
 
         }
     }

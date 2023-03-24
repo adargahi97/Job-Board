@@ -20,9 +20,9 @@ namespace Job_Board.Daos
         }
 
         //GET Request
-        public async Task<IEnumerable<Location>> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocation()
         {
-            var query = "SELECT * FROM Locations";
+            var query = "SELECT * FROM Location";
             using (var connection = sqlWrapper.CreateConnection())
             {
                 var employees = await connection.QueryAsync<Location>(query);
@@ -35,7 +35,7 @@ namespace Job_Board.Daos
         public async Task CreateLocation(LocationRequest location)
         {
             //SQL Query w/ dynamic params to be passed in
-            var query = "INSERT INTO Locations (StreetAddress, City, State, Zip, Building) " +
+            var query = "INSERT INTO Location (StreetAddress, City, State, Zip, Building) " +
                 "VALUES (@StreetAddress, @City, @State, @Zip, @Building)";
 
             //Parameters to be injected in the Query
@@ -58,16 +58,16 @@ namespace Job_Board.Daos
         public async Task<LocationRequest> GetLocationByID(Guid id)
         {
             //SQL query with passed in integer 
-            var query = $"SELECT * FROM Locations WHERE Id = {id}";
+            var query = $"SELECT * FROM Location WHERE Id = {id}";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
-                var locations = await connection.QueryFirstOrDefaultAsync<LocationRequest>(query);
+                var location = await connection.QueryFirstOrDefaultAsync<LocationRequest>(query);
 
                 //Return variable 
-                return locations;
+                return location;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Job_Board.Daos
         public async Task DeleteLocationById(Guid id)
         {
             //SQL Query to delete off of passed in integer
-            var query = $"DELETE FROM Locations WHERE Id = {id}";
+            var query = $"DELETE FROM Location WHERE Id = {id}";
 
             //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
@@ -89,7 +89,7 @@ namespace Job_Board.Daos
         public async Task<Location> UpdateLocationById(Location location)
         {
             //SQL Query, injection with dynamic params & passed in candidate object to access id
-            var query = $"UPDATE Locations SET StreetAddress = @StreetAddress, City = @City, " +
+            var query = $"UPDATE Location SET StreetAddress = @StreetAddress, City = @City, " +
                 $"State = @State, Zip = @Zip, Building = @Building" +
                 $"WHERE Id = {location.Id}";
 

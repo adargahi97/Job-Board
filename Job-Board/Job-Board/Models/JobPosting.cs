@@ -15,7 +15,7 @@ namespace Job_Board.Models
     public class JobPostingRequest
     {
         public string Position { get; set; }
-        public Guid LocationsId { get; set; }
+        public Guid LocationId { get; set; }
         public string Department { get; set; }
         public string Description { get; set; }
     }

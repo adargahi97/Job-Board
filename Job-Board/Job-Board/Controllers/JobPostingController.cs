@@ -21,7 +21,7 @@ namespace Job_Board.Controllers
 
 
         [HttpGet]
-        [Route("Job_Posting")]
+        [Route("JobPosting")]
         public async Task<IActionResult> GetJobPostings()
         {
             try
@@ -36,7 +36,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpGet]
-        [Route("Job_Posting/{id}")]
+        [Route("JobPosting/{id}")]
         public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
         {
             try
@@ -55,7 +55,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpPost]
-        [Route("Job_Posting")]
+        [Route("JobPosting")]
         public async Task<IActionResult> CreateCandidate([FromBody] JobPostingRequest createRequest)
         {
             try
@@ -70,7 +70,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpDelete]
-        [Route("Job_Posting/{id:int}")]
+        [Route("JobPosting/{id:int}")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
@@ -91,7 +91,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpPatch]
-        [Route("Job_Posting")]
+        [Route("JobPosting")]
         public async Task<IActionResult> UpdateInterviewByID([FromBody] JobPosting jobPostingReq)
         {
             try

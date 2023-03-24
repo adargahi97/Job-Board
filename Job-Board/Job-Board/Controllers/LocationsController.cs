@@ -7,25 +7,25 @@ using Microsoft.AspNetCore.Mvc;
 namespace Job_Board.Controllers
 {
     [ApiController]
-    public class LocationsController : ControllerBase
+    public class LocationController : ControllerBase
     {
 
-        private ILocationDao _locationsDao;
-        public LocationsController(ILocationDao locationsDao)
+        private ILocationDao _locationDao;
+        public LocationController(ILocationDao locationDao)
         {
-            _locationsDao = locationsDao;
+            _locationDao = locationDao;
         }
 
 
 
         [HttpGet]
-        [Route("Locations")]
-        public async Task<IActionResult> GetLocations()
+        [Route("Location")]
+        public async Task<IActionResult> GetLocation()
         {
             try
             {
-                var locations = await _locationsDao.GetLocations();
-                return Ok(locations);
+                var location = await _locationDao.GetLocation();
+                return Ok(location);
             }
             catch (Exception e)
             {
@@ -34,12 +34,12 @@ namespace Job_Board.Controllers
         }
 
         [HttpGet]
-        [Route("Locations/{id:int}")]
+        [Route("Location/{id:int}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
         {
             try
             {
-                var location = await _locationsDao.GetLocationByID(id);
+                var location = await _locationDao.GetLocationByID(id);
                 if (location == null)
                 {
                     return StatusCode(404);
@@ -53,12 +53,12 @@ namespace Job_Board.Controllers
         }
 
         [HttpPost]
-        [Route("Locations")]
+        [Route("Location")]
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
         {
             try
             {
-                await _locationsDao.CreateLocation(createRequest);
+                await _locationDao.CreateLocation(createRequest);
                 return StatusCode(201);
             }
             catch (Exception e)
@@ -68,18 +68,18 @@ namespace Job_Board.Controllers
         }
 
         [HttpDelete]
-        [Route("Locations/{id:int}")]
+        [Route("Location/{id:int}")]
         public async Task<IActionResult> DeleteLocationById([FromRoute] Guid id)
         {
             try
             {
-                var location = await _locationsDao.GetLocationByID(id);
+                var location = await _locationDao.GetLocationByID(id);
                 if (location == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _locationsDao.DeleteLocationById(id);
+                await _locationDao.DeleteLocationById(id);
                 return StatusCode(200);
             }
             catch (Exception e)
@@ -89,17 +89,17 @@ namespace Job_Board.Controllers
         }
 
         [HttpPatch]
-        [Route("Locations")]
-        public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationsReq)
+        [Route("Location")]
+        public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationReq)
         {
             try
             {
-                var location = await _locationsDao.GetLocationByID(locationsReq.Id);
+                var location = await _locationDao.GetLocationByID(locationReq.Id);
                 if (location == null)
                 {
                     return StatusCode(404);
                 }
-                var updatedLocation = await _locationsDao.UpdateLocationById(locationsReq);
+                var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
 
                 return StatusCode(200);
             }
