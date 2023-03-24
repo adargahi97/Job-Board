@@ -10,8 +10,8 @@ namespace Job_Board.Controllers
     public class LocationsController : ControllerBase
     {
 
-        private ILocationsDao _locationsDao;
-        public LocationsController(ILocationsDao locationsDao)
+        private ILocationDao _locationsDao;
+        public LocationsController(ILocationDao locationsDao)
         {
             _locationsDao = locationsDao;
         }
@@ -35,11 +35,11 @@ namespace Job_Board.Controllers
 
         [HttpGet]
         [Route("Locations/{id:int}")]
-        public async Task<IActionResult> GetLocationByID([FromRoute] int id)
+        public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
         {
             try
             {
-                var location = await _locationsDao.GetLocationsByID(id);
+                var location = await _locationsDao.GetLocationByID(id);
                 if (location == null)
                 {
                     return StatusCode(404);
@@ -54,7 +54,7 @@ namespace Job_Board.Controllers
 
         [HttpPost]
         [Route("Locations")]
-        public async Task<IActionResult> CreateLocation([FromBody] LocationsRequest createRequest)
+        public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
         {
             try
             {
@@ -69,17 +69,17 @@ namespace Job_Board.Controllers
 
         [HttpDelete]
         [Route("Locations/{id:int}")]
-        public async Task<IActionResult> DeleteLocationById([FromRoute] int id)
+        public async Task<IActionResult> DeleteLocationById([FromRoute] Guid id)
         {
             try
             {
-                var location = await _locationsDao.GetLocationsByID(id);
+                var location = await _locationsDao.GetLocationByID(id);
                 if (location == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _locationsDao.DeleteLocationsById(id);
+                await _locationsDao.DeleteLocationById(id);
                 return StatusCode(200);
             }
             catch (Exception e)
@@ -90,11 +90,11 @@ namespace Job_Board.Controllers
 
         [HttpPatch]
         [Route("Locations")]
-        public async Task<IActionResult> UpdateLocationByID([FromBody] Locations locationsReq)
+        public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationsReq)
         {
             try
             {
-                var location = await _locationsDao.GetLocationsByID(locationsReq.Id);
+                var location = await _locationsDao.GetLocationByID(locationsReq.Id);
                 if (location == null)
                 {
                     return StatusCode(404);

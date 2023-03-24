@@ -5,33 +5,34 @@ using System.Data;
 using System.Linq;
 using Job_Board.Models;
 using Job_Board.Wrappers;
+using System;
 
 namespace Job_Board.Daos
 {
-    public class LocationsDao : ILocationsDao
+    public class LocationDao : ILocationDao
     {
 
         private readonly ISqlWrapper sqlWrapper;
 
-        public LocationsDao(ISqlWrapper sqlWrapper)
+        public LocationDao(ISqlWrapper sqlWrapper)
         {
             this.sqlWrapper = sqlWrapper;
         }
 
         //GET Request
-        public async Task<IEnumerable<Locations>> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocations()
         {
             var query = "SELECT * FROM Locations";
             using (var connection = sqlWrapper.CreateConnection())
             {
-                var employees = await connection.QueryAsync<Locations>(query);
+                var employees = await connection.QueryAsync<Location>(query);
 
                 return employees.ToList();
             }
         }
 
         //POST Request (Create)
-        public async Task CreateLocation(LocationsRequest location)
+        public async Task CreateLocation(LocationRequest location)
         {
             //SQL Query w/ dynamic params to be passed in
             var query = "INSERT INTO Locations (StreetAddress, City, State, Zip, Building) " +
@@ -54,7 +55,7 @@ namespace Job_Board.Daos
         }
 
         //GET Request
-        public async Task<LocationsRequest> GetLocationsByID(int id)
+        public async Task<LocationRequest> GetLocationByID(Guid id)
         {
             //SQL query with passed in integer 
             var query = $"SELECT * FROM Locations WHERE Id = {id}";
@@ -63,7 +64,7 @@ namespace Job_Board.Daos
             using (var connection = sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
-                var locations = await connection.QueryFirstOrDefaultAsync<LocationsRequest>(query);
+                var locations = await connection.QueryFirstOrDefaultAsync<LocationRequest>(query);
 
                 //Return variable 
                 return locations;
@@ -71,7 +72,7 @@ namespace Job_Board.Daos
         }
 
         //DELETE Request
-        public async Task DeleteLocationsById(int id)
+        public async Task DeleteLocationById(Guid id)
         {
             //SQL Query to delete off of passed in integer
             var query = $"DELETE FROM Locations WHERE Id = {id}";
@@ -85,7 +86,7 @@ namespace Job_Board.Daos
         }
 
         //PATCH Request (Update)
-        public async Task<Locations> UpdateLocationById(Locations location)
+        public async Task<Location> UpdateLocationById(Location location)
         {
             //SQL Query, injection with dynamic params & passed in candidate object to access id
             var query = $"UPDATE Locations SET StreetAddress = @StreetAddress, City = @City, " +
@@ -104,7 +105,7 @@ namespace Job_Board.Daos
             using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
-                var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Locations>(query, parameters);
+                var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Location>(query, parameters);
 
                 return locationToUpdate;
             }

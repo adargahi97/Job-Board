@@ -6,6 +6,7 @@ using System.Linq;
 using Job_Board.Models;
 using Job_Board.Wrappers;
 using Microsoft.CodeAnalysis;
+using System;
 
 namespace Job_Board.Daos
 {
@@ -55,7 +56,7 @@ namespace Job_Board.Daos
         }
 
         //GET Request
-        public async Task<JobPostingRequest> GetJobPostingByID(int id)
+        public async Task<JobPostingRequest> GetJobPostingByID(Guid id)
         {
             //SQL query with passed in integer 
             var query = $"SELECT * FROM Job_Posting WHERE Id = {id}";
@@ -72,7 +73,7 @@ namespace Job_Board.Daos
         }
 
         //DELETE Request
-        public async Task DeleteJobPostingById(int id)
+        public async Task DeleteJobPostingById(Guid id)
         {
             //SQL Query to delete off of passed in integer
             var query = $"DELETE FROM Job_Posting WHERE Id = {id}";
@@ -95,7 +96,7 @@ namespace Job_Board.Daos
 
             var parameters = new DynamicParameters();
             parameters.Add("Position", jobPosting.Position, DbType.String);
-            parameters.Add("LocationsId", jobPosting.LocationsId, DbType.Int32);
+            parameters.Add("LocationsId", jobPosting.LocationId, DbType.Int32);
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
@@ -121,7 +122,7 @@ namespace Job_Board.Daos
             }
         }
 
-        public async Task<JobPostingRequest> GetJobPostingByLocationsId(int locationsId)
+        public async Task<JobPostingRequest> GetJobPostingByLocationsId(Guid locationsId)
         {
             var query = $"SELECT * FROM Job_Posting WHERE LocationsId = {locationsId}";
 

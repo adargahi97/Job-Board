@@ -35,7 +35,7 @@ namespace Job_Board.Controllers
 
         [HttpGet]
         [Route("Interview/{id:int}")]
-        public async Task<IActionResult> GetInterviewByID([FromRoute] int id)
+        public async Task<IActionResult> GetInterviewByID([FromRoute] Guid id)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Job_Board.Controllers
 
         [HttpDelete]
         [Route("Interview/{id:int}")]
-        public async Task<IActionResult> DeleteInterviewById([FromRoute] int id)
+        public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
             {
@@ -111,11 +111,11 @@ namespace Job_Board.Controllers
 
         [HttpGet]
         [Route("Interview/Job_Id/{id:int}")]
-        public async Task<IActionResult> GetInterviewByJob_Id([FromRoute] int id)
+        public async Task<IActionResult> GetInterviewByJobId([FromRoute] Guid id)
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewByJob_Id(id);
+                var interview = await _interviewDao.GetInterviewByJobId(id);
                 if (interview == null)
                 {
                     return StatusCode(404);

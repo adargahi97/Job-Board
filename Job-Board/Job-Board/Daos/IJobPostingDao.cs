@@ -1,4 +1,5 @@
 ﻿using Job_Board.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,10 +9,10 @@ namespace Job_Board.Daos
     {
         Task CreateJobPosting(JobPostingRequest jobPosting);
         Task<IEnumerable<JobPosting>> GetJobPostings();
-        Task DeleteJobPostingById(int id);
-        Task<JobPostingRequest> GetJobPostingByID(int id);
+        Task DeleteJobPostingById(Guid id);
+        Task<JobPostingRequest> GetJobPostingByID(Guid id);
         Task<JobPosting> GetJobPostingByPosition(string position);
-        Task<JobPostingRequest> GetJobPostingByLocationsId(int locationsId);
+        Task<JobPostingRequest> GetJobPostingByLocationsId(Guid locationsId);
         Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting);
     }
 }

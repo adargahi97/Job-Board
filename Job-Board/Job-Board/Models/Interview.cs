@@ -7,7 +7,7 @@ namespace Job_Board.Models
         public Guid Id { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
-        public Guid LocationsId { get; set; }
+        public Guid LocationId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid JobId { get; set; }
 
@@ -16,7 +16,7 @@ namespace Job_Board.Models
     {
         public string Date { get; set; }
         public string Time { get; set; }
-        public Guid LocationsId { get; set; }
+        public Guid LocationId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid JobId { get; set; }
     }

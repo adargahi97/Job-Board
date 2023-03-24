@@ -25,7 +25,7 @@ namespace Job_Board
             services.AddScoped<ICandidateDao, CandidateDao>();
             services.AddScoped<IInterviewDao, InterviewDao>();
             services.AddScoped<IJobPostingDao, JobPostingDao>();
-            services.AddScoped<ILocationsDao, LocationsDao>();
+            services.AddScoped<ILocationDao, LocationDao>();
             services.AddControllers();
 
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo

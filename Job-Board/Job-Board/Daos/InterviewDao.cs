@@ -1,11 +1,11 @@
-﻿using Dapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data;
 using System.Linq;
 using Job_Board.Models;
 using Job_Board.Wrappers;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System;
+using Dapper;
 
 namespace Job_Board.Daos
 {
@@ -19,29 +19,23 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-
-        //POST Request (Create)
         public async Task CreateInterview(InterviewRequest interview)
         {
-            //SQL Query w/ dynamic params to be passed in
             var query = "INSERT INTO Interview (Date, Time, LocationsId, CandidateId) " +
                 "VALUES (@Date, @Time, @LocationsId, @CandidateId)";
 
             var parameters = new DynamicParameters();
             parameters.Add("Date", interview.Date, DbType.String);
             parameters.Add("Time", interview.Time, DbType.String);
-            parameters.Add("LocationsId", interview.LocationsId, DbType.Int32);
-            parameters.Add("CandidateId", interview.CandidateId, DbType.Int32);
+            parameters.Add("LocationsId", interview.LocationId, DbType.Guid);
+            parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
-            //Connecting to DB
             using (var connection = sqlWrapper.CreateConnection())
             {
-                //executing query
                 await connection.ExecuteAsync(query, parameters);
             }
         }
 
-        //GET Request (Read)
         public async Task<IEnumerable<Interview>> GetInterviews()
         {
             var query = "SELECT * FROM Interview";
@@ -52,41 +46,29 @@ namespace Job_Board.Daos
                 return interviews.ToList();
             }
         }
-        //GET Request (Read)
-        public async Task<InterviewRequest> GetInterviewByID(int id)
+
+        public async Task<InterviewRequest> GetInterviewByID(Guid id)
         {
-            //SQL query with passed in integer 
             var query = $"SELECT * FROM Interview WHERE Id = {id}";
 
-            //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
             {
-                //Run query, set to variable candidate
                 var candidate = await connection.QueryFirstOrDefaultAsync<InterviewRequest>(query);
-
-                //Return variable 
                 return candidate;
             }
         }
 
-        //DELETE Request
-        public async Task DeleteInterviewById(int id)
+        public async Task DeleteInterviewById(Guid id)
         {
-            //SQL Query to delete off of passed in integer
             var query = $"DELETE FROM Interview WHERE Id = {id}";
-
-            //Connect to DB
-             using (sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                //Execute query
                 await sqlWrapper.ExecuteAsync(query);
             }
         }
 
-        //PATCH Request (Update)
         public async Task<Interview> UpdateInterviewById(Interview interview)
         {
-            //SQL Query, injection with dynamic params & passed in candidate object to access id
             var query = $"UPDATE Interview SET Date = @Date, Time = @Time, " +
                 $"LocationsId = @LocationsId, CandidateId = @CandidateId " +
                 $"WHERE Id = {interview.Id}";
@@ -94,22 +76,18 @@ namespace Job_Board.Daos
             var parameters = new DynamicParameters();
             parameters.Add("Date", interview.Date, DbType.String);
             parameters.Add("Time", interview.Time, DbType.String);
-            parameters.Add("LocationsId", interview.LocationsId, DbType.Int32);
-            parameters.Add("CandidateId", interview.CandidateId, DbType.Int32);
+            parameters.Add("LocationsId", interview.LocationId, DbType.Guid);
+            parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
-            //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
             {
-                //set updated candidate to query result
                 var updatedInterview = await connection.QueryFirstOrDefaultAsync<Interview>(query, parameters);
-
                 return updatedInterview;
             }
 
         }
 
-
-        public async Task<InterviewRequest> GetInterviewByCandidateId(int candidateId)
+        public async Task<InterviewRequest> GetInterviewByCandidateId(Guid candidateId)
         {
             var query = $"SELECT * FROM Interview WHERE CandidateId = {candidateId}";
 
@@ -120,9 +98,9 @@ namespace Job_Board.Daos
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewByJob_Id(int job_Id)
+        public async Task<IEnumerable<Interview>> GetInterviewByJobId(Guid jobId)
         {
-            var query = $"SELECT * FROM Interview WHERE Job_Id = {job_Id}";
+            var query = $"SELECT * FROM Interview WHERE JobId = {jobId}";
 
             using (var connection = sqlWrapper.CreateConnection())
             {

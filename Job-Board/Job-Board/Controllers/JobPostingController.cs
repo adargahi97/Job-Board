@@ -36,8 +36,8 @@ namespace Job_Board.Controllers
         }
 
         [HttpGet]
-        [Route("Job_Posting/{id:int}")]
-        public async Task<IActionResult> GetCandidateByID([FromRoute] int id)
+        [Route("Job_Posting/{id}")]
+        public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Job_Board.Controllers
 
         [HttpDelete]
         [Route("Job_Posting/{id:int}")]
-        public async Task<IActionResult> DeleteInterviewById([FromRoute] int id)
+        public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
             {

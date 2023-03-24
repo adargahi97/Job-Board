@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
@@ -23,7 +24,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var candidates = await _candidateDao.GetCandidates();
+                IEnumerable<Candidate> candidates = await _candidateDao.GetCandidates();
                 return Ok(candidates);
             }
             catch (Exception e)
@@ -33,8 +34,8 @@ namespace Job_Board.Controllers
         }
 
         [HttpGet]
-        [Route("Candidate/{id:int}")]
-        public async Task<IActionResult> GetCandidateByID([FromRoute] int id)
+        [Route("Candidate/{id:Guid}")]
+        public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
         {
             try
             {
@@ -67,8 +68,8 @@ namespace Job_Board.Controllers
         }
 
         [HttpDelete]
-        [Route("Candidate/{id:int}")]
-        public async Task<IActionResult> DeleteCandidateById([FromRoute] int id)
+        [Route("Candidate/{id}")]
+        public async Task<IActionResult> DeleteCandidateById([FromRoute] Guid id)
         {
             try
             {

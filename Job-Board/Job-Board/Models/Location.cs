@@ -3,7 +3,7 @@ using System;
 
 namespace Job_Board.Models
 {
-    public class Locations
+    public class Location
     {
         public Guid Id { get; set; }
         public string StreetAddress { get; set; }
@@ -13,7 +13,7 @@ namespace Job_Board.Models
         public string Building { get; set; }
 
     }
-    public class LocationsRequest
+    public class LocationRequest
     {
         public string StreetAddress { get; set; }
         public string City { get; set; }
