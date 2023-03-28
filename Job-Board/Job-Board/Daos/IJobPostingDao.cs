@@ -11,8 +11,8 @@ namespace Job_Board.Daos
         Task<IEnumerable<JobPosting>> GetJobPostings();
         Task DeleteJobPostingById(Guid id);
         Task<JobPostingRequest> GetJobPostingByID(Guid id);
-        Task<JobPosting> GetJobPostingByPosition(string position);
-        Task<JobPostingRequest> GetJobPostingByLocationId(Guid locationId);
+        Task<JobPostingByPosition> GetJobPostingByPosition(string position);
+        Task<JobPostingByLocationId> GetJobPostingByLocationId(Guid locationId);
         Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting);
     }
 }

@@ -111,27 +111,32 @@ namespace Job_Board.Daos
 
         }
 
-        public async Task<JobPosting> GetJobPostingByPosition(string position)
+        public async Task<JobPostingByPosition> GetJobPostingByPosition(string position)
         {
-            var query = $"SELECT * FROM JobPosting WHERE Position = {position}";
+            var query = $"SELECT * FROM JobPosting WHERE Position = '{position}'";
 
             using (sqlWrapper.CreateConnection())
             {
-                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPosting>(query);
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingByPosition>(query);
                 return jobPosting;
             }
         }
 
-        public async Task<JobPostingRequest> GetJobPostingByLocationId(Guid locationId)
+        public async Task<JobPostingByLocationId> GetJobPostingByLocationId(Guid locationId)
         {
             var query = $"SELECT * FROM JobPosting WHERE LocationId = '{locationId}'";
 
             using (sqlWrapper.CreateConnection())
             {
-                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingRequest>(query);
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingByLocationId>(query);
                 return jobPosting;
             }
         }
+
+
+
+
+
 
     }
 }

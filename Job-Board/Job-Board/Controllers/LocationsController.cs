@@ -109,5 +109,44 @@ namespace Job_Board.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("Location/Building/{building}")]
+        public async Task<IActionResult> GetLocationByBuilding([FromRoute] string building)
+        {
+            try
+            {
+                var location = await _locationDao.GetLocationByBuilding(building);
+                if (location == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(location);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("Location/State/{state}")]
+        public async Task<IActionResult> GetLocationByState([FromRoute] string state)
+        {
+            try
+            {
+                var location = await _locationDao.GetLocationByState(state);
+                if (location == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(location);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }
