@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
@@ -129,24 +130,28 @@ namespace Job_Board.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Location/State/{state}")]
-        public async Task<IActionResult> GetLocationByState([FromRoute] string state)
-        {
-            try
-            {
-                var location = await _locationDao.GetLocationByState(state);
-                if (location == null)
-                {
-                    return StatusCode(404);
-                }
-                return Ok(location);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
+
+        ///// <summary>Search for Location Information by State</summary>
+        ///// <returns>Location Information</returns>
+        ///// <response code="200">Returns the Information by State</response>
+        //[HttpGet]
+        //[Route("Location/State/{state}")]
+        //public async Task<IActionResult> GetLocationByState([FromRoute] string state)
+        //{
+        //    try
+        //    {
+        //        IEnumerable<LocationByState>location = await _locationDao.GetLocationByState(state);
+        //        if (location == null)
+        //        {
+        //            return StatusCode(404);
+        //        }
+        //        return Ok(location);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return StatusCode(500, e.Message);
+        //    }
+        //}
 
     }
 }

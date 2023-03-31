@@ -89,8 +89,8 @@ namespace Job_Board.Daos
         public async Task<Location> UpdateLocationById(Location location)
         {
             //SQL Query, injection with dynamic params & passed in candidate object to access id
-            var query = $"UPDATE Location SET StreetAddress = @StreetAddress, City = @City, " +
-                $"State = @State, Zip = @Zip, Building = @Building " +
+            var query = $"UPDATE Location SET StreetAddress = ISNULL(@StreetAddress, StreetAddress), City = ISNULL(@City, City), " +
+                $"State = ISNULL(@State, State), Zip = ISNULL(@Zip, Zip), Building = ISNULL(@Building, Building) " +
                 $"WHERE Id = '{location.Id}'";
 
             //Parameters to be injected in the Query
@@ -123,14 +123,14 @@ namespace Job_Board.Daos
             }
         }
 
-        public async Task<LocationByState> GetLocationByState(string state)
+        public async Task<IEnumerable<LocationByState>> GetLocationByState(string state)
         {
             var query = $"SELECT * FROM Location WHERE State = '{state}'";
 
             using (sqlWrapper.CreateConnection())
             {
-                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByState>(query);
-                return location;
+                var location = await sqlWrapper.QueryAsync<LocationByState>(query);
+                return location.ToList();
             }
         }
     }

@@ -96,7 +96,14 @@ namespace Job_Board.Daos
 
             var parameters = new DynamicParameters();
             parameters.Add("Position", jobPosting.Position, DbType.String);
-            parameters.Add("LocationId", jobPosting.LocationId, DbType.Guid);
+            if (jobPosting.LocationId == Guid.Empty)
+            {
+                parameters.Add("LocationId", DBNull.Value, DbType.Guid);
+            }
+            else
+            {
+                parameters.Add("LocationId", jobPosting.LocationId, DbType.Guid);
+            }
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
