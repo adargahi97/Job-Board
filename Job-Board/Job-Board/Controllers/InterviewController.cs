@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Job_Board.Controllers
@@ -128,13 +129,15 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Search for Interview Information by Last Name</summary>
+        /// <returns>Interview Information</returns>
+        /// <response code="200">Returns the Interview Information found by last name</response>
         [HttpGet]
-        [Route("Interview/Candidate/{lastName}")]
+        [Route("Interview/{lastName}")]
         public async Task<IActionResult> GetInterviewByLastName([FromRoute] string lastName)
         {
             try
             {
-                //CandidateId candidateId = await _candidateDao.GetCandidateIDByLastName(lastName);
                 var interview = await _interviewDao.GetInterviewByLastName(lastName);
                 if (interview == null)
                 {

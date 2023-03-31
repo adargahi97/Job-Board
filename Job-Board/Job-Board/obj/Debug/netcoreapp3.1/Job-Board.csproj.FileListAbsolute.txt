@@ -833,3 +833,5 @@ C:\Users\Mason.Bartlett\source\repos\final-project-job-board\LocationsJobPosting
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\LocationsJobPosting\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.dll
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\LocationsJobPosting\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.pdb
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\LocationsJobPosting\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.genruntimeconfig.cache
+C:\Users\Abbas\source\repos\final-project-job-board\.git\Job-Board\Job-Board\bin\Debug\netcoreapp3.1\Job-Board.xml
+C:\Users\Abbas\source\repos\final-project-job-board\.git\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.xml

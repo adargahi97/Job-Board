@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Job-Board</name>
+    </assembly>
+    <members>
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByLastName(System.String)">
+            <summary>Search for Interview Information by Last Name</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Interview Information found by last name</response>
+        </member>
+    </members>
+</doc>
