@@ -6,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Job_Board.Wrappers;
+using System.Reflection;
+using Microsoft.Extensions.Options;
+using System.IO;
+using System;
 
 namespace Job_Board
 {
@@ -28,12 +32,19 @@ namespace Job_Board
             services.AddScoped<ILocationDao, LocationDao>();
             services.AddControllers();
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+            services.AddSwaggerGen(c =>
             {
-                Title = "Job Board",
-                Description = "A CRUD Api for a companies job postings",
-                Version = "v1"
-            }));
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Job Board",
+                    Description = "A CRUD Api for a companies job postings",
+                    Version = "v1"
+                });
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +58,10 @@ namespace Job_Board
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Job Board V1"));
+            app.UseSwaggerUI(opt => {
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Job Board V1");
+
+            });
 
             app.UseRouting();
 
@@ -58,5 +72,6 @@ namespace Job_Board
                 endpoints.MapControllers();
             });
         }
+        
     }
 }
