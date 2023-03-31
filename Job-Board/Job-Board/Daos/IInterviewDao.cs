@@ -15,7 +15,7 @@ namespace Job_Board.Daos
         Task<Interview> UpdateInterviewById(Interview interview);
         Task<IEnumerable<Interview>> GetInterviewByJobId(Guid jobId);
 
-        Task<InterviewJoinCandidate> GetInterviewByLastName(string lastName);
+        Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName);
 
     }
 }

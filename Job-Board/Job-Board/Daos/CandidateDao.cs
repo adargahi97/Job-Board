@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Job_Board.Daos
 {
@@ -88,19 +89,32 @@ namespace Job_Board.Daos
 
         }
 
-        public async Task<Candidate> GetCandidateByFirstName(string firstName)
+        public async Task<IEnumerable<CandidateByLastName>> GetCandidateByLastName(string lastName)
         {
-            var query = $"GET FROM Candidate WHERE FirstName = {firstName}";
+            var query = $"SELECT FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
+                $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
+                $"WHERE LastName = '{lastName}'";
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var candidate = await sqlWrapper.QueryFirstOrDefaultAsync<Candidate>(query);
-                return candidate;
+                var candidates = await connection.QueryAsync<CandidateByLastName>(query);
+                return candidates.ToList();
+            }
+        }
+
+        public async Task<IEnumerable<CandidateByJobId>> GetCandidateByJobId(Guid jobId)
+        {
+            var query = $"SELECT FirstName, LastName, PhoneNumber FROM Candidate WHERE JobId = '{jobId}'";
+
+            using (var connection = sqlWrapper.CreateConnection())
+            {
+                var candidates = await connection.QueryAsync<CandidateByJobId>(query);
+                return candidates.ToList();
             }
         }
 
 
-        
+
 
     }
 }

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Job_Board.Wrappers;
 using System.Reflection;
-using Microsoft.Extensions.Options;
 using System.IO;
 using System;
 
@@ -48,7 +47,6 @@ namespace Job_Board
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

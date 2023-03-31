@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
@@ -138,11 +139,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewByLastName(lastName);
-                if (interview == null)
-                {
-                    return StatusCode(404);
-                }
+                IEnumerable<InterviewJoinCandidate> interview = await _interviewDao.GetInterviewByLastName(lastName);
                 return Ok(interview);
             }
             catch (Exception e)

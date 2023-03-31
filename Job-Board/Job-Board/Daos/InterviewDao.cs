@@ -111,20 +111,19 @@ namespace Job_Board.Daos
         }
 
 
-        public async Task<InterviewJoinCandidate> GetInterviewByLastName(string lastName)
+        public async Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName)
         {
-            //CandidateId candidateId = CandidateDao.GetCandidateIDByLastName(lastName);
             
             var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.Date, Interview.Time, Interview.JobId, Interview.LocationId" +
                         $" FROM Interview " +
                         $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
-                        $"WHERE LastName = '{lastName}'";
+                        $"WHERE LastName LIKE '{lastName}%'";
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewJoinCandidate>(query);
-                return interview;
+                var interviews = await connection.QueryAsync<InterviewJoinCandidate>(query);
 
+                return interviews.ToList();
             }
         }
 
