@@ -13,5 +13,10 @@ namespace Job_Board.Daos
         Task DeleteLocationById(Guid id);
         Task<Location> UpdateLocationById(Location location);
 
+        Task<LocationByBuilding> GetLocationByBuilding(string building);
+
+        Task<LocationByState> GetLocationByState(string state);
+
+
     }
 }

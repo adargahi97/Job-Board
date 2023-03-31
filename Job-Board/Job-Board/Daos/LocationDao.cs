@@ -41,9 +41,9 @@ namespace Job_Board.Daos
             //Parameters to be injected in the Query
             var parameters = new DynamicParameters();
             parameters.Add("StreetAddress", location.StreetAddress, DbType.String);
-            parameters.Add("City", location.City, DbType.Int32);
+            parameters.Add("City", location.City, DbType.String);
             parameters.Add("State", location.State, DbType.String);
-            parameters.Add("Zip", location.Zip, DbType.String);
+            parameters.Add("Zip", location.Zip, DbType.Int32);
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connecting to DB
@@ -90,15 +90,15 @@ namespace Job_Board.Daos
         {
             //SQL Query, injection with dynamic params & passed in candidate object to access id
             var query = $"UPDATE Location SET StreetAddress = @StreetAddress, City = @City, " +
-                $"State = @State, Zip = @Zip, Building = @Building" +
-                $"WHERE Id = {location.Id}";
+                $"State = @State, Zip = @Zip, Building = @Building " +
+                $"WHERE Id = '{location.Id}'";
 
             //Parameters to be injected in the Query
             var parameters = new DynamicParameters();
             parameters.Add("StreetAddress", location.StreetAddress, DbType.String);
-            parameters.Add("City", location.City, DbType.Int32);
+            parameters.Add("City", location.City, DbType.String);
             parameters.Add("State", location.State, DbType.String);
-            parameters.Add("Zip", location.Zip, DbType.String);
+            parameters.Add("Zip", location.Zip, DbType.Int32);
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connect to DB
@@ -110,6 +110,28 @@ namespace Job_Board.Daos
                 return locationToUpdate;
             }
 
+        }
+
+        public async Task<LocationByBuilding> GetLocationByBuilding(string building)
+        {
+            var query = $"SELECT * FROM Location WHERE Building = '{building}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByBuilding>(query);
+                return location;
+            }
+        }
+
+        public async Task<LocationByState> GetLocationByState(string state)
+        {
+            var query = $"SELECT * FROM Location WHERE State = '{state}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByState>(query);
+                return location;
+            }
         }
     }
 }

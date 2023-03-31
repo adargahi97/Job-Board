@@ -19,4 +19,17 @@ namespace Job_Board.Models
         public string Department { get; set; }
         public string Description { get; set; }
     }
+
+    public class JobPostingByPosition
+    { 
+        public string Department { get; set; }
+        public string Description { get; set; }
+        public Guid Id { get; set; }
+    }
+    public class JobPostingByLocationId
+    {
+        public string Position { get; set; }
+        public string Department { get; set; }
+
+    }
 }

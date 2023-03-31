@@ -70,7 +70,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpDelete]
-        [Route("JobPosting/{id:int}")]
+        [Route("JobPosting/{id}")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
@@ -110,6 +110,47 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+
+        [HttpGet]
+        [Route("JobPosting/LocationId/{id:guid}")]
+        public async Task<IActionResult> GetJobPostingByLocationId([FromRoute] Guid id)
+        {
+            try
+            {
+                var jobPosting = await _jobPostingDao.GetJobPostingByLocationId(id);
+                if (jobPosting == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(jobPosting);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("JobPosting/Position/{position}")]
+        public async Task<IActionResult> GetJobPostingByPosition([FromRoute] string position)
+        {
+            try
+            {
+                var jobPosting = await _jobPostingDao.GetJobPostingByPosition(position);
+                if (jobPosting == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(jobPosting);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
 
     }
 }
