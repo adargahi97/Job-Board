@@ -15,7 +15,7 @@ namespace Job_Board.Daos
 
         Task<LocationByBuilding> GetLocationByBuilding(string building);
 
-        Task<LocationByState> GetLocationByState(string state);
+        //Task<IEnumerable<LocationByState>> GetLocationByState(string state);
 
 
     }

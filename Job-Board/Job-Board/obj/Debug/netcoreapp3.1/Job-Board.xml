@@ -9,5 +9,10 @@
             <returns>Interview Information</returns>
             <response code="200">Returns the Interview Information found by last name</response>
         </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetLocationByState(System.String)">
+            <summary>Search for Location Information by State</summary>
+            <returns>Location Information</returns>
+            <response code="200">Returns the Information by State</response>
+        </member>
     </members>
 </doc>
