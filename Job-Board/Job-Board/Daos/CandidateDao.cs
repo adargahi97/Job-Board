@@ -36,7 +36,6 @@ namespace Job_Board.Daos
             }
         }
 
-
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             var query = "SELECT * FROM Candidate";
@@ -112,9 +111,5 @@ namespace Job_Board.Daos
                 return candidates.ToList();
             }
         }
-
-
-
-
     }
 }

@@ -148,6 +148,21 @@ namespace Job_Board.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Interview/DateTime/{dateTime}")]
+        public async Task<IActionResult> GetInterviewsByDateTime([FromRoute] DateTime dateTime)
+        {
+            try
+            {
+                IEnumerable<Interview> interview = await _interviewDao.GetInterviewsByDate(dateTime);
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
 
     }
 }
