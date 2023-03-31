@@ -70,7 +70,7 @@ namespace Job_Board.Controllers
         }
 
         [HttpDelete]
-        [Route("JobPosting/{id:int}")]
+        [Route("JobPosting/{id}")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
