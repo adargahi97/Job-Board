@@ -21,12 +21,11 @@ namespace Job_Board.Daos
 
         public async Task CreateInterview(InterviewRequest interview)
         {
-            var query = "INSERT INTO Interview (Date, Time, LocationId, CandidateId) " +
-                "VALUES (@Date, @Time, @LocationId, @CandidateId)";
+            var query = "INSERT INTO Interview (DateTime, LocationId, CandidateId) " +
+                "VALUES (@DateTime, @LocationId, @CandidateId)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("Date", interview.Date, DbType.String);
-            parameters.Add("Time", interview.Time, DbType.String);
+            parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
             parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
@@ -74,8 +73,7 @@ namespace Job_Board.Daos
                 $"WHERE Id = {interview.Id}";
 
             var parameters = new DynamicParameters();
-            parameters.Add("Date", interview.Date, DbType.String);
-            parameters.Add("Time", interview.Time, DbType.String);
+            parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
             parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
@@ -110,21 +108,30 @@ namespace Job_Board.Daos
             }
         }
 
-
-        public async Task<InterviewJoinCandidate> GetInterviewByLastName(string lastName)
+        public async Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName)
         {
-            //CandidateId candidateId = CandidateDao.GetCandidateIDByLastName(lastName);
             
-            var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.Date, Interview.Time, Interview.JobId, Interview.LocationId" +
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, Interview.DateTime, Interview.JobId, Interview.LocationId" +
                         $" FROM Interview " +
                         $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
-                        $"WHERE LastName = '{lastName}'";
+                        $"WHERE LastName LIKE '{lastName}%'";
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewJoinCandidate>(query);
-                return interview;
+                var interviews = await connection.QueryAsync<InterviewJoinCandidate>(query);
 
+                return interviews.ToList();
+            }
+        }
+        public async Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt)
+        {
+            var query = $"SELECT * FROM Interview WHERE DateTime = '{dt}'";
+
+            using (var connection = sqlWrapper.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+
+                return interviews.ToList();
             }
         }
 
