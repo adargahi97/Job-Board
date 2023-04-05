@@ -8964,11 +8964,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\NewNOW\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\Job-Board.csproj",
       "projectName": "Job-Board",
-      "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\NewNOW\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\Job-Board.csproj",
       "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\NewNOW\\Job-Board\\Job-Board\\obj\\",
+      "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",

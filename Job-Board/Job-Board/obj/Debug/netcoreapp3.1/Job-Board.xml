@@ -14,5 +14,10 @@
             <returns>Location Information</returns>
             <response code="200">Returns the Information by State</response>
         </member>
+        <member name="M:Job_Board.Controllers.SearchController.DailySearchByPosition(System.String)">
+            <summary>Interview Info By Position</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Information by Position</response>
+        </member>
     </members>
 </doc>

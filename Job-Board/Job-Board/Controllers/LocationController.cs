@@ -131,27 +131,6 @@ namespace Job_Board.Controllers
         }
 
 
-        ///// <summary>Search for Location Information by State</summary>
-        ///// <returns>Location Information</returns>
-        ///// <response code="200">Returns the Information by State</response>
-        //[HttpGet]
-        //[Route("Location/State/{state}")]
-        //public async Task<IActionResult> GetLocationByState([FromRoute] string state)
-        //{
-        //    try
-        //    {
-        //        IEnumerable<LocationByState>location = await _locationDao.GetLocationByState(state);
-        //        if (location == null)
-        //        {
-        //            return StatusCode(404);
-        //        }
-        //        return Ok(location);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500, e.Message);
-        //    }
-        //}
-
+        
     }
 }

@@ -32,5 +32,20 @@ namespace Job_Board.Daos
             }
         }
 
+        public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)
+        {
+            var query = $" SELECT Position, Department, Candidate.FirstName, Candidate.LastName, Interview.Date, Location.Building " +
+                            $"FROM JobPosting " +
+                            $"INNER JOIN Candidate ON JobPosting.Id = Candidate.JobId " +
+                            $"INNER JOIN Interview ON JobPosting.Id = Interview.JobId " +
+                            $"INNER JOIN Location ON JobPosting.LocationId = Location.Id WHERE Position = '{position}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var candidates = await sqlWrapper.QueryAsync<JobPostingDailySearchByPosition>(query);
+                return candidates.ToList();
+            }
+        }
+
     }
 }

@@ -21,8 +21,8 @@ namespace Job_Board.Daos
 
         public async Task CreateCandidate(CandidateRequest candidate)
         {
-            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId" +
-                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId";
+            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId)" +
+                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId)";
 
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", candidate.FirstName, DbType.String);

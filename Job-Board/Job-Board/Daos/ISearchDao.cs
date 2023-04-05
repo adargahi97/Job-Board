@@ -10,5 +10,7 @@ namespace Job_Board.Daos
 
         Task<IEnumerable<LocationByState>> GetLocationByState(string state);
 
+        Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position);
+
     }
 }

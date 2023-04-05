@@ -29,6 +29,8 @@ namespace Job_Board
             services.AddScoped<IInterviewDao, InterviewDao>();
             services.AddScoped<IJobPostingDao, JobPostingDao>();
             services.AddScoped<ILocationDao, LocationDao>();
+            services.AddScoped<ISearchDao, SearchDao>();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
