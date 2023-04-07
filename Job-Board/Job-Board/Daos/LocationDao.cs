@@ -123,6 +123,15 @@ namespace Job_Board.Daos
             }
         }
 
-        
+        public async Task<IEnumerable<LocationByState>> GetLocationByState(string state)
+        {
+            var query = $"SELECT * FROM Location WHERE State = '{state}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryAsync<LocationByState>(query);
+                return location.ToList();
+            }
+        }
     }
 }

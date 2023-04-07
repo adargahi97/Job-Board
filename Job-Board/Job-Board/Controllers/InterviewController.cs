@@ -110,59 +110,5 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
-        [HttpGet]
-        [Route("Interview/JobId/{id:guid}")]
-        public async Task<IActionResult> GetInterviewByJobId([FromRoute] Guid id)
-        {
-            try
-            {
-                var interview = await _interviewDao.GetInterviewByJobId(id);
-                if (interview == null)
-                {
-                    return StatusCode(404);
-                }
-                return Ok(interview);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        /// <summary>Search for Interview Information by Last Name</summary>
-        /// <returns>Interview Information</returns>
-        /// <response code="200">Returns the Interview Information found by last name</response>
-        [HttpGet]
-        [Route("Interview/{lastName}")]
-        public async Task<IActionResult> GetInterviewByLastName([FromRoute] string lastName)
-        {
-            try
-            {
-                IEnumerable<InterviewJoinCandidate> interview = await _interviewDao.GetInterviewByLastName(lastName);
-                return Ok(interview);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("Interview/DateTime/{dateTime}")]
-        public async Task<IActionResult> GetInterviewsByDateTime([FromRoute] DateTime dateTime)
-        {
-            try
-            {
-                IEnumerable<Interview> interview = await _interviewDao.GetInterviewsByDate(dateTime);
-                return Ok(interview);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-
     }
 }
