@@ -4,6 +4,56 @@
         <name>Job-Board</name>
     </assembly>
     <members>
+        <member name="M:Job_Board.Controllers.CandidateController.GetCandidates">
+            <summary>Get All Candidate's Information</summary>
+            <returns>Candidate Information</returns>
+            <response code="200">Returns the Information of all Candidates</response>
+        </member>
+        <member name="M:Job_Board.Controllers.CandidateController.GetCandidateByID(System.Guid)">
+            <summary>Get Candidate Information by Job ID</summary>
+            <returns>Candidate Information</returns>
+            <response code="200">Returns the Information of selected Candidates</response>
+        </member>
+        <member name="M:Job_Board.Controllers.CandidateController.CreateCandidate(Job_Board.Models.CandidateRequest)">
+            <summary>Create a new Candidate</summary>
+            <returns></returns>
+            <response code="200">Candidate has been successfully created</response>
+        </member>
+        <member name="M:Job_Board.Controllers.CandidateController.DeleteCandidateById(System.Guid)">
+            <summary>Delete a Candidate By ID</summary>
+            <returns></returns>
+            <response code="200">Candidate has been successfully deleted</response>
+        </member>
+        <member name="M:Job_Board.Controllers.CandidateController.UpdateCandidateByID(Job_Board.Models.Candidate)">
+            <summary>Update a Candidate by Candidate ID</summary>
+            <returns></returns>
+            <response code="200">Candidate has been successfully Updated</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviews">
+            <summary>Get All Interview Information</summary>
+            <returns>All interviews currently scheduled</returns>
+            <response code="200">Returns the Information of All Interviews</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByID(System.Guid)">
+            <summary>Get Interview Information by Job ID</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Information of selected Interview</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.CreateInterview(Job_Board.Models.InterviewRequest)">
+            <summary>Create Job Interview</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Creates Interview</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.DeleteInterviewById(System.Guid)">
+            <summary>Delete Interview by Interview ID</summary>
+            <returns></returns>
+            <response code="200">Deletes Interview</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.UpdateInterviewByID(Job_Board.Models.Interview)">
+            <summary>Update Interview Information By Interview ID</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Updates Interview by ID</response>
+        </member>
         <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostings">
             <summary>Get All Job Posting Information</summary>
             <returns>Job Posting Information</returns>
@@ -20,12 +70,12 @@
             <response code="200">Creates Job Posting</response>
         </member>
         <member name="M:Job_Board.Controllers.JobPostingController.DeleteInterviewById(System.Guid)">
-            <summary>Delete Job Posting</summary>
+            <summary>Delete Job Posting By ID</summary>
             <returns>Delete Job Posting </returns>
             <response code="200">Deletes Job Posting</response>
         </member>
         <member name="M:Job_Board.Controllers.JobPostingController.UpdateInterviewByID(Job_Board.Models.JobPosting)">
-            <summary>Update Job Posting Information</summary>
+            <summary>Update Job Posting Information By ID</summary>
             <returns>Job Posting Information</returns>
             <response code="200">Updates Job Posting</response>
         </member>

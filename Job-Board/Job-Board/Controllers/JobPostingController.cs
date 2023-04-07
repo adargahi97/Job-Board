@@ -41,10 +41,9 @@ namespace Job_Board.Controllers
         /// <summary>Search for Job Posting Information by ID</summary>
         /// <returns>Job Posting Information</returns>
         /// <response code="200">Returns the Information by ID</response>
-
         [HttpGet]
         [Route("JobPosting/{id}")]
-        public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
+        public async Task<IActionResult> GetJobPostingByID([FromRoute] Guid id)
         {
             try
             {
@@ -66,7 +65,7 @@ namespace Job_Board.Controllers
         /// <response code="200">Creates Job Posting</response>
         [HttpPost]
         [Route("JobPosting")]
-        public async Task<IActionResult> CreateCandidate([FromBody] JobPostingRequest createRequest)
+        public async Task<IActionResult> CreateJobPosting([FromBody] JobPostingRequest createRequest)
         {
             try
             {
@@ -79,12 +78,12 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Delete Job Posting</summary>
+        /// <summary>Delete Job Posting By ID</summary>
         /// <returns>Delete Job Posting </returns>
         /// <response code="200">Deletes Job Posting</response>
         [HttpDelete]
         [Route("JobPosting/{id}")]
-        public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteJobPostingById([FromRoute] Guid id)
         {
             try
             {
@@ -103,12 +102,12 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Update Job Posting Information</summary>
+        /// <summary>Update Job Posting Information By ID</summary>
         /// <returns>Job Posting Information</returns>
         /// <response code="200">Updates Job Posting</response>
         [HttpPatch]
         [Route("JobPosting")]
-        public async Task<IActionResult> UpdateInterviewByID([FromBody] JobPosting jobPostingReq)
+        public async Task<IActionResult> UpdateJobPostingByID([FromBody] JobPosting jobPostingReq)
         {
             try
             {

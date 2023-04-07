@@ -17,7 +17,9 @@ namespace Job_Board.Controllers
             _candidateDao = candidatedao;
         }
 
-
+        /// <summary>Get All Candidate's Information</summary>
+        /// <returns>Candidate Information</returns>
+        /// <response code="200">Returns the Information of all Candidates</response>
         [HttpGet]
         [Route("Candidate")]
         public async Task<IActionResult> GetCandidates()
@@ -33,6 +35,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Get Candidate Information by Job ID</summary>
+        /// <returns>Candidate Information</returns>
+        /// <response code="200">Returns the Information of selected Candidates</response>
         [HttpGet]
         [Route("Candidate/{id:Guid}")]
         public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
@@ -52,6 +57,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Create a new Candidate</summary>
+        /// <returns></returns>
+        /// <response code="200">Candidate has been successfully created</response>
         [HttpPost]
         [Route("Candidate")]
         public async Task<IActionResult> CreateCandidate([FromBody] CandidateRequest createRequest)
@@ -67,6 +75,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Delete a Candidate By ID</summary>
+        /// <returns></returns>
+        /// <response code="200">Candidate has been successfully deleted</response>
         [HttpDelete]
         [Route("Candidate/{id}")]
         public async Task<IActionResult> DeleteCandidateById([FromRoute] Guid id)
@@ -88,6 +99,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Update a Candidate by Candidate ID</summary>
+        /// <returns></returns>
+        /// <response code="200">Candidate has been successfully Updated</response>
         [HttpPatch]
         [Route("Candidate")]
         public async Task<IActionResult> UpdateCandidateByID([FromBody] Candidate candidateReq)
