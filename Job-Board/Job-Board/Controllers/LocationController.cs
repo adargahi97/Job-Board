@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Job_Board.Controllers
 {
@@ -18,7 +19,9 @@ namespace Job_Board.Controllers
         }
 
 
-
+        /// <summary>Get All Location Info</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Returns All Location Information</response>
         [HttpGet]
         [Route("Location")]
         public async Task<IActionResult> GetLocation()
@@ -34,6 +37,10 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Create Location Information</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Create Location Information</response>
+        /// <response code="404">TESTING TESTING</response>
         [HttpGet]
         [Route("Location/{id}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
@@ -53,6 +60,10 @@ namespace Job_Board.Controllers
             }
         }
 
+
+        /// <summary>Delete Location Information</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Delete Location Information</response>
         [HttpPost]
         [Route("Location")]
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
@@ -68,6 +79,10 @@ namespace Job_Board.Controllers
             }
         }
 
+
+        /// <summary>Delete Location Information</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Delete Location Information</response>
         [HttpDelete]
         [Route("Location/{id}")]
         public async Task<IActionResult> DeleteLocationById([FromRoute] Guid id)
@@ -89,6 +104,10 @@ namespace Job_Board.Controllers
             }
         }
 
+
+        /// <summary>Update Location Info By ID</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Update Location Information by ID</response>
         [HttpPatch]
         [Route("Location")]
         public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationReq)
@@ -111,16 +130,27 @@ namespace Job_Board.Controllers
         }
 
 
+        /// <summary>Location Info By Building</summary>
+        /// <returns>Location Information</returns>
+        /// <response code="200">Returns Location Information by Building</response>
         [HttpGet]
         [Route("Location/Building/{building}")]
         public async Task<IActionResult> GetLocationByBuilding([FromRoute] string building)
         {
             try
             {
+
                 var location = await _locationDao.GetLocationByBuilding(building);
                 if (location == null)
                 {
-                    return StatusCode(404);
+                    var errorResponse = $"{building} is not a valid BUILDING, please try again.";
+                    var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+                    return new ContentResult
+                    {
+                        StatusCode = 404,
+                        ContentType = "application/json",
+                        Content = jsonErrorResponse
+                    };
                 }
                 return Ok(location);
             }

@@ -108,6 +108,8 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+
         [HttpGet]
         [Route("Candidate/LastName/")]
         public async Task<IActionResult> GetCandidateByLastName(string lastName)
