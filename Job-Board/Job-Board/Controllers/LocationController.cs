@@ -37,10 +37,9 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Create Location Information</summary>
+        /// <summary>Get Location Information</summary>
         /// <returns>Location Information</returns>
         /// <response code="200">Create Location Information</response>
-        /// <response code="404">TESTING TESTING</response>
         [HttpGet]
         [Route("Location/{id}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
@@ -117,7 +116,14 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocationByID(locationReq.Id);
                 if (location == null)
                 {
-                    return StatusCode(404);
+                    var errorResponse = "WRONG";
+                    var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+                    return new ContentResult
+                    {
+                        StatusCode = 404,
+                        ContentType = "application/json",
+                        Content = jsonErrorResponse
+                    };
                 }
                 var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
 
@@ -151,6 +157,7 @@ namespace Job_Board.Controllers
                         ContentType = "application/json",
                         Content = jsonErrorResponse
                     };
+
                 }
                 return Ok(location);
             }

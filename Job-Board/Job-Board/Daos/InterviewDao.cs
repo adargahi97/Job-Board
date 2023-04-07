@@ -21,8 +21,8 @@ namespace Job_Board.Daos
 
         public async Task CreateInterview(InterviewRequest interview)
         {
-            var query = "INSERT INTO Interview (DateTime, LocationId, CandidateId) " +
-                "VALUES (@DateTime, @LocationId, @CandidateId)";
+            var query = "INSERT INTO Interview (DateTime, LocationId, CandidateId, JobId) " +
+                "VALUES (@DateTime, @LocationId, @CandidateId, @JobId)";
 
             var parameters = new DynamicParameters();
             parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
@@ -68,14 +68,39 @@ namespace Job_Board.Daos
 
         public async Task<Interview> UpdateInterviewById(Interview interview)
         {
-            var query = $"UPDATE Interview SET Date = @Date, Time = @Time, " +
-                $"LocationId = @LocationId, CandidateId = @CandidateId " +
-                $"WHERE Id = {interview.Id}";
+            var query = $"UPDATE Interview SET DateTime = ISNULL(@DateTime, DateTime), " +
+                $"LocationId = @LocationId, CandidateId = @CandidateId, JobId = @JobId " +
+                $"WHERE Id = '{interview.Id}'";
 
             var parameters = new DynamicParameters();
             parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
-            parameters.Add("LocationId", interview.LocationId, DbType.Guid);
-            parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
+
+            if (interview.LocationId == Guid.Empty)
+            {
+                parameters.Add("LocationId", DBNull.Value, DbType.Guid);
+            }
+            else
+            {
+                parameters.Add("LocationId", interview.LocationId, DbType.Guid);
+            }
+            if (interview.CandidateId == Guid.Empty)
+            {
+                parameters.Add("CandidateId", DBNull.Value, DbType.Guid);
+            }
+            else
+            {
+                parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
+            }
+            if (interview.JobId == Guid.Empty)
+            {
+                parameters.Add("JobId", DBNull.Value, DbType.Guid);
+            }
+            else
+            {
+                parameters.Add("JobId", interview.JobId, DbType.Guid);
+            }
+            //parameters.Add("LocationId", interview.LocationId, DbType.Guid);
+            //parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
             {
