@@ -4,11 +4,6 @@
         <name>Job-Board</name>
     </assembly>
     <members>
-        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByLastName(System.String)">
-            <summary>Search for Interview Information by Last Name</summary>
-            <returns>Interview Information</returns>
-            <response code="200">Returns the Interview Information found by last name</response>
-        </member>
         <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostings">
             <summary>Get All Job Posting Information</summary>
             <returns>Job Posting Information</returns>
@@ -84,6 +79,31 @@
             <summary>Interview Info By Position</summary>
             <returns>Interview Information</returns>
             <response code="200">Returns the Information by Position</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetCandidateByLastName(System.String)">
+            <summary>Pulls Candidate(s) based on Last Name</summary>
+            <returns>Candidate Information</returns>
+            <response code="200">Returns the Candidates with matching last names</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetCandidateByJobId(System.Guid)">
+            <summary>Search for Candidates who are applying for a certain position</summary>
+            <returns>Candidate Information</returns>
+            <response code="200">Returns the Candidate Information by Job Id</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetInterviewByJobId(System.Guid)">
+            <summary>Search for Interview Information by Job Id</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Interview Information by Job Id</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetInterviewByLastName(System.String)">
+            <summary>Search for Interview Information by Last Name</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Interview Information found by last name</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetInterviewsByDateTime(System.DateTime)">
+            <summary>Search for Interview Information by Date</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Interview Information found by Date</response>
         </member>
     </members>
 </doc>
