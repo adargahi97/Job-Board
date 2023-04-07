@@ -12,8 +12,6 @@ namespace Job_Board.Daos
         Task<Candidate> GetCandidateByID(Guid id);
         Task DeleteCandidateById(Guid id);
         Task<Candidate> UpdateCandidateById(Candidate candidate);
-        Task<IEnumerable<CandidateByLastName>> GetCandidateByLastName(string lastName);
-        Task<IEnumerable<CandidateByJobId>> GetCandidateByJobId(Guid jobId);
 
     }
 }

@@ -21,8 +21,8 @@ namespace Job_Board.Daos
 
         public async Task CreateCandidate(CandidateRequest candidate)
         {
-            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId)" +
-                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId)";
+            var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId" +
+                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId";
 
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", candidate.FirstName, DbType.String);
@@ -86,30 +86,6 @@ namespace Job_Board.Daos
                 return updatedCandidate;
             }
 
-        }
-
-        public async Task<IEnumerable<CandidateByLastName>> GetCandidateByLastName(string lastName)
-        {
-            var query = $"SELECT FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
-                $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
-                $"WHERE LastName = '{lastName}'";
-
-            using (var connection = sqlWrapper.CreateConnection())
-            {
-                var candidates = await connection.QueryAsync<CandidateByLastName>(query);
-                return candidates.ToList();
-            }
-        }
-
-        public async Task<IEnumerable<CandidateByJobId>> GetCandidateByJobId(Guid jobId)
-        {
-            var query = $"SELECT FirstName, LastName, PhoneNumber FROM Candidate WHERE JobId = '{jobId}'";
-
-            using (var connection = sqlWrapper.CreateConnection())
-            {
-                var candidates = await connection.QueryAsync<CandidateByJobId>(query);
-                return candidates.ToList();
-            }
         }
     }
 }

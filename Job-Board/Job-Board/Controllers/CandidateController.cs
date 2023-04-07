@@ -108,34 +108,6 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        [HttpGet]
-        [Route("Candidate/LastName/")]
-        public async Task<IActionResult> GetCandidateByLastName(string lastName)
-        {
-            try
-            {
-                IEnumerable<CandidateByLastName> candidates = await _candidateDao.GetCandidateByLastName(lastName);
-                return Ok(candidates);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-        [HttpGet]
-        [Route("Candidate/JobId")]
-        public async Task<IActionResult> GetCandidateByJobId(Guid JobId)
-        {
-            try
-            {
-                IEnumerable<CandidateByJobId> candidates = await _candidateDao.GetCandidateByJobId(JobId);
-                return Ok(candidates);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
 
     }
 }
