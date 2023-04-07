@@ -11,7 +11,9 @@ namespace Job_Board.Controllers
     [ApiController]
     public class SearchController : ControllerBase
     {
+
         private ISearchDao _searchDao;
+
         public SearchController(ISearchDao searchDao)
         {
             _searchDao = searchDao;

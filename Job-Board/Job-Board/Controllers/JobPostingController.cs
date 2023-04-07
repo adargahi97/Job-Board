@@ -41,7 +41,6 @@ namespace Job_Board.Controllers
         /// <summary>Search for Job Posting Information by ID</summary>
         /// <returns>Job Posting Information</returns>
         /// <response code="200">Returns the Information by ID</response>
-
         [HttpGet]
         [Route("JobPosting/{id}")]
         public async Task<IActionResult> GetJobPostingByID([FromRoute] Guid id)
@@ -79,7 +78,7 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Delete Job Posting</summary>
+        /// <summary>Delete Job Posting By ID</summary>
         /// <returns>Delete Job Posting </returns>
         /// <response code="200">Deletes Job Posting</response>
         [HttpDelete]
@@ -103,7 +102,7 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Update Job Posting Information</summary>
+        /// <summary>Update Job Posting Information By ID</summary>
         /// <returns>Job Posting Information</returns>
         /// <response code="200">Updates Job Posting</response>
         [HttpPatch]

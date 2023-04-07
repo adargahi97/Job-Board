@@ -28,6 +28,7 @@ namespace Job_Board.Daos
             parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
             parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
+            parameters.Add("JobId", interview.JobId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
             {

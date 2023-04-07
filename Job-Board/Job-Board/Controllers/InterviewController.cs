@@ -19,7 +19,9 @@ namespace Job_Board.Controllers
             _interviewDao = interviewDao;
         }
 
-
+        /// <summary>Get All Interview Information</summary>
+        /// <returns>All interviews currently scheduled</returns>
+        /// <response code="200">Returns the Information of All Interviews</response>
         [HttpGet]
         [Route("Interview")]
         public async Task<IActionResult> GetInterviews()
@@ -35,6 +37,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Get Interview Information by Job ID</summary>
+        /// <returns>Interview Information</returns>
+        /// <response code="200">Returns the Information of selected Interview</response>
         [HttpGet]
         [Route("Interview/{id:Guid}")]
         public async Task<IActionResult> GetInterviewByID([FromRoute] Guid id)
@@ -54,6 +59,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Create Job Interview</summary>
+        /// <returns>Interview Information</returns>
+        /// <response code="200">Creates Interview</response>
         [HttpPost]
         [Route("Interview")]
         public async Task<IActionResult> CreateInterview([FromBody] InterviewRequest createRequest)
@@ -69,6 +77,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Delete Interview by Interview ID</summary>
+        /// <returns></returns>
+        /// <response code="200">Deletes Interview</response>
         [HttpDelete]
         [Route("Interview/{id:int}")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
@@ -90,6 +101,9 @@ namespace Job_Board.Controllers
             }
         }
 
+        /// <summary>Update Interview Information By Interview ID</summary>
+        /// <returns>Interview Information</returns>
+        /// <response code="200">Updates Interview by ID</response>
         [HttpPatch]
         [Route("Interview")]
         public async Task<IActionResult> UpdateInterviewByID([FromBody] Interview interviewReq)
