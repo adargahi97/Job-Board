@@ -5,7 +5,6 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Job_Board.ErrorResponse;
 
 namespace Job_Board.Controllers
 {
@@ -148,7 +147,7 @@ namespace Job_Board.Controllers
                 }
                 return Ok(location);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorResponses.Error500();
                 
