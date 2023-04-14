@@ -31,26 +31,26 @@ namespace Job_Board.Daos
             }
         }
 
-        //public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)
-        //{
-        //    var query = $"SELECT DateTime, JobPosting.Position, JobPosting.Department, Candidate.FirstName, Candidate.LastName, Location.Building " +
-        //        $"FROM Interview " +
-        //        $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
-        //        $"INNER JOIN JobPosting ON JobPosting.Id = Interview.JobId " +
-        //        $"INNER JOIN Location ON Interview.LocationId = Location.Id " +
-        //        $"WHERE Position = '{position}'";
+        public async Task<IEnumerable<JobPostingByState>> GetJobPostingByState(string state)
+        {
+            var query = $"SELECT JobPosting.Position, JobPosting.Department, City, Building FROM Location " +
+                $"INNER JOIN JobPosting ON Location.Id = JobPosting.LocationId " +
+                $" WHERE State = '{state}' " +
+                $"Order By City";
 
-        //    using (sqlWrapper.CreateConnection())
-        //    {
-        //        var candidates = await sqlWrapper.QueryAsync<JobPostingDailySearchByPosition>(query);
-        //        return candidates.ToList();
-        //    }
-        //}
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryAsync<JobPostingByState>(query);
+                return location.ToList();
+            }
+        }
+
+
         public async Task<IEnumerable<CandidateByLastName>> GetCandidateByLastName(string lastName)
         {
             var query = $"SELECT FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
                 $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
-                $"WHERE LastName = '{lastName}%'";
+                $"WHERE LastName = '{lastName}'";
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -107,50 +107,39 @@ namespace Job_Board.Daos
                 return interviews.ToList();
             }
         }
-        //public async Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt)
-        //{
 
-        //    var query = $"SELECT * FROM Interview WHERE '{dt}' = CAST(DateTime AS DATE)";
+        public async Task<JobPostingByPosition> GetJobPostingByPosition(string position)
+        {
+            var query = $"SELECT * FROM JobPosting WHERE Position = '{position}'";
 
-        //    using (var connection = sqlWrapper.CreateConnection())
-        //    {
-        //        var interviews = await connection.QueryAsync<Interview>(query);
+            using (sqlWrapper.CreateConnection())
+            {
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingByPosition>(query);
+                return jobPosting;
+            }
+        }
 
-        //        return interviews.ToList();
-        //    }
-        //}
-        //public async Task<IEnumerable<Interview>> GetTodaysInterviews()
-        //{
+        public async Task<IEnumerable<JobPostingByLocationId>> GetJobPostingByLocationId(Guid locationId)
+        {
+            var query = $"SELECT * FROM JobPosting WHERE LocationId = '{locationId}'";
 
-        //    var query = $"SELECT * FROM Interview WHERE CAST(DateTime AS DATE) = CAST(GETDATE() AS DATE)";
+            using (sqlWrapper.CreateConnection())
+            {
+                var jobPosting = await sqlWrapper.QueryAsync<JobPostingByLocationId>(query);
+                return jobPosting.ToList();
+            }
+        }
 
-        //    using (var connection = sqlWrapper.CreateConnection())
-        //    {
-        //        var interviews = await connection.QueryAsync<Interview>(query);
+        public async Task<LocationByBuilding> GetLocationByBuilding(string building)
+        {
+            var query = $"SELECT * FROM Location WHERE Building = '{building}'";
 
-        //        return interviews.ToList();
-        //    }
-        //}
-
-        //public async Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position)
-        //{
-            
-        //    var query = "SELECT Position FROM JobPosting";
-
-
-
-        //    using (var connection = sqlWrapper.CreateConnection())
-        //    {
-        //        var allPositions = await connection.QueryAsync<JobPosting>(query);
-        //        return allPositions.ToList();
-                
-                
-        //    }
-
-            
-        //}
-
-       
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByBuilding>(query);
+                return location;
+            }
+        }
 
     }
 }

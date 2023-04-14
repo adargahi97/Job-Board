@@ -62,7 +62,7 @@ namespace Job_Board.Controllers
 
         /// <summary>Create Job Posting</summary>
         /// <returns>Job Posting Information</returns>
-        /// <response code="200">Creates Job Posting</response>
+        /// <response code="201">Creates Job Posting</response>
         [HttpPost]
         [Route("JobPosting")]
         public async Task<IActionResult> CreateJobPosting([FromBody] JobPostingRequest createRequest)
@@ -126,50 +126,7 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Job Posting Information by Location ID</summary>
-        /// <returns>Job Posting Information</returns>
-        /// <response code="200">Returns the Information by Location ID</response>
-        [HttpGet]
-        [Route("JobPosting/LocationId/{id:guid}")]
-        public async Task<IActionResult> GetJobPostingByLocationId([FromRoute] Guid id)
-        {
-            try
-            {
-                var jobPosting = await _jobPostingDao.GetJobPostingByLocationId(id);
-                if (jobPosting == null)
-                {
-                    return ErrorResponses.Error404("The ID You Entered");
-                }
-                return Ok(jobPosting);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
 
-
-        /// <summary>Search for Job Posting Information by Position</summary>
-        /// <returns>Job Posting Information</returns>
-        /// <response code="200">Returns the Information by Position</response>
-        [HttpGet]
-        [Route("JobPosting/Position/{position}")]
-        public async Task<IActionResult> GetJobPostingByPosition([FromRoute] string position)
-        {
-            try
-            {
-                var jobPosting = await _jobPostingDao.GetJobPostingByPosition(position);
-                if (jobPosting == null)
-                {
-                    return ErrorResponses.Error404(position);
-                }
-                return Ok(jobPosting);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
 
 
 

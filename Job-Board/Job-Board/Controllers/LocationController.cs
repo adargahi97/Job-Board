@@ -65,7 +65,7 @@ namespace Job_Board.Controllers
 
         /// <summary>Delete Location Information</summary>
         /// <returns>Location Information</returns>
-        /// <response code="200">Delete Location Information</response>
+        /// <response code="201">Delete Location Information</response>
         [HttpPost]
         [Route("Location")]
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
@@ -136,30 +136,7 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Location Info By Building</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="200">Returns Location Information by Building</response>
-        [HttpGet]
-        [Route("Location/Building/{building}")]
-        public async Task<IActionResult> GetLocationByBuilding([FromRoute] string building)
-        {
-            try
-            {
 
-                var location = await _locationDao.GetLocationByBuilding(building);
-                if (location == null)
-                {
-                    return ErrorResponses.Error404(building);
-                }
-                
-                return Ok(location);
-            }
-            catch (Exception)
-            {
-                return ErrorResponses.Error500();
-                
-            }
-        }
 
 
         

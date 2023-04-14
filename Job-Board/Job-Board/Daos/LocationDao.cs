@@ -112,16 +112,6 @@ namespace Job_Board.Daos
 
         }
 
-        public async Task<LocationByBuilding> GetLocationByBuilding(string building)
-        {
-            var query = $"SELECT * FROM Location WHERE Building = '{building}'";
-
-            using (sqlWrapper.CreateConnection())
-            {
-                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByBuilding>(query);
-                return location;
-            }
-        }
 
        
     }

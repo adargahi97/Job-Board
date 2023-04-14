@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ckRlojdAgZq0z7cKIeMlIzF0BudekccuvZ0Zochd2k8MN1/5LDe4aCP0sv2g55lxX76xymAaOM87MPd9tqwH6g==",
+  "dgSpecHash": "jzQ/4wXBeuKNqVxgmLNKC9Hpwiux+3X+XB9RBwtdkM7BzoJ8hXo0afV8QHhO1Ff1KfgyCOb0d/gShz0UGk+rcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\Job-Board.csproj",
+  "projectFilePath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\Job-Board\\Job-Board.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

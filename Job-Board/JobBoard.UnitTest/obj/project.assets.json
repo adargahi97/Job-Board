@@ -10287,11 +10287,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
       "projectName": "JobBoard.UnitTest",
-      "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
+      "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
       "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\JobBoard.UnitTest\\obj\\",
+      "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\JobBoard.UnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10308,8 +10308,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\Job-Board.csproj": {
-              "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Old\\NEWWWW\\Job-Board\\Job-Board\\Job-Board.csproj"
+            "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\Job-Board\\Job-Board.csproj": {
+              "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\main0414\\Job-Board\\Job-Board\\Job-Board.csproj"
             }
           }
         }

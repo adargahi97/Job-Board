@@ -83,7 +83,7 @@
         <member name="M:Job_Board.Controllers.JobPostingController.CreateJobPosting(Job_Board.Models.JobPostingRequest)">
             <summary>Create Job Posting</summary>
             <returns>Job Posting Information</returns>
-            <response code="200">Creates Job Posting</response>
+            <response code="201">Creates Job Posting</response>
         </member>
         <member name="M:Job_Board.Controllers.JobPostingController.DeleteJobPostingById(System.Guid)">
             <summary>Delete Job Posting By ID</summary>
@@ -94,16 +94,6 @@
             <summary>Update Job Posting Information By ID</summary>
             <returns>Job Posting Information</returns>
             <response code="200">Updates Job Posting</response>
-        </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByLocationId(System.Guid)">
-            <summary>Search for Job Posting Information by Location ID</summary>
-            <returns>Job Posting Information</returns>
-            <response code="200">Returns the Information by Location ID</response>
-        </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByPosition(System.String)">
-            <summary>Search for Job Posting Information by Position</summary>
-            <returns>Job Posting Information</returns>
-            <response code="200">Returns the Information by Position</response>
         </member>
         <member name="M:Job_Board.Controllers.LocationController.GetLocation">
             <summary>Get All Location Info</summary>
@@ -118,7 +108,7 @@
         <member name="M:Job_Board.Controllers.LocationController.CreateLocation(Job_Board.Models.LocationRequest)">
             <summary>Delete Location Information</summary>
             <returns>Location Information</returns>
-            <response code="200">Delete Location Information</response>
+            <response code="201">Delete Location Information</response>
         </member>
         <member name="M:Job_Board.Controllers.LocationController.DeleteLocationById(System.Guid)">
             <summary>Delete Location Information</summary>
@@ -130,12 +120,12 @@
             <returns>Location Information</returns>
             <response code="200">Update Location Information by ID</response>
         </member>
-        <member name="M:Job_Board.Controllers.LocationController.GetLocationByBuilding(System.String)">
-            <summary>Location Info By Building</summary>
-            <returns>Location Information</returns>
-            <response code="200">Returns Location Information by Building</response>
-        </member>
         <member name="M:Job_Board.Controllers.SearchController.GetLocationByState(System.String)">
+            <summary>Search for Location Information by State</summary>
+            <returns>Location Information</returns>
+            <response code="200">Returns the Information by State</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByState(System.String)">
             <summary>Search for Location Information by State</summary>
             <returns>Location Information</returns>
             <response code="200">Returns the Information by State</response>
@@ -159,6 +149,21 @@
             <summary>Search for Interview Information by Last Name</summary>
             <returns>Interview Information</returns>
             <response code="200">Returns the Interview Information found by last name</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByLocationId(System.Guid)">
+            <summary>Search for Job Posting Information by Location ID</summary>
+            <returns>Job Posting Information</returns>
+            <response code="200">Returns the Information by Location ID</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByPosition(System.String)">
+            <summary>Search for Job Posting Information by Position</summary>
+            <returns>Job Posting Information</returns>
+            <response code="200">Returns the Information by Position</response>
+        </member>
+        <member name="M:Job_Board.Controllers.SearchController.GetLocationByBuilding(System.String)">
+            <summary>Location Info By Building</summary>
+            <returns>Location Information</returns>
+            <response code="200">Returns Location Information by Building</response>
         </member>
     </members>
 </doc>
