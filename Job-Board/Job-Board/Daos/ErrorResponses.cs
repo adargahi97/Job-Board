@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Job_Board.Models;
-using Job_Board.Wrappers;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -25,11 +19,6 @@ namespace Job_Board.Daos
             };
         }
 
-        public static ContentResult Error500()
-        {
-
-            var errorResponse = "dang ol shoot man not sure what happent..";
-        }
 
         public static ContentResult ErrorNoCandidate(string userInput)
         {
@@ -46,8 +35,6 @@ namespace Job_Board.Daos
 
         }
 
-
-        
 
 
         public static ContentResult Error400()

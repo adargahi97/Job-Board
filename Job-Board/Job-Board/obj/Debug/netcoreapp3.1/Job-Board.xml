@@ -17,7 +17,7 @@
         <member name="M:Job_Board.Controllers.CandidateController.CreateCandidate(Job_Board.Models.CandidateRequest)">
             <summary>Create a new Candidate</summary>
             <returns></returns>
-            <response code="200">Candidate has been successfully created</response>
+            <response code="201">Candidate has been successfully created</response>
         </member>
         <member name="M:Job_Board.Controllers.CandidateController.DeleteCandidateById(System.Guid)">
             <summary>Delete a Candidate By ID</summary>
@@ -28,6 +28,22 @@
             <summary>Update a Candidate by Candidate ID</summary>
             <returns></returns>
             <response code="200">Candidate has been successfully Updated</response>
+            
+        </member>
+        <member name="M:Job_Board.Controllers.DailySearchController.GetInterviewsByDate(System.DateTime)">
+            <summary>Search for Interview Information by Date</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Interview Information found by Date</response>
+        </member>
+        <member name="M:Job_Board.Controllers.DailySearchController.GetTodaysInterviews">
+            <summary>Get Interview Information based on Today's Date</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns Interview Information for Today's Date</response>
+        </member>
+        <member name="M:Job_Board.Controllers.DailySearchController.DailySearchByPosition(System.String)">
+            <summary>Interview Info By Position</summary>
+            <returns>Interview Information</returns>
+            <response code="200">Returns the Information by Position</response>
         </member>
         <member name="M:Job_Board.Controllers.InterviewController.GetInterviews">
             <summary>Get All Interview Information</summary>
@@ -124,11 +140,6 @@
             <returns>Location Information</returns>
             <response code="200">Returns the Information by State</response>
         </member>
-        <member name="M:Job_Board.Controllers.SearchController.DailySearchByPosition(System.String)">
-            <summary>Interview Info By Position</summary>
-            <returns>Interview Information</returns>
-            <response code="200">Returns the Information by Position</response>
-        </member>
         <member name="M:Job_Board.Controllers.SearchController.GetCandidateByLastName(System.String)">
             <summary>Pulls Candidate(s) based on Last Name</summary>
             <returns>Candidate Information</returns>
@@ -148,11 +159,6 @@
             <summary>Search for Interview Information by Last Name</summary>
             <returns>Interview Information</returns>
             <response code="200">Returns the Interview Information found by last name</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetInterviewsByDateTime(System.DateTime)">
-            <summary>Search for Interview Information by Date</summary>
-            <returns>Interview Information</returns>
-            <response code="200">Returns the Interview Information found by Date</response>
         </member>
     </members>
 </doc>
