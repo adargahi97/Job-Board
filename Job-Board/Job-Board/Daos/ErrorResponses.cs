@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -21,10 +19,57 @@ namespace Job_Board.Daos
             };
         }
 
+
+        public static ContentResult ErrorNoCandidate(string userInput)
+        {
+
+            var errorResponse = $"{userInput} has no Candidates with Interviews Scheduled.";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 404,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+
+        }
+
+        public static ContentResult ErrorInputNotFound(string userInput)
+        {
+            var errorResponse = $"{userInput} was not found, please check your input or create a new candidate entry";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 404,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+        }
+
+
+
+        public static ContentResult Error400()
+        {
+
+            var errorResponse = "There is a 400 Error";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 400,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+
+        }
+
+
         public static ContentResult Error500()
         {
 
-            var errorResponse = "dang ol shoot man not sure what happent..";
+            var errorResponse = "There is an Error with the Server";
             var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
             return new ContentResult
             {
@@ -32,6 +77,7 @@ namespace Job_Board.Daos
                 ContentType = "application/json",
                 Content = jsonErrorResponse
             };
-        }
+    
+         }
     }
 }

@@ -5,6 +5,7 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Job_Board.Controllers
 {
@@ -48,7 +49,7 @@ namespace Job_Board.Controllers
                 var candidate = await _candidateDao.GetCandidateByID(id);
                 if (candidate == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.ErrorInputNotFound(id.ToString());
                 }
                 return Ok(candidate);
             }
@@ -113,17 +114,14 @@ namespace Job_Board.Controllers
                 var candidate = await _candidateDao.GetCandidateByID(candidateReq.Id);
                 if (candidate == null)
                 {
-                    return ErrorResponses.Error404("The ID You Entered");
+                    return ErrorResponses.ErrorInputNotFound(candidateReq.Id.ToString());
                 }
 
                 var updatedCandidate = await _candidateDao.UpdateCandidateById(candidateReq);
 
                 return StatusCode(200);
             }
-            catch (SqlException e)
-            {
-                return StatusCode(400, "this is a 400");
-            }
+
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);

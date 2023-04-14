@@ -38,7 +38,7 @@ namespace Job_Board.Daos
 
         public async Task<IEnumerable<Interview>> GetInterviews()
         {
-            var query = "SELECT * FROM Interview";
+            var query = "SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview";
             using (var connection = sqlWrapper.CreateConnection())
             {
                 var interviews = await connection.QueryAsync<Interview>(query);
@@ -49,7 +49,7 @@ namespace Job_Board.Daos
 
         public async Task<InterviewRequest> GetInterviewByID(Guid id)
         {
-            var query = $"SELECT * FROM Interview WHERE Id = '{id}'";
+            var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{id}'";
 
             using (var connection = sqlWrapper.CreateConnection())
             {

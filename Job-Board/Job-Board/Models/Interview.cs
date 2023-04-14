@@ -5,7 +5,7 @@ namespace Job_Board.Models
     public class Interview
     {
         public Guid Id { get; set; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public Guid LocationId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid JobId { get; set; }
@@ -13,7 +13,7 @@ namespace Job_Board.Models
     }
     public class InterviewRequest
     {
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public Guid LocationId { get; set; }
         public Guid CandidateId { get; set; }
         public Guid JobId { get; set; }
@@ -23,7 +23,7 @@ namespace Job_Board.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public Guid LocationId { get; set; }
         public Guid JobId { get; set; }
 
@@ -32,9 +32,19 @@ namespace Job_Board.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public Guid LocationId { get; set; }
         public Guid JobId { get; set; }
 
     }
+    public class InterviewDailySearch
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DateTime { get; set; }
+        public string Position { get; set; }
+        public string Building { get; set; }
+
+    }
+
 }
