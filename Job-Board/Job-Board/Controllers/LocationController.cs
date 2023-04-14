@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
+
 
 namespace Job_Board.Controllers
 {
@@ -37,10 +40,9 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Create Location Information</summary>
+        /// <summary>Get Location Information</summary>
         /// <returns>Location Information</returns>
         /// <response code="200">Create Location Information</response>
-        /// <response code="404">TESTING TESTING</response>
         [HttpGet]
         [Route("Location/{id}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
@@ -50,7 +52,7 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocationByID(id);
                 if (location == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
                 return Ok(location);
             }
@@ -92,7 +94,7 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocationByID(id);
                 if (location == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
 
                 await _locationDao.DeleteLocationById(id);
@@ -117,12 +119,16 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocationByID(locationReq.Id);
                 if (location == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
+
                 }
+                
+
                 var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
 
                 return StatusCode(200);
             }
+            
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
@@ -143,20 +149,15 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocationByBuilding(building);
                 if (location == null)
                 {
-                    var errorResponse = $"{building} is not a valid BUILDING, please try again.";
-                    var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
-                    return new ContentResult
-                    {
-                        StatusCode = 404,
-                        ContentType = "application/json",
-                        Content = jsonErrorResponse
-                    };
+                    return ErrorResponses.Error404(building);
                 }
+                
                 return Ok(location);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
+                
             }
         }
 

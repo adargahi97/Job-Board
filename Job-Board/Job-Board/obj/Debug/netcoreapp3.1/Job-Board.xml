@@ -59,22 +59,22 @@
             <returns>Job Posting Information</returns>
             <response code="200">Returns the Information of all Job Postings</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.GetCandidateByID(System.Guid)">
+        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByID(System.Guid)">
             <summary>Search for Job Posting Information by ID</summary>
             <returns>Job Posting Information</returns>
             <response code="200">Returns the Information by ID</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.CreateCandidate(Job_Board.Models.JobPostingRequest)">
+        <member name="M:Job_Board.Controllers.JobPostingController.CreateJobPosting(Job_Board.Models.JobPostingRequest)">
             <summary>Create Job Posting</summary>
             <returns>Job Posting Information</returns>
             <response code="200">Creates Job Posting</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.DeleteInterviewById(System.Guid)">
+        <member name="M:Job_Board.Controllers.JobPostingController.DeleteJobPostingById(System.Guid)">
             <summary>Delete Job Posting By ID</summary>
             <returns>Delete Job Posting </returns>
             <response code="200">Deletes Job Posting</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.UpdateInterviewByID(Job_Board.Models.JobPosting)">
+        <member name="M:Job_Board.Controllers.JobPostingController.UpdateJobPostingByID(Job_Board.Models.JobPosting)">
             <summary>Update Job Posting Information By ID</summary>
             <returns>Job Posting Information</returns>
             <response code="200">Updates Job Posting</response>
@@ -95,10 +95,9 @@
             <response code="200">Returns All Location Information</response>
         </member>
         <member name="M:Job_Board.Controllers.LocationController.GetLocationByID(System.Guid)">
-            <summary>Create Location Information</summary>
+            <summary>Get Location Information</summary>
             <returns>Location Information</returns>
             <response code="200">Create Location Information</response>
-            <response code="404">TESTING TESTING</response>
         </member>
         <member name="M:Job_Board.Controllers.LocationController.CreateLocation(Job_Board.Models.LocationRequest)">
             <summary>Delete Location Information</summary>
