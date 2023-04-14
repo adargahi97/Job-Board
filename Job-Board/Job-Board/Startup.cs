@@ -30,6 +30,7 @@ namespace Job_Board
             services.AddScoped<IJobPostingDao, JobPostingDao>();
             services.AddScoped<ILocationDao, LocationDao>();
             services.AddScoped<ISearchDao, SearchDao>();
+            services.AddScoped<IDailySearchDao, DailySearchDao>();
 
             services.AddControllers();
 

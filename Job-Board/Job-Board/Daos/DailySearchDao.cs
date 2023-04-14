@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace Job_Board.Daos
@@ -52,6 +53,8 @@ namespace Job_Board.Daos
         {
 
             var query = "SELECT Position FROM JobPosting";
+
+
 
             using (var connection = sqlWrapper.CreateConnection())
             {

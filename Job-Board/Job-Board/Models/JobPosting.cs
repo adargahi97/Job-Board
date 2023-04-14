@@ -42,4 +42,14 @@ namespace Job_Board.Models
         public string Department { get; set; }
 
     }
+
+    public class JobPostingByState
+    {
+        public string Position { get; set; }
+        public string Department { get; set; }
+        public string City { get; set; }
+
+        public string Building { get; set; }
+
+    }
 }
