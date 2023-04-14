@@ -1,10 +1,11 @@
-﻿using Dapper;
+using Dapper;
 using Job_Board.Models;
 using Job_Board.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace Job_Board.Daos
@@ -108,7 +109,20 @@ namespace Job_Board.Daos
         }
         public async Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt)
         {
-            var query = $"SELECT * FROM Interview WHERE DateTime = '{dt}'";
+
+            var query = $"SELECT * FROM Interview WHERE '{dt}' = CAST(DateTime AS DATE)";
+
+            using (var connection = sqlWrapper.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+
+                return interviews.ToList();
+            }
+        }
+        public async Task<IEnumerable<Interview>> GetTodaysInterviews()
+        {
+
+            var query = $"SELECT * FROM Interview WHERE CAST(DateTime AS DATE) = CAST(GETDATE() AS DATE)";
 
             using (var connection = sqlWrapper.CreateConnection())
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Job_Board.Models;
@@ -11,8 +12,6 @@ namespace Job_Board.Daos
 {
     public class ErrorResponses
     {
-        
-        
         public static ContentResult Error404(string userInput)
         {
 
@@ -24,8 +23,12 @@ namespace Job_Board.Daos
                 ContentType = "application/json",
                 Content = jsonErrorResponse
             };
+        }
 
+        public static ContentResult Error500()
+        {
 
+            var errorResponse = "dang ol shoot man not sure what happent..";
         }
 
         public static ContentResult ErrorNoCandidate(string userInput)
@@ -74,9 +77,7 @@ namespace Job_Board.Daos
                 ContentType = "application/json",
                 Content = jsonErrorResponse
             };
-
-
-        }
-
+    
+         }
     }
 }

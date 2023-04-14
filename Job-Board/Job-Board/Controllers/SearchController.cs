@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.WebEncoders.Testing;
 
+
 namespace Job_Board.Controllers
 {
     [ApiController]
@@ -158,13 +159,30 @@ namespace Job_Board.Controllers
         /// <returns>Interview Information</returns>
         /// <response code="200">Returns the Interview Information found by Date</response>
         [HttpGet]
-        [Route("Interview/DateTime/{dateTime}")]
-        public async Task<IActionResult> GetInterviewsByDateTime([FromRoute] DateTime dateTime)
+        [Route("Interview/DateTime/{date}")]
+        public async Task<IActionResult> GetInterviewsByDate([FromRoute] DateTime date)
         {
             try
             {
-                IEnumerable<Interview> interview = await _searchDao.GetInterviewsByDate(dateTime);
+                IEnumerable<Interview> interview = await _searchDao.GetInterviewsByDate(date);
                 return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        /// <summary>Get Interview Information based on Today's Date</summary>
+        /// <returns>Interview Information</returns>
+        /// <response code="200">Returns Interview Information for Today's Date</response>
+        [HttpGet]
+        [Route("Interview/Today")]
+        public async Task<IActionResult> GetTodaysInterviews()
+        {
+            try
+            {
+                IEnumerable<Interview> candidates = await _searchDao.GetTodaysInterviews();
+                return Ok(candidates);
             }
             catch (Exception e)
             {
