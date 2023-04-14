@@ -32,7 +32,7 @@ namespace Job_Board.Models
         public string Department { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public string Building { get; set; }
 
     }

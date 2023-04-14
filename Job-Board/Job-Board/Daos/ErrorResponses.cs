@@ -35,6 +35,19 @@ namespace Job_Board.Daos
 
         }
 
+        public static ContentResult ErrorInputNotFound(string userInput)
+        {
+            var errorResponse = $"{userInput} was not found, please check your input or create a new candidate entry";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 404,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+        }
+
 
 
         public static ContentResult Error400()

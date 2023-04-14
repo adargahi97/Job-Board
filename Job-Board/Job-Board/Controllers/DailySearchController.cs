@@ -6,8 +6,7 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Microsoft.Extensions.WebEncoders.Testing;
-
+using System.Globalization;
 
 namespace Job_Board.Controllers
 {
@@ -27,29 +26,45 @@ namespace Job_Board.Controllers
         /// <response code="200">Returns the Interview Information found by Date</response>
         [HttpGet]
         [Route("Interview/DateTime/{date}")]
-        public async Task<IActionResult> GetInterviewsByDate([FromRoute] DateTime date)
+        public async Task<IActionResult> GetInterviewsByDate(DateTime date)
         {
             try
             {
-                IEnumerable<Interview> interview = await _dailySearchDao.GetInterviewsByDate(date);
-                return Ok(interview);
+                IEnumerable<Interview> interviews = await _dailySearchDao.GetInterviewsByDate(date);
+
+                if (!interviews.Any())
+                {
+                    DateTime temp;
+                    if (!DateTime.TryParse(date.ToString(), out temp))
+                    {
+                        return ErrorResponses.Error404(date.ToShortDateString());
+                    }
+                    return ErrorResponses.ErrorNoCandidate(date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+                }
+                return Ok(interviews);
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>Get Interview Information based on Today's Date</summary>
         /// <returns>Interview Information</returns>
         /// <response code="200">Returns Interview Information for Today's Date</response>
         [HttpGet]
-        [Route("Interview/Today")]
+        [Route("Interview/TodaysInterviews")]
         public async Task<IActionResult> GetTodaysInterviews()
         {
             try
             {
-                IEnumerable<Interview> candidates = await _dailySearchDao.GetTodaysInterviews();
-                return Ok(candidates);
+                IEnumerable<InterviewDailySearch> interviews = await _dailySearchDao.GetTodaysInterviews();
+
+                if (!interviews.Any())
+                {
+                    return ErrorResponses.ErrorNoCandidate(DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+                }
+                return Ok(interviews);
             }
             catch (Exception e)
             {
@@ -90,8 +105,5 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
-
-
     }
 }

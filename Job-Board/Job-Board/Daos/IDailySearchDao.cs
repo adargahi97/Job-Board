@@ -9,10 +9,8 @@ namespace Job_Board.Daos
     {
 
         Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt);
-        Task<IEnumerable<Interview>> GetTodaysInterviews();
-
+        Task<IEnumerable<InterviewDailySearch>> GetTodaysInterviews();
         Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position);
-
         Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position);
 
     }
