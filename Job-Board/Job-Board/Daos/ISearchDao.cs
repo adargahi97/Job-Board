@@ -16,5 +16,6 @@ namespace Job_Board.Daos
         Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName);
         Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt);
 
+        Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position);
     }
 }

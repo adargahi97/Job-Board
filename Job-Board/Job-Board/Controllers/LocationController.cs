@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
+
 
 namespace Job_Board.Controllers
 {
@@ -119,10 +122,13 @@ namespace Job_Board.Controllers
                     return ErrorResponses.Error404("The ID You Entered");
 
                 }
+                
+
                 var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
 
                 return StatusCode(200);
             }
+            
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
@@ -145,6 +151,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(building);
                 }
+                
                 return Ok(location);
             }
             catch (Exception)

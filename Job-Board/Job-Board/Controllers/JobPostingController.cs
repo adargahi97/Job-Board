@@ -50,7 +50,7 @@ namespace Job_Board.Controllers
                 var jobPosting = await _jobPostingDao.GetJobPostingByID(id);
                 if (jobPosting == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
                 return Ok(jobPosting);
             }
@@ -90,7 +90,7 @@ namespace Job_Board.Controllers
                 var jobPosting = await _jobPostingDao.GetJobPostingByID(id);
                 if (jobPosting == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
 
                 await _jobPostingDao.DeleteJobPostingById(id);
@@ -114,7 +114,7 @@ namespace Job_Board.Controllers
                 var candidate = await _jobPostingDao.GetJobPostingByID(jobPostingReq.Id);
                 if (candidate == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
                 var updatedJobPosting = await _jobPostingDao.UpdateJobPostingById(jobPostingReq);
 
@@ -138,7 +138,7 @@ namespace Job_Board.Controllers
                 var jobPosting = await _jobPostingDao.GetJobPostingByLocationId(id);
                 if (jobPosting == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404("The ID You Entered");
                 }
                 return Ok(jobPosting);
             }
@@ -161,7 +161,7 @@ namespace Job_Board.Controllers
                 var jobPosting = await _jobPostingDao.GetJobPostingByPosition(position);
                 if (jobPosting == null)
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404(position);
                 }
                 return Ok(jobPosting);
             }

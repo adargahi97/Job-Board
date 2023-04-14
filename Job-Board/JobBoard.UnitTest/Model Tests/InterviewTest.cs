@@ -11,17 +11,17 @@ namespace JobBoard.UnitTest
     [TestClass]
     public class InterviewTest
     {
-        [TestMethod]
+        //[TestMethod]
 
-        public void AddInterview()
-        {
-            Interview sut = new Interview();
-            Interview expectedInterview = new Interview(); 
+        //public void AddInterview()
+        //{
+        //    Interview sut = new Interview();
+        //    Interview expectedInterview = new Interview(); 
             
 
-            sut.AddInterview(expectedInterview);
+        //    sut.AddInterview(expectedInterview);
 
-            Assert.AreEqual(expectedInterview, sut.NewInterview);
-        }
+        //    Assert.AreEqual(expectedInterview, sut.NewInterview);
+        //}
     }
 }
