@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
+using Job_Board.Models;
+using Job_Board.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -25,6 +29,47 @@ namespace Job_Board.Daos
         {
 
             var errorResponse = "dang ol shoot man not sure what happent..";
+        }
+
+        public static ContentResult ErrorNoCandidate(string userInput)
+        {
+
+            var errorResponse = $"{userInput} has no Candidates with Interviews Scheduled.";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 404,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+
+        }
+
+
+        
+
+
+        public static ContentResult Error400()
+        {
+
+            var errorResponse = "There is a 400 Error";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 400,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+
+
+        }
+
+
+        public static ContentResult Error500()
+        {
+
+            var errorResponse = "There is an Error with the Server";
             var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
             return new ContentResult
             {
@@ -32,6 +77,7 @@ namespace Job_Board.Daos
                 ContentType = "application/json",
                 Content = jsonErrorResponse
             };
-        }
+    
+         }
     }
 }

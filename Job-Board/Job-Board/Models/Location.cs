@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using System;
+﻿using System;
 
 namespace Job_Board.Models
 {
@@ -20,6 +19,7 @@ namespace Job_Board.Models
         public string State { get; set; }
         public int Zip { get; set; }
         public string Building { get; set; }
+
     }
 
     public class LocationByBuilding

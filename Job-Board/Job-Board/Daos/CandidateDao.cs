@@ -70,15 +70,23 @@ namespace Job_Board.Daos
 
         public async Task<Candidate> UpdateCandidateById(Candidate candidate)
         {
-            var query = $"UPDATE Candidate SET FirstName = @FirstName, LastName = @LastName, " +
-                $"PhoneNumber = @PhoneNumber, JobId = @JobId" +
-                $"WHERE Id = {candidate.Id}";
+            var query = $"UPDATE Candidate SET FirstName = ISNULL(@FirstName, FirstName), LastName = ISNULL(@LastName, LastName), " +
+                $"PhoneNumber = ISNULL(@PhoneNumber, PhoneNumber), JobId = ISNULL(@JobId, JobId)" +
+                $"WHERE Id = '{candidate.Id}'";
 
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", candidate.FirstName, DbType.String);
             parameters.Add("LastName", candidate.LastName, DbType.String);
             parameters.Add("PhoneNumber", candidate.PhoneNumber, DbType.String);
-            parameters.Add("JobId", candidate.JobId, DbType.Guid);
+            if (candidate.JobId == Guid.Empty)
+            {
+                parameters.Add("JobId", DBNull.Value, DbType.Guid);
+            }
+            else
+            {
+                parameters.Add("JobId", candidate.JobId, DbType.Guid);
+
+            }
 
             using (var connection = sqlWrapper.CreateConnection())
             {

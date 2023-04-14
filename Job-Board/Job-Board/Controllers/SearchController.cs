@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.WebEncoders.Testing;
+
 
 namespace Job_Board.Controllers
 {
@@ -28,9 +32,9 @@ namespace Job_Board.Controllers
             try
             {
                 IEnumerable<LocationByState> location = await _searchDao.GetLocationByState(state);
-                if (location == null)
+                if (!location.Any())
                 {
-                    return StatusCode(404);
+                    return ErrorResponses.Error404(state);
                 }
                 return Ok(location);
             }
@@ -52,9 +56,21 @@ namespace Job_Board.Controllers
             try
             {
                 IEnumerable<JobPostingDailySearchByPosition> candidates = await _searchDao.DailySearchByPosition(position);
-                if (candidates == null)
+                
+                if (!candidates.Any())
                 {
-                    return StatusCode(404);
+                    var allPositions = await _searchDao.CheckJobPostingExists(position);
+                    var stringListOfPositions = allPositions.Select(jp => jp.Position).ToList();
+                    
+                    foreach (var j in stringListOfPositions)
+                    {
+                        if (j == position)
+                        {
+                            return ErrorResponses.ErrorNoCandidate(position);
+                        }
+                    }
+
+                    return ErrorResponses.Error404(position);
                 }
                 return Ok(candidates);
             }
@@ -173,6 +189,10 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+
+
+        
 
     }
 }

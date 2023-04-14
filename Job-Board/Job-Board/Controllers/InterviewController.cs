@@ -41,7 +41,7 @@ namespace Job_Board.Controllers
         /// <returns>Interview Information</returns>
         /// <response code="200">Returns the Information of selected Interview</response>
         [HttpGet]
-        [Route("Interview/{id:int}")]
+        [Route("Interview/{id:Guid}")]
         public async Task<IActionResult> GetInterviewByID([FromRoute] Guid id)
         {
             try

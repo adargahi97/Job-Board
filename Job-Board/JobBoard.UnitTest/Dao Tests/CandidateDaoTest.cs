@@ -83,7 +83,7 @@ namespace JobBoard.UnitTest
             string name = "Ron";
 
             //ACT
-            _ = sut.GetCandidateByFirstName(name);
+            //_ = sut.GetCandidateByFirstName(name);
             //Assert
             //Assert.AreEqual(candidate.FirstName, "Ron");
             mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<Candidate>(It.Is<string>(sql => sql == $"GET FROM Candidate WHERE FirstName = {name}")), Times.Once);
