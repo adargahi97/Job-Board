@@ -19,7 +19,6 @@ namespace Job_Board.Daos
             };
         }
 
-
         public static ContentResult ErrorNoCandidate(string userInput)
         {
 
@@ -47,9 +46,6 @@ namespace Job_Board.Daos
             };
 
         }
-
-
-
         public static ContentResult Error400()
         {
 
@@ -64,7 +60,6 @@ namespace Job_Board.Daos
 
 
         }
-
 
         public static ContentResult Error500()
         {

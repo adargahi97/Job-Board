@@ -54,14 +54,10 @@ namespace Job_Board.Daos
 
             var query = "SELECT Position FROM JobPosting";
 
-
-
             using (var connection = sqlWrapper.CreateConnection())
             {
                 var allPositions = await connection.QueryAsync<JobPosting>(query);
                 return allPositions.ToList();
-
-
             }
         }
         public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)

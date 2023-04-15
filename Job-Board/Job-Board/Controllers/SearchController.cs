@@ -6,8 +6,6 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Microsoft.Extensions.WebEncoders.Testing;
-
 
 namespace Job_Board.Controllers
 {
