@@ -1,8 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace Job_Board.Daos
+namespace Job_Board.Responses
 {
     public class ErrorResponses
     {
@@ -18,6 +17,19 @@ namespace Job_Board.Daos
                 Content = jsonErrorResponse
             };
         }
+        public static ContentResult CustomError(string custom)
+        {
+
+            var errorResponse = $"{custom}";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 404,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+        }
+
 
         public static ContentResult ErrorNoCandidate(string userInput)
         {
@@ -72,7 +84,18 @@ namespace Job_Board.Daos
                 ContentType = "application/json",
                 Content = jsonErrorResponse
             };
-    
-         }
-    }
+
+        }
+        public static ContentResult ErrorUpdating(string T)
+        {
+
+            var errorResponse = $"There was an error updating the entry: {T}";
+            var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
+            return new ContentResult
+            {
+                StatusCode = 500,
+                ContentType = "application/json",
+                Content = jsonErrorResponse
+            };
+        }
 }

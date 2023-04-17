@@ -7,6 +7,7 @@ using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using System.Globalization;
+using Job_Board.Responses;
 
 namespace Job_Board.Controllers
 {
@@ -43,9 +44,9 @@ namespace Job_Board.Controllers
                 }
                 return Ok(interviews);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -66,9 +67,9 @@ namespace Job_Board.Controllers
                 }
                 return Ok(interviews);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -100,9 +101,9 @@ namespace Job_Board.Controllers
                 }
                 return Ok(candidates);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
+using Job_Board.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -29,11 +30,16 @@ namespace Job_Board.Controllers
             try
             {
                 IEnumerable<Candidate> candidates = await _candidateDao.GetCandidates();
-                return Ok(candidates);
+                if (!candidates.Any())
+                {
+                    return ErrorResponses.CustomError("There are currently no Candidate entries");
+                }
+                return SuccessResponses.GetAllSuccessful(candidates);
+                
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -51,11 +57,11 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.ErrorInputNotFound(id.ToString());
                 }
-                return Ok(candidate);
+                return SuccessResponses.GetObjectSuccessful(candidate);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -69,11 +75,11 @@ namespace Job_Board.Controllers
             try
             {
                 await _candidateDao.CreateCandidate(createRequest);
-                return StatusCode(201);
+                return SuccessResponses.CreateSuccessful("Candidate");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -89,13 +95,13 @@ namespace Job_Board.Controllers
                 var candidate = await _candidateDao.GetCandidateByID(id);
                 if (candidate == null)
                 {
-                    return ErrorResponses.Error404("The ID You Entered");
+                    return ErrorResponses.ErrorInputNotFound(id.ToString());
                 }
 
                 await _candidateDao.DeleteCandidateById(id);
-                return StatusCode(200);
+                return SuccessResponses.DeleteSuccessful(id.ToString());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorResponses.Error500();
             }
@@ -114,17 +120,17 @@ namespace Job_Board.Controllers
                 var candidate = await _candidateDao.GetCandidateByID(candidateReq.Id);
                 if (candidate == null)
                 {
-                    return ErrorResponses.ErrorInputNotFound(candidateReq.Id.ToString());
+                    return ErrorResponses.ErrorUpdating(candidateReq.Id.ToString());
                 }
 
                 var updatedCandidate = await _candidateDao.UpdateCandidateById(candidateReq);
 
-                return StatusCode(200);
+                return SuccessResponses.UpdateObjectSuccessful(candidateReq.Id.ToString());
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, ex.Message);
+                return ErrorResponses.Error500();
             }
         }
 

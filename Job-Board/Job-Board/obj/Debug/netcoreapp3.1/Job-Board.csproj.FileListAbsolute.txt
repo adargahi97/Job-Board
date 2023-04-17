@@ -1680,3 +1680,7 @@ C:\Users\Mason.Bartlett\source\repos\final-project-job-board\main0414\Job-Board\
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\main0414\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.xml
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\main0414\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.pdb
 C:\Users\Mason.Bartlett\source\repos\final-project-job-board\main0414\Job-Board\Job-Board\obj\Debug\netcoreapp3.1\Job-Board.genruntimeconfig.cache
+C:\Users\Abbas\source\repos\Job-Board\Job-Board\Job-Board\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Abbas\source\repos\Job-Board\Job-Board\Job-Board\bin\Debug\netcoreapp3.1\Scrutor.dll
+C:\Users\Abbas\source\repos\Job-Board\Job-Board\Job-Board\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\Abbas\source\repos\Job-Board\Job-Board\Job-Board\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Filters.Abstractions.dll

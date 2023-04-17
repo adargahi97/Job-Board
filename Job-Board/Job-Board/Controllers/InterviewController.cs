@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
+using Job_Board.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,9 +32,9 @@ namespace Job_Board.Controllers
                 var interviews = await _interviewDao.GetInterviews();
                 return Ok(interviews);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -53,9 +54,9 @@ namespace Job_Board.Controllers
                 }
                 return Ok(interview);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -71,9 +72,9 @@ namespace Job_Board.Controllers
                 await _interviewDao.CreateInterview(createRequest);
                 return StatusCode(201);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -95,9 +96,9 @@ namespace Job_Board.Controllers
                 await _interviewDao.DeleteInterviewById(id);
                 return StatusCode(200);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -119,9 +120,9 @@ namespace Job_Board.Controllers
 
                 return StatusCode(200);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
     }

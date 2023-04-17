@@ -7,7 +7,7 @@ using Job_Board.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
-
+using Job_Board.Responses;
 
 namespace Job_Board.Controllers
 {
@@ -34,9 +34,9 @@ namespace Job_Board.Controllers
                 var location = await _locationDao.GetLocation();
                 return Ok(location);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -56,9 +56,9 @@ namespace Job_Board.Controllers
                 }
                 return Ok(location);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -75,9 +75,9 @@ namespace Job_Board.Controllers
                 await _locationDao.CreateLocation(createRequest);
                 return StatusCode(201);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -100,9 +100,9 @@ namespace Job_Board.Controllers
                 await _locationDao.DeleteLocationById(id);
                 return StatusCode(200);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -129,9 +129,9 @@ namespace Job_Board.Controllers
                 return StatusCode(200);
             }
             
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
