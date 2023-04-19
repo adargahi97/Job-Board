@@ -25,7 +25,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Interviews by Date</summary>
         /// <remarks>Find all Interviews scheduled for a specific date.</remarks>
         /// <response code="200">Returns the Interview Information found by Date</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Interview/DateTime/{date}")]
         public async Task<IActionResult> GetInterviewsByDate(DateTime date)
         {
@@ -42,7 +47,7 @@ namespace Job_Board.Controllers
                     }
                     return ErrorResponses.ErrorNoCandidate(date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
                 }
-                return Ok(interviews);
+                return SuccessResponses.GetAllSuccessful(interviews);
             }
             catch (Exception)
             {
@@ -53,7 +58,12 @@ namespace Job_Board.Controllers
         /// <summary>Get Today's Interviews</summary>
         /// <remarks>Retrieve all Interviews scheduled today.</remarks>
         /// <response code="200">Returns Interview Information for Today's Date</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Interview/TodaysInterviews")]
         public async Task<IActionResult> GetTodaysInterviews()
         {
@@ -65,7 +75,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.ErrorNoCandidate(DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
                 }
-                return Ok(interviews);
+                return SuccessResponses.GetAllSuccessful(interviews);
             }
             catch (Exception)
             {
@@ -76,7 +86,12 @@ namespace Job_Board.Controllers
         /// <summary>Get Interview by Position</summary>
         /// <remarks>Retrieve all Interviews scheduled for a specific position.</remarks>
         /// <response code="200">Returns the Information by Position</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("JobPosting/Position")]
         public async Task<IActionResult> DailySearchByPosition(string position)
         {
@@ -99,7 +114,7 @@ namespace Job_Board.Controllers
 
                     return ErrorResponses.Error404(position);
                 }
-                return Ok(candidates);
+                return SuccessResponses.GetAllSuccessful(candidates);
             }
             catch (Exception)
             {

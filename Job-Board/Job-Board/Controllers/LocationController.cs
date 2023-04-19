@@ -25,7 +25,10 @@ namespace Job_Board.Controllers
         /// <summary>Get All Locations</summary>
         /// <remarks>Retrieve all Locations stored in the system.</remarks>
         /// <response code="200">Returns all Location information stored in the system.</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
         [Route("Location")]
         public async Task<IActionResult> GetLocation()
         {
@@ -43,7 +46,12 @@ namespace Job_Board.Controllers
         /// <summary>Get Location</summary>
         /// <remarks>Retrieve a Locations information by its Location ID.</remarks>
         /// <response code="200">Returns Location information for a specific Location ID</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location/{id}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
         {
@@ -66,7 +74,12 @@ namespace Job_Board.Controllers
         /// <summary>Update Location</summary>
         /// <remarks>Modify an existing Location's information by the Location ID.</remarks>
         /// <response code="201">Update information on an existing Location</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location")]
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
         {
@@ -85,7 +98,12 @@ namespace Job_Board.Controllers
         /// <summary>Delete Location</summary>
         /// <remarks>Remove an existing Location from the system by its unique ID.</remarks>
         /// <response code="200">Delete Location Information information for a specific Location ID</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpDelete]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location/{id}")]
         public async Task<IActionResult> DeleteLocationById([FromRoute] Guid id)
         {
@@ -110,7 +128,12 @@ namespace Job_Board.Controllers
         /// <summary>Update Location</summary>
         /// <remarks>Modify an existing Location's information by the Location ID.</remarks>
         /// <response code="200">Update Location Information by ID</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpPatch]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location")]
         public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationReq)
         {
@@ -133,12 +156,6 @@ namespace Job_Board.Controllers
             {
                 return ErrorResponses.Error500();
             }
-        }
-
-
-
-
-
-        
+        }   
     }
 }

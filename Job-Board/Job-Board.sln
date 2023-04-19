@@ -5,7 +5,12 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Job-Board", "Job-Board\Job-Board.csproj", "{FE9CD211-F14F-489D-BEC9-470ECF758720}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.UnitTest", "JobBoard.UnitTest\JobBoard.UnitTest.csproj", "{DE176391-7239-46CF-A7C6-89722CD64546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobBoard.UnitTest", "JobBoard.UnitTest\JobBoard.UnitTest.csproj", "{DE176391-7239-46CF-A7C6-89722CD64546}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6CDDDBF3-D2B8-4820-A4AE-7EBA65852260}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
