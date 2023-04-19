@@ -22,7 +22,7 @@ namespace Job_Board.Controllers
         }
 
         /// <summary>Search for Location Information by State</summary>
-        /// <returns>Location Information</returns>
+        /// <remarks>Retrieve all Buildings in a specific state.</remarks>
         /// <response code="200">Returns the Information by State</response>
         [HttpGet]
         [Route("Location/State/{state}")]
@@ -44,9 +44,9 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Search for Location Information by State</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="200">Returns the Information by State</response>
+        /// <summary>Search Job Postings by State</summary>
+        /// <remarks>Retrieve all Job Postings in a specific state.</remarks>
+        /// <response code="200">Returns the All Job Postings by State</response>
         [HttpGet]
         [Route("JobPosting/State/{state}")]
         public async Task<IActionResult> GetJobPostingByState([FromRoute] string state)
@@ -70,8 +70,8 @@ namespace Job_Board.Controllers
 
 
 
-        /// <summary>Pulls Candidate(s) based on Last Name</summary>
-        /// <returns>Candidate Information</returns>
+        /// <summary>Get Candidates by Last Name</summary>
+        /// <remarks>Retrieve all Candidates with a specific last name.</remarks>
         /// <response code="200">Returns the Candidates with matching last names</response>
         [HttpGet]
         [Route("Candidate/LastName/{lastName}")]
@@ -92,8 +92,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Candidates who are applying for a certain position</summary>
-        /// <returns>Candidate Information</returns>
+        /// <summary>Search Candidates by Job ID</summary>
+        /// <remarks>Retrieve all Candidates for a specific Job ID.</remarks>
         /// <response code="200">Returns the Candidate Information by Job Id</response>
         [HttpGet]
         [Route("Candidate/JobId/{JobId}")]
@@ -114,8 +114,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Interview Information by Job Id</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Search Interview by Job ID</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a specific Job ID.</remarks>
         /// <response code="200">Returns the Interview Information by Job Id</response>
         [HttpGet]
         [Route("Interview/JobId/{id:guid}")]
@@ -136,8 +136,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Interview Information by Last Name</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Search Interview by Last Name</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a Candidate with a specific last name.</remarks>
         /// <response code="200">Returns the Interview Information found by last name</response>
         [HttpGet]
         [Route("Interview/{lastName}")]
@@ -158,8 +158,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Job Posting Information by Location ID</summary>
-        /// <returns>Job Posting Information</returns>
+        /// <summary>Search Job Postings by Location</summary>
+        /// <remarks>Retrieve all Job Postings for a specific Location ID.</remarks>
         /// <response code="200">Returns the Information by Location ID</response>
         [HttpGet]
         [Route("JobPosting/LocationId/{id:guid}")]
@@ -181,8 +181,8 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Search for Job Posting Information by Position</summary>
-        /// <returns>Job Posting Information</returns>
+        /// <summary>Search Job Posting by Position</summary>
+        /// <remarks>Retrieve Job Posting information for a specific Position.</remarks>
         /// <response code="200">Returns the Information by Position</response>
         [HttpGet]
         [Route("JobPosting/Position/{position}")]
@@ -204,8 +204,8 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Location Info By Building</summary>
-        /// <returns>Location Information</returns>
+        /// <summary>Get Location by Building</summary>
+        /// <remarks>Retrieve Location information for a specific Building.</remarks>
         /// <response code="200">Returns Location Information by Building</response>
         [HttpGet]
         [Route("Location/Building/{building}")]

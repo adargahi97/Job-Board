@@ -22,8 +22,8 @@ namespace Job_Board.Controllers
             _dailySearchDao = dailySearchDao;
         }
 
-        /// <summary>Search for Interview Information by Date</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Search Interviews by Date</summary>
+        /// <remarks>Find all Interviews scheduled for a specific date.</remarks>
         /// <response code="200">Returns the Interview Information found by Date</response>
         [HttpGet]
         [Route("Interview/DateTime/{date}")]
@@ -50,8 +50,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Get Interview Information based on Today's Date</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Get Today's Interviews</summary>
+        /// <remarks>Retrieve all Interviews scheduled today.</remarks>
         /// <response code="200">Returns Interview Information for Today's Date</response>
         [HttpGet]
         [Route("Interview/TodaysInterviews")]
@@ -73,8 +73,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Interview Info By Position</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Get Interview by Position</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a specific position.</remarks>
         /// <response code="200">Returns the Information by Position</response>
         [HttpGet]
         [Route("JobPosting/Position")]

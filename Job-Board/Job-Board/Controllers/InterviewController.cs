@@ -20,8 +20,8 @@ namespace Job_Board.Controllers
             _interviewDao = interviewDao;
         }
 
-        /// <summary>Get All Interview Information</summary>
-        /// <returns>All interviews currently scheduled</returns>
+        /// <summary>Get All Interviews</summary>
+        /// <remarks>Retrieve all Interviews stored in the system.</remarks>
         /// <response code="200">Returns the Information of All Interviews</response>
         [HttpGet]
         [Route("Interview")]
@@ -38,8 +38,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Get Interview Information by Job ID</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Get Interview by ID</summary>
+        /// <remarks>Retrieve Interview Information for a specific Interview ID.</remarks>
         /// <response code="200">Returns the Information of selected Interview</response>
         [HttpGet]
         [Route("Interview/{id:Guid}")]
@@ -60,8 +60,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Create Job Interview</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Create Interview</summary>
+        /// <remarks>Schedule a new Interview.</remarks>
         /// <response code="200">Creates Interview</response>
         [HttpPost]
         [Route("Interview")]
@@ -78,8 +78,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Delete Interview by Interview ID</summary>
-        /// <returns></returns>
+        /// <summary>Delete Interview</summary>
+        /// <remarks>Remove an existing Interview from the system by their Interview ID.</remarks>
         /// <response code="200">Deletes Interview</response>
         [HttpDelete]
         [Route("Interview/{id:int}")]
@@ -102,8 +102,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Update Interview Information By Interview ID</summary>
-        /// <returns>Interview Information</returns>
+        /// <summary>Update Interview</summary>
+        /// <remarks>Modify an existing Interview's information by the Interview ID.</remarks>
         /// <response code="200">Updates Interview by ID</response>
         [HttpPatch]
         [Route("Interview")]

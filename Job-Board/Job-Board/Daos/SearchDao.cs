@@ -63,24 +63,27 @@ namespace Job_Board.Daos
                 return candidates.ToList();
             }
         }
-        public async Task<InterviewRequest> GetInterviewByCandidateId(Guid candidateId)
-        {
-            var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId WHERE CandidateId = '{candidateId}'";
+        //public async Task<InterviewRequest> GetInterviewByCandidateId(Guid candidateId)
+        //{
+        //    var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId WHERE CandidateId = '{candidateId}'";
 
-            using (sqlWrapper.CreateConnection())
-            {
-                var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
-                return interview;
-            }
-        }
+        //    using (sqlWrapper.CreateConnection())
+        //    {
+        //        var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
+        //        return interview;
+        //    }
+        //}
 
-        public async Task<IEnumerable<Interview>> GetInterviewByJobId(Guid jobId)
+        public async Task<IEnumerable<InterviewRequest>> GetInterviewByJobId(Guid jobId)
         {
-            var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId WHERE JobId = '{jobId}'";
+            var query = $" SELECT CONVERT(VARCHAR(20),Interview.DateTime,0) AS DateTime, JobId, Interview.LocationId, Interview.CandidateId " +
+                $"FROM JobPosting " +
+                $"INNER JOIN Interview ON JobPosting.ID = Interview.JobId " +
+                $"WHERE JobId = '{jobId}'";
 
             using (var connection = sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewRequest>(query);
 
                 return interviews.ToList();
             }

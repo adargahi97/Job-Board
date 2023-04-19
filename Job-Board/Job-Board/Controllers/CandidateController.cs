@@ -20,8 +20,8 @@ namespace Job_Board.Controllers
             _candidateDao = candidatedao;
         }
 
-        /// <summary>Get All Candidate's Information</summary>
-        /// <returns>Candidate Information</returns>
+        /// <summary>Get All Candidates</summary>
+        /// <remarks>Retrieve all Candidate information stored in the system.</remarks>
         /// <response code="200">Returns the Information of all Candidates</response>
         [HttpGet]
         [Route("Candidate")]
@@ -43,8 +43,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Get Candidate Information by Job ID</summary>
-        /// <returns>Candidate Information</returns>
+        /// <summary>Get Candidate by ID</summary>
+        /// <remarks>Retrieve a Candidates information by their Candidate ID.</remarks>
         /// <response code="200">Returns the Information of selected Candidates</response>
         [HttpGet]
         [Route("Candidate/{id:Guid}")]
@@ -65,9 +65,9 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Create a new Candidate</summary>
-        /// <returns></returns>
-        /// <response code="201">Candidate has been successfully created</response>
+        /// <summary>Create Candidate</summary>
+        /// <remarks>Add a new Candidate to the system.</remarks>
+        /// <response code="200">Candidate has been successfully created</response>
         [HttpPost]
         [Route("Candidate")]
         public async Task<IActionResult> CreateCandidate([FromBody] CandidateRequest createRequest)
@@ -75,7 +75,9 @@ namespace Job_Board.Controllers
             try
             {
                 await _candidateDao.CreateCandidate(createRequest);
-                return SuccessResponses.CreateSuccessful("Candidate");
+                return StatusCode(201);
+
+                //return SuccessResponses.CreateSuccessful("Candidate");
             }
             catch (Exception)
             {
@@ -83,8 +85,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Delete a Candidate By ID</summary>
-        /// <returns></returns>
+        /// <summary>Delete Candidate</summary>
+        /// <remarks>Remove an existing Candidate from the system by their Candidate ID.</remarks>
         /// <response code="200">Candidate has been successfully deleted</response>
         [HttpDelete]
         [Route("Candidate/{id}")]
@@ -107,8 +109,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Update a Candidate by Candidate ID</summary>
-        /// <returns></returns>
+        /// <summary>Update Candidate</summary>
+        /// <remarks>Modify an existing candidate's information by their Candidate ID.</remarks>
         /// <response code="200">Candidate has been successfully Updated</response>
         /// 
         [HttpPatch]

@@ -98,4 +98,5 @@ namespace Job_Board.Responses
                 Content = jsonErrorResponse
             };
         }
+    }
 }

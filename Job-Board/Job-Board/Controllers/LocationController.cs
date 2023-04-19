@@ -22,9 +22,9 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Get All Location Info</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="200">Returns All Location Information</response>
+        /// <summary>Get All Locations</summary>
+        /// <remarks>Retrieve all Locations stored in the system.</remarks>
+        /// <response code="200">Returns all Location information stored in the system.</response>
         [HttpGet]
         [Route("Location")]
         public async Task<IActionResult> GetLocation()
@@ -40,9 +40,9 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Get Location Information</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="200">Create Location Information</response>
+        /// <summary>Get Location</summary>
+        /// <remarks>Retrieve a Locations information by its Location ID.</remarks>
+        /// <response code="200">Returns Location information for a specific Location ID</response>
         [HttpGet]
         [Route("Location/{id}")]
         public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
@@ -63,9 +63,9 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Delete Location Information</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="201">Delete Location Information</response>
+        /// <summary>Update Location</summary>
+        /// <remarks>Modify an existing Location's information by the Location ID.</remarks>
+        /// <response code="201">Update information on an existing Location</response>
         [HttpPost]
         [Route("Location")]
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequest createRequest)
@@ -82,9 +82,9 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Delete Location Information</summary>
-        /// <returns>Location Information</returns>
-        /// <response code="200">Delete Location Information</response>
+        /// <summary>Delete Location</summary>
+        /// <remarks>Remove an existing Location from the system by its unique ID.</remarks>
+        /// <response code="200">Delete Location Information information for a specific Location ID</response>
         [HttpDelete]
         [Route("Location/{id}")]
         public async Task<IActionResult> DeleteLocationById([FromRoute] Guid id)
@@ -107,8 +107,8 @@ namespace Job_Board.Controllers
         }
 
 
-        /// <summary>Update Location Info By ID</summary>
-        /// <returns>Location Information</returns>
+        /// <summary>Update Location</summary>
+        /// <remarks>Modify an existing Location's information by the Location ID.</remarks>
         /// <response code="200">Update Location Information by ID</response>
         [HttpPatch]
         [Route("Location")]

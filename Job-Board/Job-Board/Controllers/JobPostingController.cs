@@ -20,8 +20,8 @@ namespace Job_Board.Controllers
             _jobPostingDao = jobPostingDao;
         }
 
-        /// <summary>Get All Job Posting Information</summary>
-        /// <returns>Job Posting Information</returns>
+        /// <summary>Get All Job Postings</summary>
+        /// <remarks>Retrieve all Job Postings stored in the system.</remarks>
         /// <response code="200">Returns the Information of all Job Postings</response>
 
         [HttpGet]
@@ -39,8 +39,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Search for Job Posting Information by ID</summary>
-        /// <returns>Job Posting Information</returns>
+        /// <summary>Get Job Posting by ID</summary>
+        /// <remarks>Retrieve a Job Postings information by its Job ID.</remarks>
         /// <response code="200">Returns the Information by ID</response>
         [HttpGet]
         [Route("JobPosting/{id}")]
@@ -62,8 +62,8 @@ namespace Job_Board.Controllers
         }
 
         /// <summary>Create Job Posting</summary>
-        /// <returns>Job Posting Information</returns>
-        /// <response code="201">Creates Job Posting</response>
+        /// <remarks>Add a new Job Posting to the system.</remarks>
+        /// <response code="201">Create Job Posting</response>
         [HttpPost]
         [Route("JobPosting")]
         public async Task<IActionResult> CreateJobPosting([FromBody] JobPostingRequest createRequest)
@@ -79,9 +79,9 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Delete Job Posting By ID</summary>
-        /// <returns>Delete Job Posting </returns>
-        /// <response code="200">Deletes Job Posting</response>
+        /// <summary>Delete Job Posting</summary>
+        /// <remarks>Remove an existing Job Posting from the system by its Job ID.</remarks>
+        /// <response code="200">Delete Job Posting</response>
         [HttpDelete]
         [Route("JobPosting/{id}")]
         public async Task<IActionResult> DeleteJobPostingById([FromRoute] Guid id)
@@ -103,8 +103,8 @@ namespace Job_Board.Controllers
             }
         }
 
-        /// <summary>Update Job Posting Information By ID</summary>
-        /// <returns>Job Posting Information</returns>
+        /// <summary>Update Job Posting</summary>
+        /// <remarks>Modify an existing Job Posting's information by its Job ID.</remarks>
         /// <response code="200">Updates Job Posting</response>
         [HttpPatch]
         [Route("JobPosting")]
