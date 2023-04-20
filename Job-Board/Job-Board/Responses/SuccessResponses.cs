@@ -53,9 +53,9 @@ namespace Job_Board.Responses
                 Content = jsonsuccessResponse,
             };
         }
-        public static ContentResult UpdateObjectSuccessful(Object T)
+        public static ContentResult UpdateObjectSuccessful(string obj)
         {
-            var successResponse = $"{T.ToString()} has been successfully updated.";
+            var successResponse = $"{obj} has been successfully updated.";
             var jsonsuccessResponse = JsonConvert.SerializeObject(successResponse, Formatting.Indented);
             return new ContentResult
             {

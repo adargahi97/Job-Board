@@ -48,7 +48,7 @@ namespace Job_Board.Responses
 
         public static ContentResult ErrorInputNotFound(string userInput)
         {
-            var errorResponse = $"{userInput} was not found, please check your input or create a new candidate entry";
+            var errorResponse = $"{userInput} was not found, please double check your input";
             var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
             return new ContentResult
             {

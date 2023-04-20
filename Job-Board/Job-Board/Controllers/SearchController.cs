@@ -24,7 +24,12 @@ namespace Job_Board.Controllers
         /// <summary>Search for Location Information by State</summary>
         /// <remarks>Retrieve all Buildings in a specific state.</remarks>
         /// <response code="200">Returns the Information by State</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location/State/{state}")]
         public async Task<IActionResult> GetLocationByState([FromRoute] string state)
         {
@@ -47,7 +52,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Job Postings by State</summary>
         /// <remarks>Retrieve all Job Postings in a specific state.</remarks>
         /// <response code="200">Returns the All Job Postings by State</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("JobPosting/State/{state}")]
         public async Task<IActionResult> GetJobPostingByState([FromRoute] string state)
         {
@@ -67,13 +77,13 @@ namespace Job_Board.Controllers
         }
 
 
-
-
-
         /// <summary>Get Candidates by Last Name</summary>
         /// <remarks>Retrieve all Candidates with a specific last name.</remarks>
         /// <response code="200">Returns the Candidates with matching last names</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Candidate/LastName/{lastName}")]
         public async Task<IActionResult> GetCandidateByLastName(string lastName)
         {
@@ -95,7 +105,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Candidates by Job ID</summary>
         /// <remarks>Retrieve all Candidates for a specific Job ID.</remarks>
         /// <response code="200">Returns the Candidate Information by Job Id</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Candidate/JobId/{JobId}")]
         public async Task<IActionResult> GetCandidateByJobId(Guid JobId)
         {
@@ -117,7 +132,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Interview by Job ID</summary>
         /// <remarks>Retrieve all Interviews scheduled for a specific Job ID.</remarks>
         /// <response code="200">Returns the Interview Information by Job Id</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Interview/JobId/{id:guid}")]
         public async Task<IActionResult> GetInterviewByJobId([FromRoute] Guid id)
         {
@@ -139,7 +159,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Interview by Last Name</summary>
         /// <remarks>Retrieve all Interviews scheduled for a Candidate with a specific last name.</remarks>
         /// <response code="200">Returns the Interview Information found by last name</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Interview/{lastName}")]
         public async Task<IActionResult> GetInterviewByLastName([FromRoute] string lastName)
         {
@@ -161,7 +186,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Job Postings by Location</summary>
         /// <remarks>Retrieve all Job Postings for a specific Location ID.</remarks>
         /// <response code="200">Returns the Information by Location ID</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("JobPosting/LocationId/{id:guid}")]
         public async Task<IActionResult> GetJobPostingByLocationId([FromRoute] Guid id)
         {
@@ -184,7 +214,12 @@ namespace Job_Board.Controllers
         /// <summary>Search Job Posting by Position</summary>
         /// <remarks>Retrieve Job Posting information for a specific Position.</remarks>
         /// <response code="200">Returns the Information by Position</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("JobPosting/Position/{position}")]
         public async Task<IActionResult> GetJobPostingByPosition([FromRoute] string position)
         {
@@ -207,7 +242,12 @@ namespace Job_Board.Controllers
         /// <summary>Get Location by Building</summary>
         /// <remarks>Retrieve Location information for a specific Building.</remarks>
         /// <response code="200">Returns Location Information by Building</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         [Route("Location/Building/{building}")]
         public async Task<IActionResult> GetLocationByBuilding([FromRoute] string building)
         {
@@ -228,7 +268,5 @@ namespace Job_Board.Controllers
 
             }
         }
-
-
     }
 }
