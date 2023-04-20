@@ -75,9 +75,7 @@ namespace Job_Board.Controllers
             try
             {
                 await _candidateDao.CreateCandidate(createRequest);
-                return StatusCode(201);
-
-                //return SuccessResponses.CreateSuccessful("Candidate");
+                return SuccessResponses.CreateSuccessful("Candidate");
             }
             catch (Exception)
             {
