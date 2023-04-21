@@ -18,6 +18,7 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
+        //Create a new Entry
         public async Task CreateJobPosting(JobPostingRequest jobPosting)
         {
             var query = "INSERT INTO JobPosting (Position, LocationId, Department, Description) " +

@@ -19,20 +19,24 @@ namespace Job_Board.Daos
         {
             this.sqlWrapper = sqlWrapper;
         }
-
-        public async Task<IEnumerable<Interview>> GetInterviewsByDate(DateTime dt)
+        //GET Request (Return Interview info based on Date)
+        public async Task<IEnumerable<InterviewDailySearch>> GetInterviewsByDate(DateTime dt)
         {
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
+                $"FROM Interview " +
+                $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
+                $"INNER JOIN Location ON Interview.LocationId = Location.Id " +
+                $"INNER JOIN JobPosting ON Interview.JobId = JobPosting.Id " + 
+                $"WHERE '{dt}' = CAST(DateTime AS DATE)";
 
-            var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE '{dt}' = CAST(DateTime AS DATE)";
-
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await sqlWrapper.QueryAsync<InterviewDailySearch>(query);
 
                 return interviews.ToList();
             }
         }
-
+        //GET Request (Return Interview info based on Todays Date)
         public async Task<IEnumerable<InterviewDailySearch>> GetTodaysInterviews()
         {
             var query = "SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
@@ -48,10 +52,9 @@ namespace Job_Board.Daos
                 return interviews.ToList();
             }
         }
-
+        //GET Request (Return all current positions)
         public async Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position)
         {
-
             var query = "SELECT Position FROM JobPosting";
 
             using (var connection = sqlWrapper.CreateConnection())
@@ -60,6 +63,7 @@ namespace Job_Board.Daos
                 return allPositions.ToList();
             }
         }
+        //GET Request (Return Interviews & Candidates based on position)
         public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)
         {
             var query = $"SELECT CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobPosting.Position, JobPosting.Department, Candidate.FirstName, Candidate.LastName, Location.Building " +
