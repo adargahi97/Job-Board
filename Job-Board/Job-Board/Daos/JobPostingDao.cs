@@ -29,17 +29,17 @@ namespace Job_Board.Daos
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
         public async Task<IEnumerable<JobPosting>> GetJobPostings()
         {
             var query = "SELECT * FROM JobPosting";
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var jobPostings = await connection.QueryAsync<JobPosting>(query);
+                var jobPostings = await sqlWrapper.QueryAsync<JobPosting>(query);
 
                 return jobPostings.ToList();
             }
@@ -48,9 +48,9 @@ namespace Job_Board.Daos
         {
             var query = $"SELECT * FROM JobPosting WHERE Id = '{id}'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var jobPosting = await connection.QueryFirstOrDefaultAsync<JobPostingRequest>(query);
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingRequest>(query);
 
                 return jobPosting;
             }
@@ -60,9 +60,9 @@ namespace Job_Board.Daos
         {
             var query = $"DELETE FROM JobPosting WHERE Id = '{id}'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                await connection.ExecuteAsync(query);
+                await sqlWrapper.ExecuteAsync(query);
             }
         }
 
@@ -85,9 +85,9 @@ namespace Job_Board.Daos
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var updatedJobPosting = await connection.QueryFirstOrDefaultAsync<JobPosting>(query, parameters);
+                var updatedJobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPosting>(query, parameters);
 
                 return updatedJobPosting;
             }

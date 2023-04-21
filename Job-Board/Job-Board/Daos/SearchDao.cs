@@ -46,9 +46,9 @@ namespace Job_Board.Daos
             var query = $"SELECT FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
                 $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
                 $"WHERE LastName = '{lastName}'";
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var candidates = await connection.QueryAsync<CandidateByLastName>(query);
+                var candidates = await sqlWrapper.QueryAsync<CandidateByLastName>(query);
                 return candidates.ToList();
             }
         }
@@ -57,9 +57,9 @@ namespace Job_Board.Daos
         {
             var query = $"SELECT FirstName, LastName, PhoneNumber FROM Candidate WHERE JobId = '{jobId}'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var candidates = await connection.QueryAsync<CandidateByJobId>(query);
+                var candidates = await sqlWrapper.QueryAsync<CandidateByJobId>(query);
                 return candidates.ToList();
             }
         }
@@ -81,9 +81,9 @@ namespace Job_Board.Daos
                 $"INNER JOIN Interview ON JobPosting.ID = Interview.JobId " +
                 $"WHERE JobId = '{jobId}'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<InterviewRequest>(query);
+                var interviews = await sqlWrapper.QueryAsync<InterviewRequest>(query);
 
                 return interviews.ToList();
             }
@@ -97,9 +97,9 @@ namespace Job_Board.Daos
                         $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
                         $"WHERE LastName LIKE '{lastName}%'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<InterviewJoinCandidate>(query);
+                var interviews = await sqlWrapper.QueryAsync<InterviewJoinCandidate>(query);
 
                 return interviews.ToList();
             }

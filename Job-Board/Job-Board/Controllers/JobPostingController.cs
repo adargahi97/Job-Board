@@ -49,7 +49,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting/{id}")]
         public async Task<IActionResult> GetJobPostingByID([FromRoute] Guid id)

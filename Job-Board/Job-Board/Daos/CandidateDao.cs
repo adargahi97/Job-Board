@@ -31,9 +31,9 @@ namespace Job_Board.Daos
             parameters.Add("JobId", candidate.JobId, DbType.Guid);
             parameters.Add("InterviewId", candidate.InterviewId, DbType.Guid);
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
 
@@ -41,9 +41,9 @@ namespace Job_Board.Daos
         {
             var query = "SELECT * FROM Candidate";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var candidates = await connection.QueryAsync<Candidate>(query);
+                var candidates = await sqlWrapper.QueryAsync<Candidate>(query);
                 return candidates.ToList();
             }
         }
@@ -89,9 +89,9 @@ namespace Job_Board.Daos
 
             }
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var updatedCandidate = await connection.QueryFirstOrDefaultAsync<Candidate>(query, parameters);
+                var updatedCandidate = await sqlWrapper.QueryFirstOrDefaultAsync<Candidate>(query, parameters);
                 return updatedCandidate;
             }
 

@@ -1,6 +1,8 @@
-﻿using Job_Board.Daos;
+﻿using Dapper;
+using Job_Board.Daos;
 using Job_Board.Models;
 using Job_Board.Wrappers;
+using Microsoft.CodeAnalysis;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,89 +15,73 @@ namespace JobBoard.UnitTest.Dao_Tests
     [TestClass]
     public class InterviewDaoTest
     {
-        //[TestMethod]
-        //void CallSqlWithString()
-        //{
-        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
 
-        //    InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
+        Mock<ISqlWrapper> mockSqlWrapper;
+        InterviewDao sut;
+        Guid interviewGuid;
+        List<Interview> interview;
+        InterviewRequest interviewRequest;
 
-        //    sut.GetInterview();
+        [TestInitialize]
+        public void Initialize()
+        {
+            mockSqlWrapper = new Mock<ISqlWrapper>();
+            sut = new InterviewDao(mockSqlWrapper.Object);
+            interviewGuid = new Guid("d4138efe-c728-408b-88e5-0d12e681de19");
+            interview = new List<Interview>()
+            {
+                new Interview()
+                {
+                    Id = new Guid("d4138efe-c728-408b-88e5-0d12e681de19"),
+                    DateTime = "2023-04-21",
+                    LocationId = new Guid("fc27a8ef-1755-4a98-be38-b9f5bc202cd4"),
+                    CandidateId = new Guid("d7748f96-fb3a-4dfa-8b28-7d0b4aab3db7"),
+                    JobId = new Guid("0ab667e2-3936-48ec-b1da-e7614239b788")
 
-        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Interview>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
-        //}
+                }
+            };
+            interviewRequest = new InterviewRequest()
+            {
+                DateTime = "2023-04-21",
+                LocationId = new Guid("fc27a8ef-1755-4a98-be38-b9f5bc202cd4"),
+                CandidateId = new Guid("d7748f96-fb3a-4dfa-8b28-7d0b4aab3db7"),
+                JobId = new Guid("0ab667e2-3936-48ec-b1da-e7614239b788")
+            };
 
+        }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            mockSqlWrapper = null;
+            sut = null;
+            interviewGuid = new Guid();
+            interview = null;
+            interviewRequest = null;
+        }
 
         [TestMethod]
-        public void DeleteInterviewByID_Works()
+        public void CreateInterview_ShouldCreateEntry()
         {
+            _ = sut.CreateInterview(interviewRequest);
 
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.ExecuteAsync(It.Is<string>(sql => sql == "INSERT INTO Interview (DateTime, LocationId, CandidateId, JobId) " +
+                "VALUES (@DateTime, @LocationId, @CandidateId, @JobId)"), It.IsAny<DynamicParameters>()), Times.Once);
 
-            InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
-            int id = 1;
+        }
 
+        [TestMethod]
+        public void GetInterviewById_UsesProperSqlQuery_OneTime()
+        {
             // Act
-            //_ = sut.DeleteInterviewById(id);
+            _ = sut.GetInterviewByID(interviewGuid);
 
             // Assert
-
-            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Interview WHERE Id = {id}")), Times.Once); ;
-        }
-
-        [TestMethod]
-        public void GetInterviewByID_NotNull()
-        {
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-
-            InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
-
-            //ACT
-
-            //var candidate = sut.GetInterviewByID(1);
-
-            //ASSERT
-            //Assert.IsTrue(candidate.Id > 0);
-            //Assert.IsNotNull(candidate.Id);
-
-        }
-
-        [TestMethod]
-        public void GetInterviewByCandidateId_PullsInfo()
-        {
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
-            int candidateId = 1;
-
-            //ACT
-            //_ = sut.GetInterviewByCandidateId(candidateId);
-
-            //Assert
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<InterviewRequest>(It.Is<string>(sql => sql == $"GET FROM Interview WHERE CandidateId = {candidateId}")), Times.Once);
-
-        }
-
-        [TestMethod]
-        public void GetInterviewByJobId_PullsInfo()
-        {
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            InterviewDao sut = new InterviewDao(mockSqlWrapper.Object);
-            int jobId = 1;
-
-            //ACT
-            //_ = sut.GetInterviewByJobId(jobId);
-
-            //Assert
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<InterviewRequest>(It.Is<string>(sql => sql == $"GET FROM Interview WHERE JobId = {jobId}")), Times.Once);
-
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{interviewGuid}'")), Times.Once);
         }
 
     }
+
+
+
 }

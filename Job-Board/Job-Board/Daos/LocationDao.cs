@@ -23,9 +23,9 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<Location>> GetLocation()
         {
             var query = "SELECT * FROM Location";
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var employees = await connection.QueryAsync<Location>(query);
+                var employees = await sqlWrapper.QueryAsync<Location>(query);
 
                 return employees.ToList();
             }
@@ -47,10 +47,10 @@ namespace Job_Board.Daos
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connecting to DB
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //executing query
-                await connection.ExecuteAsync(query, parameters);
+                await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
 
@@ -61,10 +61,10 @@ namespace Job_Board.Daos
             var query = $"SELECT * FROM Location WHERE Id = '{id}'";
 
             //Connect to DB
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //Run query, set to variable candidate
-                var location = await connection.QueryFirstOrDefaultAsync<LocationRequest>(query);
+                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(query);
 
                 //Return variable 
                 return location;
@@ -78,10 +78,10 @@ namespace Job_Board.Daos
             var query = $"DELETE FROM Location WHERE Id = '{id}'";
 
             //Connect to DB
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //Execute query
-                await connection.ExecuteAsync(query);
+                await sqlWrapper.ExecuteAsync(query);
             }
         }
 
@@ -102,10 +102,10 @@ namespace Job_Board.Daos
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connect to DB
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
-                var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Location>(query, parameters);
+                var locationToUpdate = await sqlWrapper.QueryFirstOrDefaultAsync<Location>(query, parameters);
 
                 return locationToUpdate;
             }

@@ -41,6 +41,11 @@ namespace Job_Board.Wrappers
             var result = await this._connection.QueryFirstOrDefaultAsync<T>(sql);
             return result;
         }
+        public async Task<T> QueryFirstOrDefaultAsync<T>(string sql, DynamicParameters parameters)
+        {
+            var result = await this._connection.QueryFirstOrDefaultAsync<T>(sql);
+            return result;
+        }
 
         public async Task ExecuteAsync(string sql)
         {

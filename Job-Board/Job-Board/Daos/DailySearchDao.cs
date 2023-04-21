@@ -25,9 +25,9 @@ namespace Job_Board.Daos
 
             var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE '{dt}' = CAST(DateTime AS DATE)";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await sqlWrapper.QueryAsync<Interview>(query);
 
                 return interviews.ToList();
             }
@@ -54,9 +54,9 @@ namespace Job_Board.Daos
 
             var query = "SELECT Position FROM JobPosting";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var allPositions = await connection.QueryAsync<JobPosting>(query);
+                var allPositions = await sqlWrapper.QueryAsync<JobPosting>(query);
                 return allPositions.ToList();
             }
         }

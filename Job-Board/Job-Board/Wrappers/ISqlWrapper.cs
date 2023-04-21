@@ -12,5 +12,7 @@ namespace Job_Board.Wrappers
         Task ExecuteAsync(string sql);
         Task ExecuteAsync(string sql, DynamicParameters parameters);
         Task<T> QueryFirstOrDefaultAsync<T>(string sql);
+        Task<T> QueryFirstOrDefaultAsync<T>(string sql, DynamicParameters parameters);
+
     }
 }

@@ -100,7 +100,7 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [Route("Interview/{id:int}")]
+        [Route("Interview/id")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try

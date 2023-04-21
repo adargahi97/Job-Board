@@ -1,4 +1,5 @@
-﻿using Job_Board.Daos;
+﻿using Dapper;
+using Job_Board.Daos;
 using Job_Board.Models;
 using Job_Board.Wrappers;
 using Microsoft.CodeAnalysis;
@@ -14,92 +15,85 @@ namespace JobBoard.UnitTest.Dao_Tests
     [TestClass]
     public class JobPostingDaoTest
     {
-        //[TestMethod]
-        //void CallSqlWithString()
-        //{
+        Mock<ISqlWrapper> mockSqlWrapper;
+        JobPostingDao sut;
+        Guid jobPostingGuid;
+        List<JobPosting> jobPosting;
+        JobPostingRequest jobPostingRequest;
 
-        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+        [TestInitialize]
+        public void Initialize()
+        {
+            mockSqlWrapper = new Mock<ISqlWrapper>();
+            sut = new JobPostingDao(mockSqlWrapper.Object);
+            jobPostingGuid = new Guid("4ad9f6b1-7a8d-4f1b-aad9-1cc48391f45f");
+            jobPosting = new List<JobPosting>()
+            {
+                new JobPosting()
+                {
+                    Id = new Guid ("4ad9f6b1-7a8d-4f1b-aad9-1cc48391f45f"),
+                    Position = "Test Postition",
+                    LocationId = new Guid ("2abf7110-5329-469b-93bc-0db491cadb18"),
+                    Department =  "Test Dept",
+                    Description = "Test Desc"
+                }
+            };
+            jobPostingRequest = new JobPostingRequest()
+            {
+                Position = "Test Postition",
+                LocationId = new Guid("2abf7110-5329-469b-93bc-0db491cadb18"),
+                Department = "Test Dept",
+                Description = "Test Desc"
+            };
 
-        //    JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
+        }
 
-        //    sut.GetJobPosting();
-
-        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<JobPosting>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
-
-        //}
-
+        [TestCleanup]
+        public void Cleanup()
+        {
+            mockSqlWrapper = null;
+            sut = null;
+            jobPostingGuid = new Guid();
+            jobPosting = null;
+            jobPostingRequest = null;
+        }
 
         [TestMethod]
-        public void DeleteJobPostingByID_Works()
+        public void CreateJobPosting_ShouldCreateEntry()
         {
+            _ = sut.CreateJobPosting(jobPostingRequest);
 
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.ExecuteAsync(It.Is<string>(sql => sql == "INSERT INTO JobPosting (Position, LocationId, Department, Description) " +
+                "VALUES (@Position, @LocationId, @Department, @Description)"), It.IsAny<DynamicParameters>()), Times.Once);
 
-            JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
+        }
 
+        [TestMethod]
+        public void GetJobPostingById_UsesProperSqlQuery_OneTime()
+        {
             // Act
-            _ = sut.DeleteJobPostingById(id);
+            _ = sut.GetJobPostingByID(jobPostingGuid);
 
             // Assert
-
-            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM JobPosting WHERE Id = {id}")), Times.Once); ;
-        }
-
-        [TestMethod]
-        public void GetJobPostingByID_NotNull()
-        {
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-
-            JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
-
-            //ACT
-
-            var jobPosting = sut.GetJobPostingByID(id);
-
-            //ASSERT
-            Assert.IsTrue(jobPosting.Id > 0);
-            Assert.IsNotNull(jobPosting.Id);
-
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT * FROM JobPosting WHERE Id = '{jobPostingGuid}'")), Times.Once);
         }
 
 
         [TestMethod]
-        public void GetJobPostingByPosition_PullsInfo()
+        public void DeleteJobPostingById_UsesProperSqlQuery_OneTime()
         {
+            // Act
+            _ = sut.DeleteJobPostingById(jobPostingGuid);
 
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            string position = "Intern";
-
-            //ACT
-            _ = sut.GetJobPostingByPosition(position);
-            //Assert
-            //Assert.AreEqual(candidate.FirstName, "Ron");
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPosting>(It.Is<string>(sql => sql == $"GET FROM JobPosting WHERE Postion = {position}")), Times.Once);
-
+            // Assert
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM JobPosting WHERE Id = '{jobPostingGuid}'")), Times.Once);
         }
 
-        [TestMethod]
-        public void GetJobPostingByLocationId_PullsInfo()
-        {
 
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            JobPostingDao sut = new JobPostingDao(mockSqlWrapper.Object);
-            Guid locationId = Guid.Parse("2ABF7110-5329-469B-93BC-0DB491CADB18");
 
-            //ACT
-            _ = sut.GetJobPostingByLocationId(locationId);
-            //Assert
-            //Assert.AreEqual(candidate.FirstName, "Ron");
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<JobPostingRequest>(It.Is<string>(sql => sql == $"GET FROM JobPosting WHERE LocationId = {locationId}")), Times.Once);
 
-        }
+
+ 
 
     }
 }

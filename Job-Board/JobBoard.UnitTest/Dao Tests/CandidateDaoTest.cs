@@ -13,125 +13,71 @@ namespace JobBoard.UnitTest
 {
     [TestClass]
     public class CandidateDaoTest
-
     {
-        //[TestMethod]
-        //public void CallSqlWithString()
-        //{
-        //    Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-        //    //mockSqlWrapper.Setup(o => o.Query<Candidate>(It.IsAny<string>())).Returns(new List<Candidate>());
-        //    ISqlWrapper customMockSqlWrapper = new MockSqlWrapper();
-        //    CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
 
-        //    sut.GetCandidate();
+        Mock<ISqlWrapper> mockSqlWrapper;
+        CandidateDao sut;
+        Guid candidateGuid;
+        List<Candidate> candidate;
+        CandidateRequest candidateRequest;
 
-        //    mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql => sql == "SELECT * FROM [DBO].[JOBBOARD]")), Times.Once);
-
-        //}
-
-
-
-        [TestMethod]
-        public void GetCandidateByID_PullsInfo()
+        [TestInitialize]
+        public void Initialize()
         {
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
-
-            Candidate candidate = new Candidate()
+            mockSqlWrapper = new Mock<ISqlWrapper>();
+            sut = new CandidateDao(mockSqlWrapper.Object);
+            candidateGuid = new Guid("125f1ad4-41b9-4e07-9412-51bb1b34f736");
+            candidate = new List<Candidate>()
             {
-                FirstName = "Don",
-                LastName = "Jon",
-                PhoneNumber = "555-555-5555",
-                //Job_Id = 8,
-                //LocationId = 8,
-                //Id = 8,
+                new Candidate()
+                {
+                    Id =  new Guid("125f1ad4-41b9-4e07-9412-51bb1b34f736"),
+                    FirstName = "Abbas",
+                    LastName = "Dargahi",
+                    PhoneNumber = "555-555-0008",
+                    JobId = new Guid("e4203d53-03e3-4121-bead-94a14248f1ea")
+                }
+            };
+            candidateRequest = new CandidateRequest()
+            {
+                FirstName = "Abbas",
+                LastName = "Dargahi",
+                PhoneNumber = "555-555-0008",
+                JobId = new Guid("e4203d53-03e3-4121-bead-94a14248f1ea")
             };
 
-            //ACT
-            var result = sut.GetCandidateByID(candidate.Id).Result;
-            //var result2 = sut.GetCandidateByID(1).Result;
-
-
-            //mockSqlWrapper.Setup(w => w.Query<CandidateRequest>(It.IsAny<string>())).Returns(new List<Candidate>());
-
-
-            //ASSERT
-            //Assert.IsNotNull(result);
-            //Assert.IsTrue(result.LocationId > 0);
-            //Assert.IsNotNull(candidate);
-            //Assert.AreEqual(candidate.Job_Id, 8);
-            //Assert.AreEqual(result.LocationId, 8);
-            //Assert.AreEqual(result2.LocationId, 1);
-
-
-            //mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.Query<Candidate>(It.Is<string>(sql => sql == $"SELECT * FROM Candidate WHERE Id = {id}")), Times.Once);
-            //mockSqlWrapper.Verify(c => c.QueryFirstOrDefaultAsync<CandidateRequest>(It.Is<string>(q => q.Contains("Candidate") && q.Contains(firstName)), It.IsAny<object>()), Times.Once);
-
-
-
         }
 
-        [TestMethod]
-        public void GetCandidateByFirstName_PullsInfo()
-        { 
-
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
-            string name = "Ron";
-
-            //ACT
-            //_ = sut.GetCandidateByFirstName(name);
-            //Assert
-            //Assert.AreEqual(candidate.FirstName, "Ron");
-            mockSqlWrapper.Verify(x => x.QueryFirstOrDefaultAsync<Candidate>(It.Is<string>(sql => sql == $"GET FROM Candidate WHERE FirstName = {name}")), Times.Once);
-
-        }
-
-
-
-        [TestMethod]
-
-        public void GetCandidateByID_NotNull()
+        [TestCleanup]
+        public void Cleanup()
         {
+            mockSqlWrapper = null;
+            sut = null;
+            candidateGuid = new Guid();
+            candidate = null;
+            candidateRequest = null;
+        }
 
-            //ARRANGE
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
+        [TestMethod]
+        public void CreateCandidate_ShouldCreateEntry()
+        {
+            _ = sut.CreateCandidate(candidateRequest);
 
-            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
-            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
-
-            //ACT
-
-            var candidate = sut.GetCandidateByID(id);
-
-            //ASSERT
-            Assert.IsTrue(candidate.Id > 0);
-            Assert.IsNotNull(candidate.Id);
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.ExecuteAsync(It.Is<string>(sql => sql == "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId, InterviewId)" +
+                "VALUES (@FirstName, @LastName, @PhoneNumber, @JobId, @InterviewId)"), It.IsAny<DynamicParameters>()), Times.Once);
 
         }
 
-
         [TestMethod]
-        public void DeleteCandidateByID_Works()
+        public void GetCandidateById_UsesProperSqlQuery_OneTime()
         {
-
-            Mock<ISqlWrapper> mockSqlWrapper = new Mock<ISqlWrapper>();
-
-            CandidateDao sut = new CandidateDao(mockSqlWrapper.Object);
-            Guid id = Guid.Parse("647C0678 - E977 - 4723 - A00D - 74DB0085A964");
-
             // Act
-            _ = sut.DeleteCandidateById(id);
+            _ = sut.GetCandidateByID(candidateGuid);
 
             // Assert
-
-            mockSqlWrapper.Verify(x => x.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Candidate WHERE Id = {id}")), Times.Once); ;
+            mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT * FROM Candidate WHERE Id = '{candidateGuid}'")), Times.Once);
         }
 
-        
-
     }
+
 }

@@ -30,18 +30,18 @@ namespace Job_Board.Daos
             parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
             parameters.Add("JobId", interview.JobId, DbType.Guid);
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
 
         public async Task<IEnumerable<Interview>> GetInterviews()
         {
             var query = "SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview";
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await sqlWrapper.QueryAsync<Interview>(query);
 
                 return interviews.ToList();
             }
@@ -51,9 +51,9 @@ namespace Job_Board.Daos
         {
             var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{id}'";
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var candidate = await connection.QueryFirstOrDefaultAsync<InterviewRequest>(query);
+                var candidate = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
                 return candidate;
             }
         }
@@ -103,9 +103,9 @@ namespace Job_Board.Daos
             //parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             //parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
-            using (var connection = sqlWrapper.CreateConnection())
+            using (sqlWrapper.CreateConnection())
             {
-                var updatedInterview = await connection.QueryFirstOrDefaultAsync<Interview>(query, parameters);
+                var updatedInterview = await sqlWrapper.QueryFirstOrDefaultAsync<Interview>(query, parameters);
                 return updatedInterview;
             }
 

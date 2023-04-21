@@ -141,8 +141,8 @@
             <response code="500">Internal Server Error</response>
         </member>
         <member name="M:Job_Board.Controllers.LocationController.CreateLocation(Job_Board.Models.LocationRequest)">
-            <summary>Update Location</summary>
-            <remarks>Modify an existing Location's information by the Location ID.</remarks>
+            <summary>Create Location</summary>
+            <remarks>Create New Location information.</remarks>
             <response code="201">Update information on an existing Location</response>
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
