@@ -29,17 +29,9 @@ namespace Job_Board.Daos
                 $"INNER JOIN JobPosting ON Interview.JobId = JobPosting.Id " + 
                 $"WHERE '{dt}' = CAST(DateTime AS DATE)";
 
-<<<<<<< HEAD
-            var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE '{dt}' = CAST(DateTime AS DATE)";
-
-            using (sqlWrapper.CreateConnection())
-            {
-                var interviews = await sqlWrapper.QueryAsync<Interview>(query);
-=======
             using (sqlWrapper.CreateConnection())
             {
                 var interviews = await sqlWrapper.QueryAsync<InterviewDailySearch>(query);
->>>>>>> 496bce5668b064b95ad5621d279f1a201d08731c
 
                 return interviews.ToList();
             }

@@ -97,11 +97,7 @@ namespace Job_Board.Controllers
         [HttpDelete]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-<<<<<<< HEAD
-        [Route("Interview/id")]
-=======
         [Route("Interview/{id}")]
->>>>>>> 496bce5668b064b95ad5621d279f1a201d08731c
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
