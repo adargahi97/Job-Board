@@ -103,10 +103,10 @@ namespace Job_Board.Daos
             parameters.Add("Building", location.Building, DbType.String);
 
             //Connect to DB
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
                 //set updated candidate to query result
-                var locationToUpdate = await sqlWrapper.QueryFirstOrDefaultAsync<Location>(query, parameters);
+                var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Location>(query, parameters);
 
 
                 return locationToUpdate;

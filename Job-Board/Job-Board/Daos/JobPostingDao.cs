@@ -86,9 +86,9 @@ namespace Job_Board.Daos
             parameters.Add("Department", jobPosting.Department, DbType.String);
             parameters.Add("Description", jobPosting.Description, DbType.String);
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var updatedJobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPosting>(query, parameters);
+                var updatedJobPosting = await connection.QueryFirstOrDefaultAsync<JobPosting>(query, parameters);
 
                 return updatedJobPosting;
             }

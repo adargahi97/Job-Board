@@ -106,9 +106,9 @@ namespace Job_Board.Daos
             //parameters.Add("LocationId", interview.LocationId, DbType.Guid);
             //parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
-            using (sqlWrapper.CreateConnection())
+            using (var connection = sqlWrapper.CreateConnection())
             {
-                var updatedInterview = await sqlWrapper.QueryFirstOrDefaultAsync<Interview>(query, parameters);
+                var updatedInterview = await connection.QueryFirstOrDefaultAsync<Interview>(query, parameters);
                 return updatedInterview;
             }
 

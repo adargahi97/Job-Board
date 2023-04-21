@@ -60,7 +60,6 @@ namespace Job_Board.Models
         /// Candidate's Interview Id
         /// </summary>
         /// <example>F140AC1A-4941-46D5-8A4E-C1CA19E24C3F</example>
-        public Guid InterviewId { get; set; }
     }
 
     public class CandidateByLastName
