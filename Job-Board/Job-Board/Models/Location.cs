@@ -12,22 +12,22 @@ namespace Job_Board.Models
         /// <summary>
         /// Location's Street Address
         /// </summary>
-        /// <example>Tango</example>
+        /// <example>987 Mason Dr</example>
         public string StreetAddress { get; set; }
         /// <summary>
         /// Location's City
         /// </summary>
-        /// <example>987 Mason Dr</example>
+        /// <example>Portland</example>
         public string City { get; set; }
         /// <summary>
         /// Location's State
         /// </summary>
-        /// <example>Portland</example>
+        /// <example>OR</example>
         public string State { get; set; }
         /// <summary>
         /// Location's Zip Code
         /// </summary>
-        /// <example>OR</example>
+        /// <example>38332</example>
         public int Zip { get; set; }
         /// <summary>
         /// Building Location
@@ -41,22 +41,22 @@ namespace Job_Board.Models
         /// <summary>
         /// Location's Street Address
         /// </summary>
-        /// <example>Tango</example>
+        /// <example>987 Mason Dr</example>
         public string StreetAddress { get; set; }
         /// <summary>
-        /// Location's City
+        /// Location's Street Address
         /// </summary>
         /// <example>987 Mason Dr</example>
         public string City { get; set; }
         /// <summary>
         /// Location's State
         /// </summary>
-        /// <example>Portland</example>
+        /// <example>OR</example>
         public string State { get; set; }
         /// <summary>
         /// Location's Zip Code
         /// </summary>
-        /// <example>OR</example>
+        /// <example>38223</example>
         public int Zip { get; set; }
         /// <summary>
         /// Building Location
@@ -71,22 +71,22 @@ namespace Job_Board.Models
         /// <summary>
         /// Location's Street Address
         /// </summary>
-        /// <example>Tango</example>
+        /// <example>987 Mason Dr</example>
         public string StreetAddress { get; set; }
         /// <summary>
-        /// Location's City
+        /// Location's Street Address
         /// </summary>
         /// <example>987 Mason Dr</example>
         public string City { get; set; }
         /// <summary>
         /// Location's State
         /// </summary>
-        /// <example>Portland</example>
+        /// <example>OR</example>
         public string State { get; set; }
         /// <summary>
         /// Location's Zip Code
         /// </summary>
-        /// <example>OR</example>
+        /// <example>38223</example>
         public int Zip { get; set; }
         /// <summary>
         /// Location's Id
@@ -106,7 +106,7 @@ namespace Job_Board.Models
         /// <summary>
         /// Location's City
         /// </summary>
-        /// <example>987 Mason Dr</example>
+        /// <example>Tango</example>
         public string City { get; set; }
 
     }

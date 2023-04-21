@@ -29,14 +29,13 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Interview/DateTime/{date}")]
         public async Task<IActionResult> GetInterviewsByDate(DateTime date)
         {
             try
             {
-                IEnumerable<Interview> interviews = await _dailySearchDao.GetInterviewsByDate(date);
+                IEnumerable<InterviewDailySearch> interviews = await _dailySearchDao.GetInterviewsByDate(date);
 
                 if (!interviews.Any())
                 {
@@ -62,7 +61,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Interview/TodaysInterviews")]
         public async Task<IActionResult> GetTodaysInterviews()
@@ -90,7 +88,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting/Position")]
         public async Task<IActionResult> DailySearchByPosition(string position)

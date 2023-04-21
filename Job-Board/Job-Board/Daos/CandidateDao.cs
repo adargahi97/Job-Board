@@ -19,6 +19,7 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
+        //POST Request (Create)
         public async Task CreateCandidate(CandidateRequest candidate)
         {
             var query = "INSERT INTO Candidate (FirstName, LastName, PhoneNumber, JobId, InterviewId)" +
@@ -36,7 +37,7 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-
+        //GET Request (Get All Candidates)
         public async Task<IEnumerable<Candidate>> GetCandidates()
         {
             var query = "SELECT * FROM Candidate";
@@ -48,7 +49,7 @@ namespace Job_Board.Daos
             }
         }
 
-
+        //GET Request (Return single candidate by Id)
         public async Task<Candidate> GetCandidateByID(Guid id)
         {
             var query = $"SELECT * FROM Candidate WHERE Id = '{id}'";
@@ -59,6 +60,7 @@ namespace Job_Board.Daos
             }
         }
 
+        //DELETE Request (Delete on Id)
         public async Task DeleteCandidateById(Guid id)
         {
             var query = $"DELETE FROM Candidate WHERE Id = '{id}'";
@@ -69,6 +71,7 @@ namespace Job_Board.Daos
             }
         }
 
+        //PATCH Request (Update on Id)
         public async Task<Candidate> UpdateCandidateById(Candidate candidate)
         {
             var query = $"UPDATE Candidate SET FirstName = ISNULL(@FirstName, FirstName), LastName = ISNULL(@LastName, LastName), " +
@@ -79,6 +82,7 @@ namespace Job_Board.Daos
             parameters.Add("FirstName", candidate.FirstName, DbType.String);
             parameters.Add("LastName", candidate.LastName, DbType.String);
             parameters.Add("PhoneNumber", candidate.PhoneNumber, DbType.String);
+
             if (candidate.JobId == Guid.Empty)
             {
                 parameters.Add("JobId", DBNull.Value, DbType.Guid);
@@ -86,7 +90,6 @@ namespace Job_Board.Daos
             else
             {
                 parameters.Add("JobId", candidate.JobId, DbType.Guid);
-
             }
 
             using (sqlWrapper.CreateConnection())

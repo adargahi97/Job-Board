@@ -19,6 +19,7 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
+        //POST Request (Create a new Interview)
         public async Task CreateInterview(InterviewRequest interview)
         {
             var query = "INSERT INTO Interview (DateTime, LocationId, CandidateId, JobId) " +
@@ -35,7 +36,7 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-
+        //GET Request (Returns all Interviews scheduled)
         public async Task<IEnumerable<Interview>> GetInterviews()
         {
             var query = "SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview";
@@ -46,7 +47,7 @@ namespace Job_Board.Daos
                 return interviews.ToList();
             }
         }
-
+        //GET Request (Returns a single interview on Interview Id)
         public async Task<InterviewRequest> GetInterviewByID(Guid id)
         {
             var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{id}'";
@@ -57,23 +58,25 @@ namespace Job_Board.Daos
                 return candidate;
             }
         }
-
+        //DEL Request (Deleted on Interview Id)
         public async Task DeleteInterviewById(Guid id)
         {
             var query = $"DELETE FROM Interview WHERE Id = '{id}'";
+
             using (sqlWrapper.CreateConnection())
             {
                 await sqlWrapper.ExecuteAsync(query);
             }
         }
-
+        //PATCH Request (Updates Interview on Id)
         public async Task<Interview> UpdateInterviewById(Interview interview)
         {
             var query = $"UPDATE Interview SET DateTime = ISNULL(@DateTime, DateTime), " +
-                $"LocationId = @LocationId, CandidateId = @CandidateId, JobId = @JobId " +
+                $"LocationId = ISNULL(@LocationId, LocationId), CandidateId = ISNULL(@CandidateId, CandidateId), JobId = ISNULL(@JobId, JobId) " +
                 $"WHERE Id = '{interview.Id}'";
 
             var parameters = new DynamicParameters();
+
             parameters.Add("DateTime", interview.DateTime, DbType.DateTime);
 
             if (interview.LocationId == Guid.Empty)
@@ -110,8 +113,5 @@ namespace Job_Board.Daos
             }
 
         }
-
-
-
     }
 }

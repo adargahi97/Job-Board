@@ -48,7 +48,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Interview/{id:Guid}")]
         public async Task<IActionResult> GetInterviewByID([FromRoute] Guid id)
@@ -75,7 +74,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [ProducesResponseType(201)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Interview")]
         public async Task<IActionResult> CreateInterview([FromBody] InterviewRequest createRequest)
@@ -98,9 +96,12 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpDelete]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+<<<<<<< HEAD
         [Route("Interview/id")]
+=======
+        [Route("Interview/{id}")]
+>>>>>>> 496bce5668b064b95ad5621d279f1a201d08731c
         public async Task<IActionResult> DeleteInterviewById([FromRoute] Guid id)
         {
             try
@@ -127,7 +128,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPatch]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Interview")]
         public async Task<IActionResult> UpdateInterviewByID([FromBody] Interview interviewReq)
@@ -141,7 +141,7 @@ namespace Job_Board.Controllers
                 }
                 var updatedInterview = await _interviewDao.UpdateInterviewById(interviewReq);
 
-                return SuccessResponses.UpdateObjectSuccessful($"Interview: {updatedInterview.Id}");
+                return SuccessResponses.UpdateObjectSuccessful($"Interview: {interviewReq.Id.ToString()}");
             }
             catch (Exception)
             {
