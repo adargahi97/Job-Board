@@ -19,31 +19,6 @@ namespace Job_Board.Controllers
             _candidateDao = candidatedao;
         }
 
-        /// <summary>Get All Candidates</summary>
-        /// <remarks>Retrieve all Candidate information stored in the system.</remarks>
-        /// <response code="200">Returns the Information of all Candidates</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(500)]
-        [Route("Candidate")]
-        public async Task<IActionResult> GetCandidates()
-        {
-            try
-            {
-                IEnumerable<Candidate> candidates = await _candidateDao.GetCandidates();
-                if (!candidates.Any())
-                {
-                    return ErrorResponses.CustomError("There are currently no Candidate entries");
-                }
-                return SuccessResponses.GetAllSuccessful(candidates);
-                
-            }
-            catch (Exception)
-            {
-                return ErrorResponses.Error500();
-            }
-        }
 
         /// <summary>Get Candidate by ID</summary>
         /// <remarks>Retrieve a Candidates information by their Candidate ID.</remarks>
@@ -52,7 +27,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Candidate/{id:Guid}")]
         public async Task<IActionResult> GetCandidateByID([FromRoute] Guid id)
@@ -79,7 +53,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [ProducesResponseType(201)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Candidate")]
         public async Task<IActionResult> CreateCandidate([FromBody] CandidateRequest createRequest)
@@ -102,7 +75,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpDelete]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Candidate/{id}")]
         public async Task<IActionResult> DeleteCandidateById([FromRoute] Guid id)
@@ -131,7 +103,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPatch]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("Candidate")]
         public async Task<IActionResult> UpdateCandidateByID([FromBody] Candidate candidateReq)

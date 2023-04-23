@@ -21,28 +21,6 @@ namespace Job_Board.Controllers
             _locationDao = locationDao;
         }
 
-
-        /// <summary>Get All Locations</summary>
-        /// <remarks>Retrieve all Locations stored in the system.</remarks>
-        /// <response code="200">Returns all Location information stored in the system.</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(500)]
-        [Route("Location")]
-        public async Task<IActionResult> GetLocation()
-        {
-            try
-            {
-                var location = await _locationDao.GetLocation();
-                return Ok(location);
-            }
-            catch (Exception)
-            {
-                return ErrorResponses.Error500();
-            }
-        }
-
         /// <summary>Get Location</summary>
         /// <remarks>Retrieve a Locations information by its Location ID.</remarks>
         /// <response code="200">Returns Location information for a specific Location ID</response>

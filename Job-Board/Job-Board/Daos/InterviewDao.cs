@@ -36,17 +36,7 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-        //GET Request (Returns all Interviews scheduled)
-        public async Task<IEnumerable<Interview>> GetInterviews()
-        {
-            var query = "SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview";
-            using (sqlWrapper.CreateConnection())
-            {
-                var interviews = await sqlWrapper.QueryAsync<Interview>(query);
 
-                return interviews.ToList();
-            }
-        }
         //GET Request (Returns a single interview on Interview Id)
         public async Task<InterviewRequest> GetInterviewByID(Guid id)
         {
@@ -111,7 +101,50 @@ namespace Job_Board.Daos
                 var updatedInterview = await connection.QueryFirstOrDefaultAsync<Interview>(query, parameters);
                 return updatedInterview;
             }
+        }
 
+        //GET Request (Return Interview info based on Date)
+        public async Task<IEnumerable<InterviewDailySearch>> GetInterviewsByDate(DateTime dt)
+        {
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
+                $"FROM Interview " +
+                $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
+                $"INNER JOIN Location ON Interview.LocationId = Location.Id " +
+                $"INNER JOIN JobPosting ON Interview.JobId = JobPosting.Id " +
+                $"WHERE '{dt}' = CAST(DateTime AS DATE)";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interviews = await sqlWrapper.QueryAsync<InterviewDailySearch>(query);
+
+                return interviews.ToList();
+            }
+        }
+        public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)
+        {
+            var query = $"SELECT CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobPosting.Position, JobPosting.Department, Candidate.FirstName, Candidate.LastName, Location.Building " +
+                $"FROM Interview " +
+                $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
+                $"INNER JOIN JobPosting ON JobPosting.Id = Interview.JobId " +
+                $"INNER JOIN Location ON Interview.LocationId = Location.Id " +
+                $"WHERE Position = '{position}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var candidates = await sqlWrapper.QueryAsync<JobPostingDailySearchByPosition>(query);
+                return candidates.ToList();
+            }
+        }
+ 
+        public async Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position)
+        {
+            var query = "SELECT Position FROM JobPosting";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var allPositions = await sqlWrapper.QueryAsync<JobPosting>(query);
+                return allPositions.ToList();
+            }
         }
     }
 }

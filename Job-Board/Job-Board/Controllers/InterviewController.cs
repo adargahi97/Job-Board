@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
@@ -18,27 +20,6 @@ namespace Job_Board.Controllers
         public InterviewController(IInterviewDao interviewDao)
         {
             _interviewDao = interviewDao;
-        }
-
-        /// <summary>Get All Interviews</summary>
-        /// <remarks>Retrieve all Interviews stored in the system.</remarks>
-        /// <response code="200">Returns the Information of All Interviews</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(500)]
-        [Route("Interview")]
-        public async Task<IActionResult> GetInterviews()
-        {
-            try
-            {
-                var interviews = await _interviewDao.GetInterviews();
-                return SuccessResponses.GetAllSuccessful(interviews);
-            }
-            catch (Exception)
-            {
-                return ErrorResponses.Error500();
-            }
         }
 
         /// <summary>Get Interview by ID</summary>
@@ -138,6 +119,74 @@ namespace Job_Board.Controllers
                 var updatedInterview = await _interviewDao.UpdateInterviewById(interviewReq);
 
                 return SuccessResponses.UpdateObjectSuccessful($"Interview: {interviewReq.Id.ToString()}");
+            }
+            catch (Exception)
+            {
+                return ErrorResponses.Error500();
+            }
+        }
+        /// <summary>Search Interviews by Date</summary>
+        /// <remarks>Find all Interviews scheduled for a specific date.</remarks>
+        /// <response code="200">Returns the Interview Information found by Date</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("Interview/{date}")]
+        public async Task<IActionResult> GetInterviewsByDate(DateTime date)
+        {
+            try
+            {
+                IEnumerable<InterviewDailySearch> interviews = await _interviewDao.GetInterviewsByDate(date);
+
+                if (!interviews.Any())
+                {
+                    DateTime temp;
+                    if (!DateTime.TryParse(date.ToString(), out temp))
+                    {
+                        return ErrorResponses.Error404(date.ToShortDateString());
+                    }
+                    return ErrorResponses.ErrorNoCandidate(date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+                }
+                return SuccessResponses.GetAllSuccessful(interviews);
+            }
+            catch (Exception)
+            {
+                return ErrorResponses.Error500();
+            }
+        }
+        /// <summary>Get Interview by Position</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a specific position.</remarks>
+        /// <response code="200">Returns the Information by Position</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("JobPosting/Position")]
+        public async Task<IActionResult> DailySearchByPosition(string position)
+        {
+            try
+            {
+                IEnumerable<JobPostingDailySearchByPosition> candidates = await _interviewDao.DailySearchByPosition(position);
+
+                if (!candidates.Any())
+                {
+                    var allPositions = await _interviewDao.CheckJobPostingExists(position);
+                    var stringListOfPositions = allPositions.Select(jp => jp.Position).ToList();
+
+                    foreach (string j in stringListOfPositions)
+                    {
+                        if (j.ToLower() == position.ToLower())
+                        {
+                            return ErrorResponses.ErrorNoCandidate(position);
+                        }
+                    }
+
+                    return ErrorResponses.Error404(position);
+                }
+                return SuccessResponses.GetAllSuccessful(candidates);
             }
             catch (Exception)
             {

@@ -21,32 +21,6 @@ namespace Job_Board.Controllers
             _searchDao = searchDao;
         }
 
-        /// <summary>Search for Location Information by State</summary>
-        /// <remarks>Retrieve all Buildings in a specific state.</remarks>
-        /// <response code="200">Returns the Information by State</response>
-        /// <response code="404">Data invalid</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
-        [Route("Location/State/{state}")]
-        public async Task<IActionResult> GetLocationByState([FromRoute] string state)
-        {
-            try
-            {
-                IEnumerable<LocationByState> location = await _searchDao.GetLocationByState(state);
-                if (!location.Any())
-                {
-                    return ErrorResponses.Error404(state);
-                }
-                return Ok(location);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
 
 
         /// <summary>Search Job Postings by State</summary>
@@ -56,7 +30,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting/State/{state}")]
         public async Task<IActionResult> GetJobPostingByState([FromRoute] string state)

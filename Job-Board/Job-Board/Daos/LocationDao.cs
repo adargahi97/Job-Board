@@ -19,17 +19,6 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        //GET Request
-        public async Task<IEnumerable<Location>> GetLocation()
-        {
-            var query = "SELECT * FROM Location";
-            using (sqlWrapper.CreateConnection())
-            {
-                var employees = await sqlWrapper.QueryAsync<Location>(query);
-
-                return employees.ToList();
-            }
-        }
 
         //POST Request (Create)
         public async Task CreateLocation(LocationRequest location)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Job_Board.Daos
 {
-    public class SearchDao : ISearchDao
+    public class SearchDao
     {
 
         private readonly ISqlWrapper sqlWrapper;
@@ -19,15 +19,6 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        public async Task<IEnumerable<LocationByState>> GetLocationByState(string state)
-        {
-            var query = $"SELECT * FROM Location WHERE State = '{state}'";
-            using (sqlWrapper.CreateConnection())
-            {
-                var location = await sqlWrapper.QueryAsync<LocationByState>(query);
-                return location.ToList();
-            }
-        }
         public async Task<IEnumerable<JobPostingByState>> GetJobPostingByState(string state)
         {
             var query = $"SELECT JobPosting.Position, JobPosting.Department, City, Building FROM Location " +
@@ -63,16 +54,6 @@ namespace Job_Board.Daos
                 return candidates.ToList();
             }
         }
-        //public async Task<InterviewRequest> GetInterviewByCandidateId(Guid candidateId)
-        //{
-        //    var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId WHERE CandidateId = '{candidateId}'";
-
-        //    using (sqlWrapper.CreateConnection())
-        //    {
-        //        var interview = await sqlWrapper.QueryFirstOrDefaultAsync<InterviewRequest>(query);
-        //        return interview;
-        //    }
-        //}
 
         public async Task<IEnumerable<InterviewRequest>> GetInterviewByJobId(Guid jobId)
         {
@@ -120,15 +101,6 @@ namespace Job_Board.Daos
             {
                 var jobPosting = await sqlWrapper.QueryAsync<JobPostingByLocationId>(query);
                 return jobPosting.ToList();
-            }
-        }
-        public async Task<LocationByBuilding> GetLocationByBuilding(string building)
-        {
-            var query = $"SELECT * FROM Location WHERE Building = '{building}'";
-            using (sqlWrapper.CreateConnection())
-            {
-                var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationByBuilding>(query);
-                return location;
             }
         }
     }

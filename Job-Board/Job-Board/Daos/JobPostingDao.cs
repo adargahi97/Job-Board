@@ -35,16 +35,7 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-        public async Task<IEnumerable<JobPosting>> GetJobPostings()
-        {
-            var query = "SELECT * FROM JobPosting";
-            using (sqlWrapper.CreateConnection())
-            {
-                var jobPostings = await sqlWrapper.QueryAsync<JobPosting>(query);
 
-                return jobPostings.ToList();
-            }
-        }
         public async Task<JobPostingRequest> GetJobPostingByID(Guid id)
         {
             var query = $"SELECT * FROM JobPosting WHERE Id = '{id}'";

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Job_Board;
 using Job_Board.Daos;
@@ -18,28 +20,6 @@ namespace Job_Board.Controllers
         public JobPostingController(IJobPostingDao jobPostingDao)
         {
             _jobPostingDao = jobPostingDao;
-        }
-
-        /// <summary>Get All Job Postings</summary>
-        /// <remarks>Retrieve all Job Postings stored in the system.</remarks>
-        /// <response code="200">Returns the Information of all Job Postings</response>
-        /// <response code="500">Internal Server Error</response>
-
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(500)]
-        [Route("JobPosting")]
-        public async Task<IActionResult> GetJobPostings()
-        {
-            try
-            {
-                var jobPostings = await _jobPostingDao.GetJobPostings();
-                return Ok(jobPostings);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
         }
 
         /// <summary>Get Job Posting by ID</summary>
@@ -98,7 +78,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpDelete]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting/{id}")]
         public async Task<IActionResult> DeleteJobPostingById([FromRoute] Guid id)
@@ -127,7 +106,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPatch]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting")]
         public async Task<IActionResult> UpdateJobPostingByID([FromBody] JobPosting jobPostingReq)
@@ -148,5 +126,6 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
     }
 }

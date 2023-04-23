@@ -36,17 +36,6 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-        //GET Request (Get All Candidates)
-        public async Task<IEnumerable<Candidate>> GetCandidates()
-        {
-            var query = "SELECT * FROM Candidate";
-
-            using (sqlWrapper.CreateConnection())
-            {
-                var candidates = await sqlWrapper.QueryAsync<Candidate>(query);
-                return candidates.ToList();
-            }
-        }
 
         //GET Request (Return single candidate by Id)
         public async Task<Candidate> GetCandidateByID(Guid id)

@@ -8,10 +8,10 @@ namespace Job_Board.Daos
     public interface IJobPostingDao
     {
         Task CreateJobPosting(JobPostingRequest jobPosting);
-        Task<IEnumerable<JobPosting>> GetJobPostings();
         Task DeleteJobPostingById(Guid id);
         Task<JobPostingRequest> GetJobPostingByID(Guid id);
         Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting);
+        
 
     }
 }
