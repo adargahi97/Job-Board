@@ -72,7 +72,7 @@ namespace JobBoard.UnitTest
         public void GetCandidateById_UsesProperSqlQuery_OneTime()
         {
             // Act
-            _ = sut.GetCandidateByID(candidateGuid);
+            _ = sut.GetCandidateById(candidateGuid);
 
             // Assert
             mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT * FROM Candidate WHERE Id = '{candidateGuid}'")), Times.Once);

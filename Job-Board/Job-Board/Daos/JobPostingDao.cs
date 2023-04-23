@@ -18,7 +18,7 @@ namespace Job_Board.Daos
             this.sqlWrapper = sqlWrapper;
         }
 
-        //Create a new Entry
+        //POST Request (Create a new Job Posting)
         public async Task CreateJobPosting(JobPostingRequest jobPosting)
         {
             var query = "INSERT INTO JobPosting (Position, LocationId, Department, Description) " +
@@ -35,8 +35,8 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query, parameters);
             }
         }
-
-        public async Task<JobPostingRequest> GetJobPostingByID(Guid id)
+        //GET Request (Get a specific Job Posting by Id)
+        public async Task<JobPostingRequest> GetJobPostingById(Guid id)
         {
             var query = $"SELECT * FROM JobPosting WHERE Id = '{id}'";
 
@@ -47,7 +47,7 @@ namespace Job_Board.Daos
                 return jobPosting;
             }
         }
-
+        //DELETE Request (Delete an entry based off of Job Id)
         public async Task DeleteJobPostingById(Guid id)
         {
             var query = $"DELETE FROM JobPosting WHERE Id = '{id}'";
@@ -57,7 +57,7 @@ namespace Job_Board.Daos
                 await sqlWrapper.ExecuteAsync(query);
             }
         }
-
+        //PATCH Request (Update a Job Posting based off of Id)
         public async Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting)
         {
             var query = $"UPDATE JobPosting SET Position = ISNULL(@Position, Position), LocationId = COALESCE(@LocationId, LocationId), " +
@@ -84,6 +84,33 @@ namespace Job_Board.Daos
                 return updatedJobPosting;
             }
 
+        }
+        //GET Request (Get Job Postings by Position)
+        public async Task<JobPostingJoin> GetJobPostingByPosition(string position)
+        {
+            var query = $"SELECT JobPosting.Id, JobPosting.Position, JobPosting.Department, JobPosting.Description, City, State, Building FROM Location " +
+                $"INNER JOIN JobPosting ON Location.Id = JobPosting.LocationId " +
+                $" WHERE JobPosting.Position = '{position}' " +
+                $"Order By City";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var jobPosting = await sqlWrapper.QueryFirstOrDefaultAsync<JobPostingJoin>(query);
+                return jobPosting;
+            }
+        }
+        //GET Request (Get Job Postings by Building)
+        public async Task<IEnumerable<JobPostingJoin>> GetJobPostingByBuilding(string building)
+        {
+            var query = $"SELECT JobPosting.Id, JobPosting.Position, JobPosting.Department, JobPosting.Description, City, State, Building FROM Location " +
+                $"INNER JOIN JobPosting ON Location.Id = JobPosting.LocationId " +
+                $" WHERE Building = '{building}' " +
+                $"Order By JobPosting.Position";
+            using (sqlWrapper.CreateConnection())
+            {
+                var location = await sqlWrapper.QueryAsync<JobPostingJoin>(query);
+                return location.ToList();
+            }
         }
     }
 }

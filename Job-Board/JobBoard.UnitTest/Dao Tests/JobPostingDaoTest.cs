@@ -72,7 +72,7 @@ namespace JobBoard.UnitTest.Dao_Tests
         public void GetJobPostingById_UsesProperSqlQuery_OneTime()
         {
             // Act
-            _ = sut.GetJobPostingByID(jobPostingGuid);
+            _ = sut.GetJobPostingById(jobPostingGuid);
 
             // Assert
             mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT * FROM JobPosting WHERE Id = '{jobPostingGuid}'")), Times.Once);

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Job_Board.Daos
 {
@@ -38,7 +37,7 @@ namespace Job_Board.Daos
         }
 
         //GET Request (Return single candidate by Id)
-        public async Task<Candidate> GetCandidateByID(Guid id)
+        public async Task<Candidate> GetCandidateById(Guid id)
         {
             var query = $"SELECT * FROM Candidate WHERE Id = '{id}'";
             using (sqlWrapper.CreateConnection())
@@ -84,6 +83,32 @@ namespace Job_Board.Daos
             {
                 var updatedCandidate = await connection.QueryFirstOrDefaultAsync<Candidate>(query, parameters);
                 return updatedCandidate;
+            }
+
+        }
+        //GET Request (Return candidate(s) by Last Name)
+        public async Task<IEnumerable<CandidateJoin>> GetCandidateByLastName(string lastName)
+        {
+            var query = $"SELECT Candidate.Id, FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
+                $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
+                $"WHERE LastName LIKE '{lastName}%'";
+            using (sqlWrapper.CreateConnection())
+            {
+                var candidates = await sqlWrapper.QueryAsync<CandidateJoin>(query);
+                return candidates.ToList();
+            }
+
+        }
+        //GET Request (Return candidate(s) by Phone Number)
+        public async Task<IEnumerable<CandidateJoin>> GetCandidateByPhoneNumber(string phoneNumber)
+        {
+            var query = $"SELECT Candidate.Id, FirstName, LastName, PhoneNumber, JobPosting.Position, JobPosting.Department " +
+                $"FROM Candidate INNER JOIN JobPosting ON Candidate.JobId = JobPosting.Id " +
+                $"WHERE PhoneNumber LIKE '%{phoneNumber}%'";
+            using (sqlWrapper.CreateConnection())
+            {
+                var candidates = await sqlWrapper.QueryAsync<CandidateJoin>(query);
+                return candidates.ToList();
             }
 
         }

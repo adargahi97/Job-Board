@@ -31,11 +31,11 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("JobPosting/{id}")]
-        public async Task<IActionResult> GetJobPostingByID([FromRoute] Guid id)
+        public async Task<IActionResult> GetJobPostingById([FromRoute] Guid id)
         {
             try
             {
-                var jobPosting = await _jobPostingDao.GetJobPostingByID(id);
+                var jobPosting = await _jobPostingDao.GetJobPostingById(id);
                 if (jobPosting == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
@@ -55,7 +55,6 @@ namespace Job_Board.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [ProducesResponseType(201)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Route("JobPosting")]
         public async Task<IActionResult> CreateJobPosting([FromBody] JobPostingRequest createRequest)
@@ -84,7 +83,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var jobPosting = await _jobPostingDao.GetJobPostingByID(id);
+                var jobPosting = await _jobPostingDao.GetJobPostingById(id);
                 if (jobPosting == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
@@ -108,11 +107,11 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("JobPosting")]
-        public async Task<IActionResult> UpdateJobPostingByID([FromBody] JobPosting jobPostingReq)
+        public async Task<IActionResult> UpdateJobPostingById([FromBody] JobPosting jobPostingReq)
         {
             try
             {
-                var candidate = await _jobPostingDao.GetJobPostingByID(jobPostingReq.Id);
+                var candidate = await _jobPostingDao.GetJobPostingById(jobPostingReq.Id);
                 if (candidate == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
@@ -126,6 +125,57 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+        /// <summary>Search Job Posting by Position</summary>
+        /// <remarks>Retrieve Job Posting information for a specific Position.</remarks>
+        /// <response code="200">Returns the Information by Position</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("JobPosting/Position/{position}")]
+        public async Task<IActionResult> GetJobPostingByPosition([FromRoute] string position)
+        {
+            try
+            {
+                var jobPosting = await _jobPostingDao.GetJobPostingByPosition(position);
+                if (jobPosting == null)
+                {
+                    return ErrorResponses.Error404(position);
+                }
+                return Ok(jobPosting);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        /// <summary>Search Job Posting by Position</summary>
+        /// <remarks>Retrieve Job Posting information for a specific Position.</remarks>
+        /// <response code="200">Returns the Information by Position</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("JobPosting/Building/{building}")]
+        public async Task<IActionResult> GetJobPostingByBuilding([FromRoute] string building)
+        {
+            try
+            {
+                var jobPosting = await _jobPostingDao.GetJobPostingByBuilding(building);
+                if (jobPosting == null)
+                {
+                    return ErrorResponses.Error404(building);
+                }
+                return Ok(jobPosting);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
     }
 }

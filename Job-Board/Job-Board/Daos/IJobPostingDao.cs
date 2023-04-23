@@ -9,9 +9,10 @@ namespace Job_Board.Daos
     {
         Task CreateJobPosting(JobPostingRequest jobPosting);
         Task DeleteJobPostingById(Guid id);
-        Task<JobPostingRequest> GetJobPostingByID(Guid id);
+        Task<JobPostingRequest> GetJobPostingById(Guid id);
         Task<JobPosting> UpdateJobPostingById(JobPosting jobPosting);
-        
+        Task<IEnumerable<JobPostingJoin>> GetJobPostingByBuilding(string building);
+        Task<JobPostingJoin> GetJobPostingByPosition(string position);
 
     }
 }

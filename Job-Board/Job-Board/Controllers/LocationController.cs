@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Job_Board.Responses;
+using System.Linq;
 
 namespace Job_Board.Controllers
 {
@@ -30,11 +31,11 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("Location/{id}")]
-        public async Task<IActionResult> GetLocationByID([FromRoute] Guid id)
+        public async Task<IActionResult> GetLocationById([FromRoute] Guid id)
         {
             try
             {
-                var location = await _locationDao.GetLocationByID(id);
+                var location = await _locationDao.GetLocationById(id);
                 if (location == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
@@ -84,7 +85,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var location = await _locationDao.GetLocationByID(id);
+                var location = await _locationDao.GetLocationById(id);
                 if (location == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
@@ -113,23 +114,44 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var location = await _locationDao.GetLocationByID(locationReq.Id);
+                var location = await _locationDao.GetLocationById(locationReq.Id);
                 if (location == null)
                 {
                     return ErrorResponses.Error404("The ID You Entered");
-
                 }
-                
 
                 var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
-
                 return StatusCode(200);
             }
-            
             catch (Exception)
             {
                 return ErrorResponses.Error500();
             }
-        }   
+        }
+        /// <summary>Get Address by Building</summary>
+        /// <remarks>Retrieves Address based on Building.</remarks>
+        /// <response code="200">Returns the Address of selected Building</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("Location/Building")]
+        public async Task<IActionResult> GetAddressByLocation(string building)
+        {
+            try
+            {
+                IEnumerable<Location> address = await _locationDao.GetAddressByBuilding(building);
+                if (!address.Any())
+                {
+                    return ErrorResponses.Error404(building);
+                }
+                return Ok(address);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

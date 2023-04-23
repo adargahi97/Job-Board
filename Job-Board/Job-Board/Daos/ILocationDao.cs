@@ -8,9 +8,10 @@ namespace Job_Board.Daos
     public interface ILocationDao
     {
         Task CreateLocation(LocationRequest location);
-        Task<LocationRequest> GetLocationByID(Guid id);
-        Task DeleteLocationByID(Guid id);
+        Task<LocationRequest> GetLocationById(Guid id);
+        Task DeleteLocationById(Guid id);
         Task<Location> UpdateLocationById(Location location);
+        Task<IEnumerable<Location>> GetAddressByBuilding(string building);
 
     }
 }

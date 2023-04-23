@@ -34,7 +34,7 @@ namespace Job_Board.Responses
         public static ContentResult ErrorNoCandidate(string userInput)
         {
 
-            var errorResponse = $"{userInput} has no Candidates with Interviews Scheduled.";
+            var errorResponse = $"{userInput} has no Interviews Scheduled.";
             var jsonErrorResponse = JsonConvert.SerializeObject(errorResponse);
             return new ContentResult
             {

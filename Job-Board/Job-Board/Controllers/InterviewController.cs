@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Job_Board.Daos;
 using Job_Board.Models;
 using Job_Board.Responses;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Job_Board.Controllers
@@ -35,7 +34,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewByID(id);
+                var interview = await _interviewDao.GetInterviewById(id);
                 if (interview == null)
                 {
                     return ErrorResponses.ErrorInputNotFound(id.ToString());
@@ -83,7 +82,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewByID(id);
+                var interview = await _interviewDao.GetInterviewById(id);
                 if (interview == null)
                 {
                     return ErrorResponses.ErrorInputNotFound(id.ToString());
@@ -107,11 +106,11 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("Interview")]
-        public async Task<IActionResult> UpdateInterviewByID([FromBody] Interview interviewReq)
+        public async Task<IActionResult> UpdateInterviewById([FromBody] Interview interviewReq)
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewByID(interviewReq.Id);
+                var interview = await _interviewDao.GetInterviewById(interviewReq.Id);
                 if (interview == null)
                 {
                     return ErrorResponses.ErrorInputNotFound(interviewReq.Id.ToString());
@@ -133,12 +132,12 @@ namespace Job_Board.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        [Route("Interview/{date}")]
+        [Route("Interview/Date/{date}")]
         public async Task<IActionResult> GetInterviewsByDate(DateTime date)
         {
             try
             {
-                IEnumerable<InterviewDailySearch> interviews = await _interviewDao.GetInterviewsByDate(date);
+                IEnumerable<InterviewJoin> interviews = await _interviewDao.GetInterviewsByDate(date);
 
                 if (!interviews.Any())
                 {
@@ -165,11 +164,11 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("JobPosting/Position")]
-        public async Task<IActionResult> DailySearchByPosition(string position)
+        public async Task<IActionResult> GetInterviewsByPosition(string position)
         {
             try
             {
-                IEnumerable<JobPostingDailySearchByPosition> candidates = await _interviewDao.DailySearchByPosition(position);
+                IEnumerable<InterviewJoin> candidates = await _interviewDao.GetInterviewsByPosition(position);
 
                 if (!candidates.Any())
                 {
@@ -191,6 +190,57 @@ namespace Job_Board.Controllers
             catch (Exception)
             {
                 return ErrorResponses.Error500();
+            }
+        }
+        /// <summary>Search Interview by Job ID</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a specific Job ID.</remarks>
+        /// <response code="200">Returns the Interview Information by Job Id</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [Route("Interview/JobId/{id:guid}")]
+        public async Task<IActionResult> GetInterviewByJobId([FromRoute] Guid id)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewByJobId(id);
+                if (!interview.Any())
+                {
+                    return ErrorResponses.Error404("The Id You Entered");
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        /// <summary>Search Interview by Last Name</summary>
+        /// <remarks>Retrieve all Interviews scheduled for a Candidate with a specific last name.</remarks>
+        /// <response code="200">Returns the Interview Information found by last name</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("Interview/LastName/{lastName}")]
+        public async Task<IActionResult> GetInterviewByLastName([FromRoute] string lastName)
+        {
+            try
+            {
+                IEnumerable<InterviewJoinCandidate> interview = await _interviewDao.GetInterviewByLastName(lastName);
+                if (!interview.Any())
+                {
+                    return ErrorResponses.Error404(lastName);
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
             }
         }
     }

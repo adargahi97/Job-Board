@@ -33,7 +33,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var candidate = await _candidateDao.GetCandidateByID(id);
+                var candidate = await _candidateDao.GetCandidateById(id);
                 if (candidate == null)
                 {
                     return ErrorResponses.ErrorInputNotFound(id.ToString());
@@ -81,7 +81,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var candidate = await _candidateDao.GetCandidateByID(id);
+                var candidate = await _candidateDao.GetCandidateById(id);
                 if (candidate == null)
                 {
                     return ErrorResponses.ErrorInputNotFound(id.ToString());
@@ -109,7 +109,7 @@ namespace Job_Board.Controllers
         {
             try
             {
-                var candidate = await _candidateDao.GetCandidateByID(candidateReq.Id);
+                var candidate = await _candidateDao.GetCandidateById(candidateReq.Id);
                 if (candidate == null)
                 {
                     return ErrorResponses.ErrorUpdating(candidateReq.Id.ToString());
@@ -123,6 +123,56 @@ namespace Job_Board.Controllers
             catch (Exception)
             {
                 return ErrorResponses.Error500();
+            }
+        }
+        /// <summary>Get Candidates by Last Name</summary>
+        /// <remarks>Retrieve all Candidates with a specific last name.</remarks>
+        /// <response code="200">Returns the Candidates with matching last names</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("Candidate/LastName/{lastName}")]
+        public async Task<IActionResult> GetCandidateByLastName(string lastName)
+        {
+            try
+            {
+                IEnumerable<CandidateJoin> candidates = await _candidateDao.GetCandidateByLastName(lastName);
+                if (!candidates.Any())
+                {
+                    return ErrorResponses.Error404(lastName);
+                }
+                return Ok(candidates);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        /// <summary>Get Candidates by Phone Number</summary>
+        /// <remarks>Retrieve all Candidates based on Phone Number.</remarks>
+        /// <response code="200">Returns the Candidates with matching phone number</response>
+        /// <response code="404">Data invalid</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [Route("Candidate/PhoneNumber/{phoneNumber}")]
+        public async Task<IActionResult> GetCandidateByPhoneNumber(string phoneNumber)
+        {
+            try
+            {
+                IEnumerable<CandidateJoin> candidates = await _candidateDao.GetCandidateByPhoneNumber(phoneNumber);
+                if (!candidates.Any())
+                {
+                    return ErrorResponses.Error404(phoneNumber);
+                }
+                return Ok(candidates);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
             }
         }
 
