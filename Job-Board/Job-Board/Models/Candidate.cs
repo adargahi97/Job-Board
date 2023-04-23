@@ -58,8 +58,13 @@ namespace Job_Board.Models
         public Guid JobId { get; set; }
     }
 
-    public class CandidateByLastName
+    public class CandidateJoin
     {
+        /// <summary>
+        /// Candidate Id
+        /// </summary>
+        /// <example>221D5EC3-D99A-4A47-8E74-2411328E99D2</example>
+        public Guid Id { get; set; }
         /// <summary>
         /// Candidate's First Name
         /// </summary>
@@ -85,24 +90,5 @@ namespace Job_Board.Models
         /// </summary>
         ///<example>Marketing</example>
         public string Department { get; set; }
-    }
-
-    public class CandidateByJobId
-    {
-        /// <summary>
-        /// Candidate's First Name
-        /// </summary>
-        /// <example>Jonathan</example>
-        public string FirstName { get; set; }
-        /// <summary>
-        /// Candidate's Last Name
-        /// </summary>
-        /// <example>Miller</example>
-        public string LastName { get; set; }
-        /// <summary>
-        /// Candidate's Phone Number
-        /// </summary>
-        /// <example>314-992-3234</example>
-        public string PhoneNumber { get; set; }
     }
 }

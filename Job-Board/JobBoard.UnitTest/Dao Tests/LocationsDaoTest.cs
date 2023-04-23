@@ -75,7 +75,7 @@ namespace JobBoard.UnitTest.Dao_Tests
         public void GetLocationById_UsesProperSqlQuery_OneTime()
         {
             // Act
-            _ = sut.GetLocationByID(locationGuid);
+            _ = sut.GetLocationById(locationGuid);
 
             // Assert
             mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT * FROM Location WHERE Id = '{locationGuid}'")), Times.Once);

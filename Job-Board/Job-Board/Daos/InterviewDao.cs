@@ -38,7 +38,7 @@ namespace Job_Board.Daos
         }
 
         //GET Request (Returns a single interview on Interview Id)
-        public async Task<InterviewRequest> GetInterviewByID(Guid id)
+        public async Task<InterviewRequest> GetInterviewById(Guid id)
         {
             var query = $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{id}'";
 
@@ -93,8 +93,6 @@ namespace Job_Board.Daos
             {
                 parameters.Add("JobId", interview.JobId, DbType.Guid);
             }
-            //parameters.Add("LocationId", interview.LocationId, DbType.Guid);
-            //parameters.Add("CandidateId", interview.CandidateId, DbType.Guid);
 
             using (var connection = sqlWrapper.CreateConnection())
             {
@@ -104,7 +102,7 @@ namespace Job_Board.Daos
         }
 
         //GET Request (Return Interview info based on Date)
-        public async Task<IEnumerable<InterviewDailySearch>> GetInterviewsByDate(DateTime dt)
+        public async Task<IEnumerable<InterviewJoin>> GetInterviewsByDate(DateTime dt)
         {
             var query = $"SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
                 $"FROM Interview " +
@@ -115,12 +113,13 @@ namespace Job_Board.Daos
 
             using (sqlWrapper.CreateConnection())
             {
-                var interviews = await sqlWrapper.QueryAsync<InterviewDailySearch>(query);
+                var interviews = await sqlWrapper.QueryAsync<InterviewJoin>(query);
 
                 return interviews.ToList();
             }
         }
-        public async Task<IEnumerable<JobPostingDailySearchByPosition>> DailySearchByPosition(string position)
+        //GET Request (Return Interview info based on Date)
+        public async Task<IEnumerable<InterviewJoin>> GetInterviewsByPosition(string position)
         {
             var query = $"SELECT CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobPosting.Position, JobPosting.Department, Candidate.FirstName, Candidate.LastName, Location.Building " +
                 $"FROM Interview " +
@@ -131,11 +130,11 @@ namespace Job_Board.Daos
 
             using (sqlWrapper.CreateConnection())
             {
-                var candidates = await sqlWrapper.QueryAsync<JobPostingDailySearchByPosition>(query);
+                var candidates = await sqlWrapper.QueryAsync<InterviewJoin>(query);
                 return candidates.ToList();
             }
         }
- 
+        //internal method used for error handling
         public async Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position)
         {
             var query = "SELECT Position FROM JobPosting";
@@ -144,6 +143,37 @@ namespace Job_Board.Daos
             {
                 var allPositions = await sqlWrapper.QueryAsync<JobPosting>(query);
                 return allPositions.ToList();
+            }
+        }
+        //GET Request (Return Interview info based on Job Id)
+        public async Task<IEnumerable<InterviewRequest>> GetInterviewByJobId(Guid jobId)
+        {
+            var query = $" SELECT CONVERT(VARCHAR(20),Interview.DateTime,0) AS DateTime, JobId, Interview.LocationId, Interview.CandidateId " +
+                $"FROM JobPosting " +
+                $"INNER JOIN Interview ON JobPosting.ID = Interview.JobId " +
+                $"WHERE JobId = '{jobId}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interviews = await sqlWrapper.QueryAsync<InterviewRequest>(query);
+
+                return interviews.ToList();
+            }
+        }
+        //GET Request (Return Interview info based on Last Name)
+        public async Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName)
+        {
+
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, Interview.JobId, Interview.LocationId" +
+                        $" FROM Interview " +
+                        $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
+                        $"WHERE LastName LIKE '{lastName}%'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var interviews = await sqlWrapper.QueryAsync<InterviewJoinCandidate>(query);
+
+                return interviews.ToList();
             }
         }
     }

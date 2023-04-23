@@ -84,8 +84,19 @@ namespace Job_Board.Models
         public Guid JobId { get; set; }
 
     }
-    public class InterviewDailySearch
+
+    public class InterviewJoin
     {
+        /// <summary>
+        /// Job Position
+        /// </summary>
+        /// <example>Intern</example>
+        public string Position { get; set; }
+        /// <summary>
+        /// Job Listing's Department
+        /// </summary>
+        ///<example>Marketing</example>
+        public string Department { get; set; }
         /// <summary>
         /// Candidate's First Name
         /// </summary>
@@ -101,11 +112,6 @@ namespace Job_Board.Models
         /// </summary>
         /// <example>2023-01-01 12:00:00</example>
         public string DateTime { get; set; }
-        /// <summary>
-        /// Job Position
-        /// </summary>
-        /// <example>Intern</example>
-        public string Position { get; set; }
         /// <summary>
         /// Building Location
         /// </summary>

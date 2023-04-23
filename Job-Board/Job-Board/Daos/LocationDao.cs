@@ -23,7 +23,6 @@ namespace Job_Board.Daos
         //POST Request (Create)
         public async Task CreateLocation(LocationRequest location)
         {
-            //SQL Query
             var query = "INSERT INTO Location (StreetAddress, City, State, Zip, Building) " +
                 "VALUES (@StreetAddress, @City, @State, @Zip, @Building)";
 
@@ -34,29 +33,21 @@ namespace Job_Board.Daos
             parameters.Add("Zip", location.Zip, DbType.Int32);
             parameters.Add("Building", location.Building, DbType.String);
 
-            //Connecting to DB
             using (sqlWrapper.CreateConnection())
             {
-                //executing query
                 await sqlWrapper.ExecuteAsync(query, parameters);
 
             }
         }
 
         //GET Request
-        public async Task<LocationRequest> GetLocationByID(Guid id)
+        public async Task<LocationRequest> GetLocationById(Guid id)
         {
-            //SQL query
             var query = $"SELECT * FROM Location WHERE Id = '{id}'";
 
-            //Connect to DB
             using (sqlWrapper.CreateConnection())
             {
-                //Run query, set to variable candidate
                 var location = await sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(query);
-
-                //Return variable 
-
                 return location;
             }
         }
@@ -64,13 +55,10 @@ namespace Job_Board.Daos
         //DELETE Request
         public async Task DeleteLocationById(Guid id)
         {
-            //SQL Query
             var query = $"DELETE FROM Location WHERE Id = '{id}'";
 
-            //Connect to DB
             using (sqlWrapper.CreateConnection())
             {
-                //Execute query
                 await sqlWrapper.ExecuteAsync(query);
 
             }
@@ -79,7 +67,6 @@ namespace Job_Board.Daos
         //PATCH Request (Update)
         public async Task<Location> UpdateLocationById(Location location)
         {
-            //SQL Query
             var query = $"UPDATE Location SET StreetAddress = ISNULL(@StreetAddress, StreetAddress), City = ISNULL(@City, City), " +
                 $"State = ISNULL(@State, State), Zip = ISNULL(@Zip, Zip), Building = ISNULL(@Building, Building) " +
                 $"WHERE Id = '{location.Id}'";
@@ -91,14 +78,24 @@ namespace Job_Board.Daos
             parameters.Add("Zip", location.Zip, DbType.Int32);
             parameters.Add("Building", location.Building, DbType.String);
 
-            //Connect to DB
             using (var connection = sqlWrapper.CreateConnection())
             {
-                //set updated candidate to query result
                 var locationToUpdate = await connection.QueryFirstOrDefaultAsync<Location>(query, parameters);
 
 
                 return locationToUpdate;
+            }
+
+        }
+        //GET Request (Get Location info based on Building)
+        public async Task<IEnumerable<Location>> GetAddressByBuilding(string building)
+        {
+            var query = $"SELECT * FROM Location WHERE Building = '{building}'";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var candidates = await sqlWrapper.QueryAsync<Location>(query);
+                return candidates.ToList();
             }
 
         }
