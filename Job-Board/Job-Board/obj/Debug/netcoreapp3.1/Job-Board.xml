@@ -165,7 +165,7 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.LocationController.UpdateLocationByID(Job_Board.Models.Location)">
+        <member name="M:Job_Board.Controllers.LocationController.UpdateLocationById(Job_Board.Models.Location)">
             <summary>Update Location</summary>
             <remarks>Modify an existing Location's information by the Location ID.</remarks>
             <response code="200">Update Location Information by ID</response>

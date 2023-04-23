@@ -91,7 +91,7 @@ namespace Job_Board.Controllers
                     return ErrorResponses.Error404("The ID You Entered");
                 }
 
-                await _locationDao.DeleteLocationByID(id);
+                await _locationDao.DeleteLocationById(id);
                 return StatusCode(200);
             }
             catch (Exception)
@@ -110,7 +110,7 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("Location")]
-        public async Task<IActionResult> UpdateLocationByID([FromBody] Location locationReq)
+        public async Task<IActionResult> UpdateLocationById([FromBody] Location locationReq)
         {
             try
             {
