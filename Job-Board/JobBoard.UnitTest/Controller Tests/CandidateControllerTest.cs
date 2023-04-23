@@ -10,6 +10,13 @@ namespace JobBoard.UnitTest
     public class CandidateControllerTests
     {
 
+
+
+
+
+
+
+
         //[TestMethod]
 
         //public void CallDao()
@@ -23,7 +30,8 @@ namespace JobBoard.UnitTest
         //    mockCandidateDao.Verify(candidateDao => candidateDao.GetCandidate(), Times.Once);
         //}
 
-        
-        }
+
+
 
     }
+}

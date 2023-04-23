@@ -9,7 +9,7 @@ namespace Job_Board.Daos
     {
         Task CreateLocation(LocationRequest location);
         Task<LocationRequest> GetLocationByID(Guid id);
-        Task DeleteLocationById(Guid id);
+        Task DeleteLocationByID(Guid id);
         Task<Location> UpdateLocationById(Location location);
 
     }

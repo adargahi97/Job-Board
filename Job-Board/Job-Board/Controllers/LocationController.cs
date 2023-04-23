@@ -90,7 +90,7 @@ namespace Job_Board.Controllers
                     return ErrorResponses.Error404("The ID You Entered");
                 }
 
-                await _locationDao.DeleteLocationById(id);
+                await _locationDao.DeleteLocationByID(id);
                 return StatusCode(200);
             }
             catch (Exception)

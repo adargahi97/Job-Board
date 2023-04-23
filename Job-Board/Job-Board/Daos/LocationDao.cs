@@ -62,7 +62,7 @@ namespace Job_Board.Daos
         }
 
         //DELETE Request
-        public async Task DeleteLocationById(Guid id)
+        public async Task DeleteLocationByID(Guid id)
         {
             //SQL Query
             var query = $"DELETE FROM Location WHERE Id = '{id}'";

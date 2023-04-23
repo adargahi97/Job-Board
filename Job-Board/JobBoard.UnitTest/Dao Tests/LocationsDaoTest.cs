@@ -85,7 +85,7 @@ namespace JobBoard.UnitTest.Dao_Tests
         public void DeleteLocationById_UsesProperSqlQuery_OneTime()
         {
             // Act
-            _ = sut.DeleteLocationById(locationGuid);
+            _ = sut.DeleteLocationByID(locationGuid);
 
             // Assert
             mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.ExecuteAsync(It.Is<string>(sql => sql == $"DELETE FROM Location WHERE Id = '{locationGuid}'")), Times.Once);
