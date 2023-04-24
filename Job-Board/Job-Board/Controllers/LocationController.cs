@@ -63,7 +63,7 @@ namespace Job_Board.Controllers
             try
             {
                 await _locationDao.CreateLocation(createRequest);
-                return StatusCode(201);
+                return SuccessResponses.CreateSuccessful("Location");
             }
             catch (Exception)
             {
@@ -92,7 +92,7 @@ namespace Job_Board.Controllers
                 }
 
                 await _locationDao.DeleteLocationById(id);
-                return StatusCode(200);
+                return SuccessResponses.DeleteSuccessful("Location");
             }
             catch (Exception)
             {
@@ -121,7 +121,7 @@ namespace Job_Board.Controllers
                 }
 
                 var updatedLocation = await _locationDao.UpdateLocationById(locationReq);
-                return StatusCode(200);
+                return SuccessResponses.UpdateObjectSuccessful(locationReq.Id.ToString());
             }
             catch (Exception)
             {
@@ -146,11 +146,11 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(building);
                 }
-                return Ok(address);
+                return SuccessResponses.GetObjectSuccessful(address);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
     }

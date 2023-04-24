@@ -74,7 +74,7 @@ namespace JobBoard.UnitTest.Dao_Tests
         public void GetInterviewById_UsesProperSqlQuery_OneTime()
         {
             // Act
-            _ = sut.GetInterviewByID(interviewGuid);
+            _ = sut.GetInterviewById(interviewGuid);
 
             // Assert
             mockSqlWrapper.Verify(sqlWrapper => sqlWrapper.QueryFirstOrDefaultAsync<LocationRequest>(It.Is<string>(sql => sql == $"SELECT Id, CONVERT(VARCHAR(20),DateTime,0) AS DateTime, JobId, LocationId, CandidateId FROM Interview WHERE Id = '{interviewGuid}'")), Times.Once);

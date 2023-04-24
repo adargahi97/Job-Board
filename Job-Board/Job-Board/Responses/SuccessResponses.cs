@@ -28,7 +28,7 @@ namespace Job_Board.Responses
             var jsonsuccessResponse = JsonConvert.SerializeObject(successResponse);
             return new ContentResult
             {
-                StatusCode = 200,
+                StatusCode = 201,
                 ContentType = "application/json",
                 Content = jsonsuccessResponse
             };

@@ -32,6 +32,20 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
+        <member name="M:Job_Board.Controllers.CandidateController.GetCandidateByLastName(System.String)">
+            <summary>Get Candidates by Last Name</summary>
+            <remarks>Retrieve all Candidates with a specific last name.</remarks>
+            <response code="200">Returns the Candidates with matching last names</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:Job_Board.Controllers.CandidateController.GetCandidateByPhoneNumber(System.String)">
+            <summary>Get Candidates by Phone Number</summary>
+            <remarks>Retrieve all Candidates based on Phone Number.</remarks>
+            <response code="200">Returns the Candidates with matching phone number</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
         <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByID(System.Guid)">
             <summary>Get Interview by ID</summary>
             <remarks>Retrieve Interview Information for a specific Interview ID.</remarks>
@@ -53,7 +67,7 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.InterviewController.UpdateInterviewByID(Job_Board.Models.Interview)">
+        <member name="M:Job_Board.Controllers.InterviewController.UpdateInterviewById(Job_Board.Models.Interview)">
             <summary>Update Interview</summary>
             <remarks>Modify an existing Interview's information by the Interview ID.</remarks>
             <response code="200">Updates Interview by ID</response>
@@ -67,14 +81,28 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.InterviewController.DailySearchByPosition(System.String)">
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewsByPosition(System.String)">
             <summary>Get Interview by Position</summary>
             <remarks>Retrieve all Interviews scheduled for a specific position.</remarks>
             <response code="200">Returns the Information by Position</response>
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByID(System.Guid)">
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByJobId(System.Guid)">
+            <summary>Search Interview by Job ID</summary>
+            <remarks>Retrieve all Interviews scheduled for a specific Job ID.</remarks>
+            <response code="200">Returns the Interview Information by Job Id</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByLastName(System.String)">
+            <summary>Search Interview by Last Name</summary>
+            <remarks>Retrieve all Interviews scheduled for a Candidate with a specific last name.</remarks>
+            <response code="200">Returns the Interview Information found by last name</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingById(System.Guid)">
             <summary>Get Job Posting by ID</summary>
             <remarks>Retrieve a Job Postings information by its Job ID.</remarks>
             <response code="200">Returns the Information by ID</response>
@@ -95,14 +123,28 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.JobPostingController.UpdateJobPostingByID(Job_Board.Models.JobPosting)">
+        <member name="M:Job_Board.Controllers.JobPostingController.UpdateJobPostingById(Job_Board.Models.JobPosting)">
             <summary>Update Job Posting</summary>
             <remarks>Modify an existing Job Posting's information by its Job ID.</remarks>
             <response code="200">Updates Job Posting</response>
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.LocationController.GetLocationByID(System.Guid)">
+        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByPosition(System.String)">
+            <summary>Search Job Posting by Position</summary>
+            <remarks>Retrieve Job Posting information for a specific Position.</remarks>
+            <response code="200">Returns the Information by Position</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:Job_Board.Controllers.JobPostingController.GetJobPostingByBuilding(System.String)">
+            <summary>Search Job Posting by Position</summary>
+            <remarks>Retrieve Job Posting information for a specific Position.</remarks>
+            <response code="200">Returns the Information by Position</response>
+            <response code="404">Data invalid</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:Job_Board.Controllers.LocationController.GetLocationById(System.Guid)">
             <summary>Get Location</summary>
             <remarks>Retrieve a Locations information by its Location ID.</remarks>
             <response code="200">Returns Location information for a specific Location ID</response>
@@ -123,64 +165,17 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.LocationController.UpdateLocationByID(Job_Board.Models.Location)">
+        <member name="M:Job_Board.Controllers.LocationController.UpdateLocationById(Job_Board.Models.Location)">
             <summary>Update Location</summary>
             <remarks>Modify an existing Location's information by the Location ID.</remarks>
             <response code="200">Update Location Information by ID</response>
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByState(System.String)">
-            <summary>Search Job Postings by State</summary>
-            <remarks>Retrieve all Job Postings in a specific state.</remarks>
-            <response code="200">Returns the All Job Postings by State</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetCandidateByLastName(System.String)">
-            <summary>Get Candidates by Last Name</summary>
-            <remarks>Retrieve all Candidates with a specific last name.</remarks>
-            <response code="200">Returns the Candidates with matching last names</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetCandidateByJobId(System.Guid)">
-            <summary>Search Candidates by Job ID</summary>
-            <remarks>Retrieve all Candidates for a specific Job ID.</remarks>
-            <response code="200">Returns the Candidate Information by Job Id</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetInterviewByJobId(System.Guid)">
-            <summary>Search Interview by Job ID</summary>
-            <remarks>Retrieve all Interviews scheduled for a specific Job ID.</remarks>
-            <response code="200">Returns the Interview Information by Job Id</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetInterviewByLastName(System.String)">
-            <summary>Search Interview by Last Name</summary>
-            <remarks>Retrieve all Interviews scheduled for a Candidate with a specific last name.</remarks>
-            <response code="200">Returns the Interview Information found by last name</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByLocationId(System.Guid)">
-            <summary>Search Job Postings by Location</summary>
-            <remarks>Retrieve all Job Postings for a specific Location ID.</remarks>
-            <response code="200">Returns the Information by Location ID</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetJobPostingByPosition(System.String)">
-            <summary>Search Job Posting by Position</summary>
-            <remarks>Retrieve Job Posting information for a specific Position.</remarks>
-            <response code="200">Returns the Information by Position</response>
-            <response code="404">Data invalid</response>
-            <response code="500">Internal Server Error</response>
-        </member>
-        <member name="M:Job_Board.Controllers.SearchController.GetLocationByBuilding(System.String)">
-            <summary>Get Location by Building</summary>
-            <remarks>Retrieve Location information for a specific Building.</remarks>
-            <response code="200">Returns Location Information by Building</response>
+        <member name="M:Job_Board.Controllers.LocationController.GetAddressByLocation(System.String)">
+            <summary>Get Address by Building</summary>
+            <remarks>Retrieves Address based on Building.</remarks>
+            <response code="200">Returns the Address of selected Building</response>
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
@@ -238,53 +233,41 @@
             </summary>
             <example>85DA0EA5-101C-45BC-9388-9C64898363FE</example>
         </member>
-        <member name="P:Job_Board.Models.CandidateByLastName.FirstName">
+        <member name="P:Job_Board.Models.CandidateJoin.Id">
+            <summary>
+            Candidate Id
+            </summary>
+            <example>221D5EC3-D99A-4A47-8E74-2411328E99D2</example>
+        </member>
+        <member name="P:Job_Board.Models.CandidateJoin.FirstName">
             <summary>
             Candidate's First Name
             </summary>
             <example>Jonathan</example>
         </member>
-        <member name="P:Job_Board.Models.CandidateByLastName.LastName">
+        <member name="P:Job_Board.Models.CandidateJoin.LastName">
             <summary>
             Candidate's Last Name
             </summary>
             <example>Miller</example>
         </member>
-        <member name="P:Job_Board.Models.CandidateByLastName.PhoneNumber">
+        <member name="P:Job_Board.Models.CandidateJoin.PhoneNumber">
             <summary>
             Candidate's Phone Number
             </summary>
             <example>314-992-3234</example>
         </member>
-        <member name="P:Job_Board.Models.CandidateByLastName.Position">
+        <member name="P:Job_Board.Models.CandidateJoin.Position">
             <summary>
             Job Position
             </summary>
             <example>Intern</example>
         </member>
-        <member name="P:Job_Board.Models.CandidateByLastName.Department">
+        <member name="P:Job_Board.Models.CandidateJoin.Department">
              <summary>
              Job Listing's Department
              </summary>
             <example>Marketing</example>
-        </member>
-        <member name="P:Job_Board.Models.CandidateByJobId.FirstName">
-            <summary>
-            Candidate's First Name
-            </summary>
-            <example>Jonathan</example>
-        </member>
-        <member name="P:Job_Board.Models.CandidateByJobId.LastName">
-            <summary>
-            Candidate's Last Name
-            </summary>
-            <example>Miller</example>
-        </member>
-        <member name="P:Job_Board.Models.CandidateByJobId.PhoneNumber">
-            <summary>
-            Candidate's Phone Number
-            </summary>
-            <example>314-992-3234</example>
         </member>
         <member name="P:Job_Board.Models.Interview.Id">
             <summary>
@@ -370,31 +353,37 @@
             </summary>
             <example>0AB667E2-3936-48EC-B1DA-E7614239B788</example>
         </member>
-        <member name="P:Job_Board.Models.InterviewDailySearch.FirstName">
-            <summary>
-            Candidate's First Name
-            </summary>
-            <example>Jonathan</example>
-        </member>
-        <member name="P:Job_Board.Models.InterviewDailySearch.LastName">
-            <summary>
-            Candidate's Last Name
-            </summary>
-            <example>Miller</example>
-        </member>
-        <member name="P:Job_Board.Models.InterviewDailySearch.DateTime">
-            <summary>
-            Interview's Date and Time
-            </summary>
-            <example>2023-01-01 12:00:00</example>
-        </member>
-        <member name="P:Job_Board.Models.InterviewDailySearch.Position">
+        <member name="P:Job_Board.Models.InterviewJoin.Position">
             <summary>
             Job Position
             </summary>
             <example>Intern</example>
         </member>
-        <member name="P:Job_Board.Models.InterviewDailySearch.Building">
+        <member name="P:Job_Board.Models.InterviewJoin.Department">
+             <summary>
+             Job Listing's Department
+             </summary>
+            <example>Marketing</example>
+        </member>
+        <member name="P:Job_Board.Models.InterviewJoin.FirstName">
+            <summary>
+            Candidate's First Name
+            </summary>
+            <example>Jonathan</example>
+        </member>
+        <member name="P:Job_Board.Models.InterviewJoin.LastName">
+            <summary>
+            Candidate's Last Name
+            </summary>
+            <example>Miller</example>
+        </member>
+        <member name="P:Job_Board.Models.InterviewJoin.DateTime">
+            <summary>
+            Interview's Date and Time
+            </summary>
+            <example>2023-01-01 12:00:00</example>
+        </member>
+        <member name="P:Job_Board.Models.InterviewJoin.Building">
             <summary>
             Building Location
             </summary>
@@ -454,91 +443,43 @@
              </summary>
             <example>Marketing Intern</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingByPosition.Department">
-             <summary>
-             Job Listing's Department
-             </summary>
-            <example>Marketing</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByPosition.Description">
-             <summary>
-             Job Listing's Description
-             </summary>
-            <example>Marketing Intern</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByPosition.Id">
+        <member name="P:Job_Board.Models.JobPostingJoin.Id">
             <summary>
             Job Posting's Id
             </summary>
             <example>0AB667E2-3936-48EC-B1DA-E7614239B788</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.Position">
+        <member name="P:Job_Board.Models.JobPostingJoin.Position">
             <summary>
             Job Position
             </summary>
             <example>Intern</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.Department">
+        <member name="P:Job_Board.Models.JobPostingJoin.Department">
              <summary>
              Job Listing's Department
              </summary>
             <example>Marketing</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.FirstName">
-            <summary>
-            Candidate's First Name
-            </summary>
-            <example>Jonathan</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.LastName">
-            <summary>
-            Candidate's Last Name
-            </summary>
-            <example>Miller</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.DateTime">
-            <summary>
-            Interview's Date and Time
-            </summary>
-            <example>2023-01-01 12:00:00</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingDailySearchByPosition.Building">
-            <summary>
-            Building Location
-            </summary>
-            <example>Tango</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByLocationId.Position">
-            <summary>
-            Job Position
-            </summary>
-            <example>Intern</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByLocationId.Department">
+        <member name="P:Job_Board.Models.JobPostingJoin.Description">
              <summary>
-             Job Listing's Department
+             Job Listing's Description
              </summary>
-            <example>Marketing</example>
+            <example>Marketing Intern</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingByState.Position">
-            <summary>
-            Job Position
-            </summary>
-            <example>Intern</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByState.Department">
-             <summary>
-             Job Listing's Department
-             </summary>
-            <example>Marketing</example>
-        </member>
-        <member name="P:Job_Board.Models.JobPostingByState.City">
+        <member name="P:Job_Board.Models.JobPostingJoin.City">
              <summary>
              Location's City
              </summary>
             <example>Portland</example>
         </member>
-        <member name="P:Job_Board.Models.JobPostingByState.Building">
+        <member name="P:Job_Board.Models.JobPostingJoin.State">
+            <summary>
+            Location's State
+            </summary>
+            <example>OR</example>
+        </member>
+        <member name="P:Job_Board.Models.JobPostingJoin.Building">
             <summary>
             Building Location
             </summary>
@@ -607,48 +548,6 @@
         <member name="P:Job_Board.Models.LocationRequest.Building">
             <summary>
             Building Location
-            </summary>
-            <example>Tango</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByBuilding.StreetAddress">
-            <summary>
-            Location's Street Address
-            </summary>
-            <example>987 Mason Dr</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByBuilding.City">
-            <summary>
-            Location's Street Address
-            </summary>
-            <example>987 Mason Dr</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByBuilding.State">
-            <summary>
-            Location's State
-            </summary>
-            <example>OR</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByBuilding.Zip">
-            <summary>
-            Location's Zip Code
-            </summary>
-            <example>38223</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByBuilding.Id">
-            <summary>
-            Location's Id
-            </summary>
-            <example>0AB667E2-3936-48EC-B1DA-E7614239B788</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByState.Building">
-            <summary>
-            Building Location
-            </summary>
-            <example>Tango</example>
-        </member>
-        <member name="P:Job_Board.Models.LocationByState.City">
-            <summary>
-            Location's City
             </summary>
             <example>Tango</example>
         </member>
