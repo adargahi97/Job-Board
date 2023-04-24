@@ -46,7 +46,7 @@
             <response code="404">Data invalid</response>
             <response code="500">Internal Server Error</response>
         </member>
-        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewByID(System.Guid)">
+        <member name="M:Job_Board.Controllers.InterviewController.GetInterviewById(System.Guid)">
             <summary>Get Interview by ID</summary>
             <remarks>Retrieve Interview Information for a specific Interview ID.</remarks>
             <response code="200">Returns the Information of selected Interview</response>

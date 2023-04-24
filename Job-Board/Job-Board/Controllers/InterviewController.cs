@@ -30,7 +30,7 @@ namespace Job_Board.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Route("Interview/{id:Guid}")]
-        public async Task<IActionResult> GetInterviewByID([FromRoute] Guid id)
+        public async Task<IActionResult> GetInterviewById([FromRoute] Guid id)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Job_Board.Controllers
             try
             {
                 await _interviewDao.CreateInterview(createRequest);
-                return SuccessResponses.CreateSuccessful("Inteview");
+                return SuccessResponses.CreateSuccessful("Interview");
             }
             catch (Exception)
             {
@@ -89,7 +89,7 @@ namespace Job_Board.Controllers
                 }
 
                 await _interviewDao.DeleteInterviewById(id);
-                return SuccessResponses.DeleteSuccessful(id.ToString());
+                return SuccessResponses.DeleteSuccessful("Interview");
             }
             catch (Exception)
             {
@@ -211,7 +211,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404("The Id You Entered");
                 }
-                return Ok(interview);
+                return SuccessResponses.GetAllSuccessful(interview);
             }
             catch (Exception e)
             {
@@ -236,7 +236,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(lastName);
                 }
-                return Ok(interview);
+                return SuccessResponses.GetObjectSuccessful(interview);
             }
             catch (Exception e)
             {

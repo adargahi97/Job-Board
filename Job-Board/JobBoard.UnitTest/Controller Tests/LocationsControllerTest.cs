@@ -52,16 +52,6 @@ namespace JobBoard.UnitTest.Controller_Tests
             };
 
         }
-        [TestCleanup]
-        public void Cleanup()
-        {
-            mockLocationDao = null;
-            sut = null;
-            locationGuid = new Guid();
-            mockLocation = null;
-            locationRequest = null;
-        }
-
 
         [TestMethod]
         public async Task CreateLocation_ReturnsOk_WhenModelIsValid()

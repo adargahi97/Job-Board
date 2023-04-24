@@ -88,7 +88,7 @@ namespace Job_Board.Controllers
                 }
 
                 await _candidateDao.DeleteCandidateById(id);
-                return SuccessResponses.DeleteSuccessful(id.ToString());
+                return SuccessResponses.DeleteSuccessful("Candidate");
             }
             catch (Exception)
             {
@@ -143,7 +143,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(lastName);
                 }
-                return Ok(candidates);
+                return SuccessResponses.GetAllSuccessful(candidates);
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(phoneNumber);
                 }
-                return Ok(candidates);
+                return SuccessResponses.GetAllSuccessful(candidates);
             }
             catch (Exception e)
             {
