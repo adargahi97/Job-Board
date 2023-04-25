@@ -9088,19 +9088,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Abbas.Dargahi\\.nuget\\packages\\": {}
+    "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abbas.Dargahi\\Source\\Repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj",
       "projectName": "Job-Board",
-      "projectPath": "C:\\Users\\Abbas.Dargahi\\Source\\Repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
-      "packagesPath": "C:\\Users\\Abbas.Dargahi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abbas.Dargahi\\Source\\Repos\\final-project-job-board\\Job-Board\\Job-Board\\obj\\",
+      "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj",
+      "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Abbas.Dargahi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9180,7 +9180,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

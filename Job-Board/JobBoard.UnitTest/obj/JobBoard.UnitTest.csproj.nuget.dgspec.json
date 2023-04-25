@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj": {}
+    "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj": {
+    "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
+        "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj",
         "projectName": "Job-Board",
-        "projectPath": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj",
-        "packagesPath": "C:\\Users\\Abbas.Dargahi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\obj\\",
+        "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj",
+        "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Abbas.Dargahi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,21 +94,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj": {
+    "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
         "projectName": "JobBoard.UnitTest",
-        "projectPath": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
-        "packagesPath": "C:\\Users\\Abbas.Dargahi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\JobBoard.UnitTest\\obj\\",
+        "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\JobBoard.UnitTest\\JobBoard.UnitTest.csproj",
+        "packagesPath": "C:\\Users\\Mason.Bartlett\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\JobBoard.UnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Abbas.Dargahi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mason.Bartlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -122,8 +122,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj": {
-                "projectPath": "C:\\Users\\Abbas.Dargahi\\source\\repos\\final-project-job-board\\Job-Board\\Job-Board\\Job-Board.csproj"
+              "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj": {
+                "projectPath": "C:\\Users\\Mason.Bartlett\\source\\repos\\final-project-job-board\\Final0424\\Job-Board\\Job-Board\\Job-Board.csproj"
               }
             }
           }
@@ -175,7 +175,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

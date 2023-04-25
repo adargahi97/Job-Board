@@ -7,6 +7,7 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Job_Board.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
 
 namespace Job_Board.Controllers
@@ -62,11 +63,11 @@ namespace Job_Board.Controllers
             try
             {
                 await _jobPostingDao.CreateJobPosting(createRequest);
-                return StatusCode(201);
+                return SuccessResponses.CreateSuccessful("Job Posting");
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -86,15 +87,15 @@ namespace Job_Board.Controllers
                 var jobPosting = await _jobPostingDao.GetJobPostingById(id);
                 if (jobPosting == null)
                 {
-                    return ErrorResponses.Error404("The ID You Entered");
+                    return ErrorResponses.ErrorInputNotFound(id.ToString());
                 }
 
                 await _jobPostingDao.DeleteJobPostingById(id);
-                return StatusCode(200);
+                return SuccessResponses.DeleteSuccessful("Job Posting");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
 
@@ -114,15 +115,15 @@ namespace Job_Board.Controllers
                 var candidate = await _jobPostingDao.GetJobPostingById(jobPostingReq.Id);
                 if (candidate == null)
                 {
-                    return ErrorResponses.Error404("The ID You Entered");
+                    return ErrorResponses.ErrorUpdating(jobPostingReq.Id.ToString());
                 }
                 var updatedJobPosting = await _jobPostingDao.UpdateJobPostingById(jobPostingReq);
 
-                return StatusCode(200);
+                return SuccessResponses.UpdateObjectSuccessful(jobPostingReq.Id.ToString());
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return StatusCode(500, e.Message);
+                return ErrorResponses.Error500();
             }
         }
         /// <summary>Search Job Posting by Position</summary>
@@ -143,7 +144,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(position);
                 }
-                return Ok(jobPosting);
+                return SuccessResponses.GetObjectSuccessful(jobPosting);
             }
             catch (Exception e)
             {
@@ -168,7 +169,7 @@ namespace Job_Board.Controllers
                 {
                     return ErrorResponses.Error404(building);
                 }
-                return Ok(jobPosting);
+                return SuccessResponses.GetAllSuccessful(jobPosting);
             }
             catch (Exception e)
             {
