@@ -13,6 +13,7 @@ namespace Job_Board.Daos
         Task<InterviewRequest> GetInterviewById(Guid id);
         Task<Interview> UpdateInterviewById(Interview interview);
         Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position);
+        Task<IEnumerable<JobPosting>> CheckJobIDExists(Guid id);
         Task<IEnumerable<InterviewJoin>> GetInterviewsByPosition(string position);
         Task<IEnumerable<InterviewRequest>> GetInterviewByJobId(Guid jobId);
         Task<IEnumerable<InterviewJoinCandidate>> GetInterviewByLastName(string lastName);

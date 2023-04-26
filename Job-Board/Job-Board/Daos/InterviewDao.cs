@@ -104,7 +104,7 @@ namespace Job_Board.Daos
         //GET Request (Return Interview info based on Date)
         public async Task<IEnumerable<InterviewJoin>> GetInterviewsByDate(DateTime dt)
         {
-            var query = $"SELECT Candidate.FirstName, Candidate.LastName, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
+            var query = $"SELECT Candidate.FirstName, Candidate.LastName, JobPosting.Department, CONVERT(VARCHAR(15),CAST(DateTime AS TIME),100) AS DateTime, JobPosting.Position, Location.Building " +
                 $"FROM Interview " +
                 $"INNER JOIN Candidate ON Interview.CandidateId = Candidate.Id " +
                 $"INNER JOIN Location ON Interview.LocationId = Location.Id " +
@@ -138,6 +138,16 @@ namespace Job_Board.Daos
         public async Task<IEnumerable<JobPosting>> CheckJobPostingExists(string position)
         {
             var query = "SELECT Position FROM JobPosting";
+
+            using (sqlWrapper.CreateConnection())
+            {
+                var allPositions = await sqlWrapper.QueryAsync<JobPosting>(query);
+                return allPositions.ToList();
+            }
+        }
+        public async Task<IEnumerable<JobPosting>> CheckJobIDExists(Guid id)
+        {
+            var query = "SELECT Id FROM JobPosting";
 
             using (sqlWrapper.CreateConnection())
             {

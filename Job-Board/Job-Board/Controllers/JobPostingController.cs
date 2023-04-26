@@ -151,8 +151,8 @@ namespace Job_Board.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        /// <summary>Search Job Posting by Position</summary>
-        /// <remarks>Retrieve Job Posting information for a specific Position.</remarks>
+        /// <summary>Search Job Posting by Building</summary>
+        /// <remarks>Retrieve Job Posting information for a specific Building.</remarks>
         /// <response code="200">Returns the Information by Position</response>
         /// <response code="404">Data invalid</response>
         /// <response code="500">Internal Server Error</response>

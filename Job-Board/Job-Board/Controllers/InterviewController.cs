@@ -7,6 +7,7 @@ using Job_Board.Daos;
 using Job_Board.Models;
 using Job_Board.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Job_Board.Controllers
 {
@@ -207,9 +208,22 @@ namespace Job_Board.Controllers
             try
             {
                 var interview = await _interviewDao.GetInterviewByJobId(id);
+
                 if (!interview.Any())
                 {
-                    return ErrorResponses.Error404("The Id You Entered");
+                    //Checking if there this Job ID is in our DB
+                    var allJobIds = await _interviewDao.CheckJobIDExists(id);
+                    var stringListOfJobIds = allJobIds.Select(jp => jp.Id).ToList();
+
+                    foreach (Guid j in stringListOfJobIds)
+                    {
+                        if (j == id)
+                        {
+                            return ErrorResponses.ErrorNoCandidate($"{id}");
+                        }
+                    }
+
+                    return ErrorResponses.Error404("The ID you entered");
                 }
                 return SuccessResponses.GetAllSuccessful(interview);
             }
@@ -234,7 +248,7 @@ namespace Job_Board.Controllers
                 IEnumerable<InterviewJoinCandidate> interview = await _interviewDao.GetInterviewByLastName(lastName);
                 if (!interview.Any())
                 {
-                    return ErrorResponses.Error404(lastName);
+                    return ErrorResponses.CustomError($"There are no Inverviews scheduled under the last name {lastName}");
                 }
                 return SuccessResponses.GetObjectSuccessful(interview);
             }
