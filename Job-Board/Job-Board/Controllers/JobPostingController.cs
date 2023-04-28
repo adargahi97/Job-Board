@@ -165,7 +165,7 @@ namespace Job_Board.Controllers
             try
             {
                 var jobPosting = await _jobPostingDao.GetJobPostingByBuilding(building);
-                if (jobPosting == null)
+                if (!jobPosting.Any())
                 {
                     return ErrorResponses.Error404(building);
                 }
